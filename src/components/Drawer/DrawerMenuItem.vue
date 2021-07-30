@@ -18,7 +18,7 @@
     :label="item.meta.title"
     :content-inset-level="0.5"
     group="menu"
-    :class="{'text-primary':expansion}"
+    :header-class="{'text-primary':expansion}"
   >
     <template v-for="item2 in item.children" :key="item2">
       <drawer-menu-item
@@ -46,7 +46,9 @@ export default defineComponent({
     watch(route, () => {
       if (props.item.children) {
         for (const child of props.item.children) {
-          expansion.value = child.path === route.path
+          if (child.path === route.path) {
+            expansion.value = true
+          }
         }
       }
     }, {
