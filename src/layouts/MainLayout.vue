@@ -32,7 +32,7 @@
     </q-drawer>
 
     <q-page-container style="background-color: #f2f3f8;">
-      <router-view class="q-ma-md"/>
+      <router-view/>
     </q-page-container>
   </q-layout>
 </template>

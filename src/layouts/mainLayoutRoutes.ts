@@ -20,7 +20,7 @@ const mainLayoutRoutes: RouteRecordRaw[] = [
     children: [
       {
         path: '/editor/markdown',
-        component: () => import('pages/Editor/MarkdownEditor.vue'),
+        component: () => import('pages/Editor/Editor.vue'),
         meta: {
           icon: 'mdi-language-markdown',
           title: 'Markdown编辑器'

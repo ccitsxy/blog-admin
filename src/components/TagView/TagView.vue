@@ -12,10 +12,11 @@
     <q-route-tab
       class="tagView"
       to="/"
+      exact
       content-class="tagView-q-router-tab"
     >
       <template v-slot:default>
-        <q-icon size="1.3rem" name="home"/>
+        <q-icon size="24px" name="home"/>
         <div class="line-limit-length q-mx-xs">主页</div>
       </template>
     </q-route-tab>
@@ -30,8 +31,9 @@ export default defineComponent({
 })
 </script>
 
+<!--suppress CssInvalidPseudoSelector -->
 <style scoped>
-::v-deep .tagView-q-router-tab {
-  min-width: 40px !important;
+:deep(.tagView-q-router-tab) {
+  min-width: 36px !important;
 }
 </style>
