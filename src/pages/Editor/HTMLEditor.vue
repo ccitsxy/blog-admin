@@ -1,5 +1,5 @@
 <template>
-  <q-editor v-model="editor"></q-editor>
+  <div></div>
 </template>
 
 <script lang="ts">
