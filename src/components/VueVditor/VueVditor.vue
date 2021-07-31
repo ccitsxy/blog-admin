@@ -5,7 +5,7 @@
 <script lang="ts">
 import Vditor from 'vditor'
 import 'vditor/dist/index.css'
-import { onMounted, ref, watch, toRaw, defineComponent } from 'vue'
+import { defineComponent, onMounted, ref, watch, toRaw, onUnmounted, unref } from 'vue'
 
 export default defineComponent({
   name: 'VueVditor',
@@ -58,6 +58,13 @@ export default defineComponent({
         }
       }
     )
+    onUnmounted(() => {
+      const editorInstance = unref(contentEditor)
+      if (!editorInstance) return
+      try {
+        editorInstance?.destroy?.()
+      } catch (error) {}
+    })
     return {
       editorRef
     }

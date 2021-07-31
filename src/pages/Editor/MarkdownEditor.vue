@@ -11,7 +11,7 @@ export default defineComponent({
   name: 'MarkdownEditor',
   components: { VueVditor },
   setup () {
-    function handleAfterEvent (event:Vditor) {
+    function handleAfterEvent (event: Vditor) {
       console.log(event)
     }
 
