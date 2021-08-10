@@ -2,22 +2,21 @@
   <q-tabs
     align="left"
     active-color="primary"
-    class="col-12"
+    class="col-12 text-black"
     dense
-    swipeable
     inline-label
-    indicator-color="transparent"
     :breakpoint="0"
   >
     <q-route-tab
-      class="tagView"
-      to="/"
-      exact
+      to="/dashboard/analysis"
+      class="bg-white"
       content-class="tagView-q-router-tab"
     >
       <template v-slot:default>
-        <q-icon size="24px" name="home"/>
-        <div class="line-limit-length q-mx-xs">主页</div>
+        <q-icon size="18px" name="home" class="q-mr-xs"/>
+        <div class="q-mx-xs">分析页</div>
+        <q-icon size="18px" name="refresh" class="q-mr-xs"/>
+        <q-icon size="18px" name="close"/>
       </template>
     </q-route-tab>
 

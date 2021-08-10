@@ -71,3 +71,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped>
+.vditor{
+  border-radius: 0;
+}
+</style>

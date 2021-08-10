@@ -4,7 +4,8 @@ const routes: RouteRecordRaw[] = [
   {
     path: '',
     component: () => import('layouts/MainLayout.vue'),
-    name: 'MainLayout'
+    name: 'MainLayout',
+    redirect: '/dashboard'
   },
 
   // Always leave this as last one,

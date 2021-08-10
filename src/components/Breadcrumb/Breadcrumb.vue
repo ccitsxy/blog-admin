@@ -6,7 +6,7 @@
       :icon="item.meta.icon"
       :label="item.meta.title"
       :to="item.path"
-    ></q-breadcrumbs-el>
+    />
   </q-breadcrumbs>
 </template>
 

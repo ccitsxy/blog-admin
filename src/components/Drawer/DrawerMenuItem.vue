@@ -2,9 +2,8 @@
   <q-item
     v-if="!item.children"
     :to="item.path"
-    exact
     active
-    active-class="active-menu bg-blue-1 text-primary"
+    active-class="bg-blue-1 text-primary"
   >
     <q-item-section avatar>
       <q-icon :name="item.meta.icon"></q-icon>
@@ -13,17 +12,16 @@
   </q-item>
   <q-expansion-item
     v-else
-    :default-opened="expansion"
+    v-model="expansion"
     :icon="item.meta.icon"
     :label="item.meta.title"
     :content-inset-level="0.5"
-    group="menu"
-    :header-class="{'text-primary':expansion}"
+    :header-class="{'text-primary':$route.path.startsWith(item.path) }"
   >
     <template v-for="item2 in item.children" :key="item2">
       <drawer-menu-item
         :item="item2"
-      ></drawer-menu-item>
+      />
     </template>
   </q-expansion-item>
 </template>
@@ -40,7 +38,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup: function (props) {
+  setup (props) {
     const expansion = ref(false)
     const route = useRoute()
     watch(route, () => {
@@ -50,6 +48,8 @@ export default defineComponent({
             expansion.value = true
           }
         }
+      } else if (props.item.path !== route.path) {
+        expansion.value = false
       }
     }, {
       immediate: true
@@ -60,9 +60,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style scoped>
-.active-menu {
-  border-right: 4px solid #1976D2;
-}
-</style>

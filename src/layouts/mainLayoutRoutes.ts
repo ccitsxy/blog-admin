@@ -2,16 +2,27 @@ import { RouteRecordRaw } from 'vue-router'
 
 const mainLayoutRoutes: RouteRecordRaw[] = [
   {
-    path: '/',
-    component: () => import('pages/Index.vue'),
+    path: '/dashboard',
+    component: () => import('pages/PageIndex.vue'),
+    redirect: '/dashboard/analysis',
     meta: {
-      icon: 'home',
-      title: '主页'
-    }
+      icon: 'dashboard',
+      title: '仪表盘'
+    },
+    children: [
+      {
+        path: '/dashboard/analysis',
+        component: () => import('pages/Dashboard/Analysis.vue'),
+        meta: {
+          icon: 'home',
+          title: '分析页'
+        }
+      }
+    ]
   },
   {
     path: '/editor',
-    component: () => import('pages/Editor/Index.vue'),
+    component: () => import('pages/PageIndex.vue'),
     redirect: '/editor/markdown',
     meta: {
       icon: 'edit',

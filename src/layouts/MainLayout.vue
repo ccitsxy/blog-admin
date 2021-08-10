@@ -13,8 +13,8 @@
         <q-toolbar-title shrink>Blog</q-toolbar-title>
         <breadcrumb/>
       </q-toolbar>
-      <q-separator></q-separator>
-      <tag-view/>
+      <q-separator/>
+      <tags-view/>
     </q-header>
 
     <q-drawer
@@ -31,26 +31,23 @@
       </q-list>
     </q-drawer>
 
-    <q-page-container style="background-color: #f2f3f8;">
-      <router-view/>
+    <q-page-container>
+      <router-view class="q-pa-md" style="background-color: #f2f3f8;min-height: calc(100vh - 87px)"/>
     </q-page-container>
   </q-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, defineAsyncComponent, ref } from 'vue'
 
 import mainLayoutRoutes from 'layouts/mainLayoutRoutes'
-import DrawerMenu from 'components/Drawer/DrawerMenu.vue'
-import Breadcrumb from 'components/Breadcrumb/Breadcrumb.vue'
-import TagView from 'components/TagView/TagView.vue'
 
 export default defineComponent({
   name: 'MainLayout',
   components: {
-    TagView,
-    Breadcrumb,
-    DrawerMenu
+    TagsView: defineAsyncComponent(() => import('components/TagsView/TagsView.vue')),
+    Breadcrumb: defineAsyncComponent(() => import('components/Breadcrumb/Breadcrumb.vue')),
+    DrawerMenu: defineAsyncComponent(() => import('components/Drawer/DrawerMenu.vue'))
   },
   setup () {
     const leftDrawerOpen = ref(false)

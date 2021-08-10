@@ -1,11 +1,11 @@
 <template>
-  <router-view/>
+  <div id="analysis"></div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Editor'
+  name: 'Analysis'
 })
 </script>
