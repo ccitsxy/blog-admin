@@ -1,13 +1,11 @@
 <template>
   <div id="markdownEditor">
-    <vue-vditor v-model="editor" :options="options" class="vue-vditor" @after="handleAfterEvent"/>
+    <vue-vditor v-model="editor" :options="options" class="vue-vditor"/>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent, ref } from 'vue'
-
-import Vditor from 'vditor'
 
 export default defineComponent({
   name: 'MarkdownEditor',
@@ -15,10 +13,6 @@ export default defineComponent({
     VueVditor: defineAsyncComponent(() => import('components/VueVditor/VueVditor.vue'))
   },
   setup () {
-    function handleAfterEvent (event: Vditor) {
-      console.log(event)
-    }
-
     return {
       editor: ref(''),
       options: {
@@ -29,8 +23,7 @@ export default defineComponent({
         fullscreen: {
           index: 3000
         }
-      },
-      handleAfterEvent
+      }
     }
   }
 })

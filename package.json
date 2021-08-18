@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
-    "@tinymce/tinymce-vue": "^4.0.4",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "quasar": "^2.0.0",

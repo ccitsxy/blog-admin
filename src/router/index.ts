@@ -8,7 +8,7 @@ import {
 import { StateInterface } from '../store'
 import routes from './routes'
 
-//  初始化路由
+// 初始化路由
 import mainLayoutRoutes from 'layouts/mainLayoutRoutes'
 
 /*
@@ -37,7 +37,7 @@ export default route<StateInterface>(function (/* { store, ssrContext } */) {
     )
   })
 
-  //  初始化路由
+  // 初始化路由
   for (const x of mainLayoutRoutes) {
     Router.addRoute('MainLayout', x)
   }

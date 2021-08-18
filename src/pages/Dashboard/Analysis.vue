@@ -1,5 +1,7 @@
 <template>
-  <div id="analysis"></div>
+  <div id="analysis">
+    <q-img src="../../assets/quasar-logo-vertical.svg"/>
+  </div>
 </template>
 
 <script lang="ts">

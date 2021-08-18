@@ -1,6 +1,9 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated class="bg-white text-dark">
+    <q-header
+      class="bg-white text-black shadow-up-1"
+      elevated
+    >
       <q-toolbar>
         <q-btn
           flat
@@ -20,9 +23,8 @@
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
-      class="bg-white"
       :width="240"
-      bordered
+      class="bg-white shadow-up-1"
     >
       <q-list>
         <q-scroll-area style="height: 100vh;">
@@ -32,7 +34,7 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view class="q-pa-md" style="background-color: #f2f3f8;min-height: calc(100vh - 87px)"/>
+      <page-index class="q-pa-md" style="background-color: #f2f3f8;min-height: calc(100vh - 87px);"/>
     </q-page-container>
   </q-layout>
 </template>
@@ -45,6 +47,7 @@ import mainLayoutRoutes from 'layouts/mainLayoutRoutes'
 export default defineComponent({
   name: 'MainLayout',
   components: {
+    PageIndex: defineAsyncComponent(() => import('pages/PageIndex.vue')),
     TagsView: defineAsyncComponent(() => import('components/TagsView/TagsView.vue')),
     Breadcrumb: defineAsyncComponent(() => import('components/Breadcrumb/Breadcrumb.vue')),
     DrawerMenu: defineAsyncComponent(() => import('components/Drawer/DrawerMenu.vue'))

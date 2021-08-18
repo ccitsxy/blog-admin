@@ -4,6 +4,7 @@
     :to="item.path"
     active
     active-class="bg-blue-1 text-primary"
+    :inset-level="0.5"
   >
     <q-item-section avatar>
       <q-icon :name="item.meta.icon"></q-icon>
@@ -15,7 +16,6 @@
     v-model="expansion"
     :icon="item.meta.icon"
     :label="item.meta.title"
-    :content-inset-level="0.5"
     :header-class="{'text-primary':$route.path.startsWith(item.path) }"
   >
     <template v-for="item2 in item.children" :key="item2">
