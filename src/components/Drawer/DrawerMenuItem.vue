@@ -4,10 +4,10 @@
     :to="item.path"
     active
     active-class="bg-blue-1 text-primary"
-    :inset-level="0.5"
+    :inset-level="initLevel"
   >
     <q-item-section avatar>
-      <q-icon :name="item.meta.icon"></q-icon>
+      <q-icon v-if="item.meta.icon" :name="item.meta.icon"></q-icon>
     </q-item-section>
     <q-item-section>{{ item.meta.title }}</q-item-section>
   </q-item>
@@ -17,11 +17,12 @@
     :icon="item.meta.icon"
     :label="item.meta.title"
     :header-class="{'text-primary':$route.path.startsWith(item.path) }"
+    :header-inset-level="initLevel"
   >
     <template v-for="item2 in item.children" :key="item2">
       <drawer-menu-item
         :item="item2"
-      />
+        :init-level="initLevel+0.5"/>
     </template>
   </q-expansion-item>
 </template>
@@ -36,6 +37,11 @@ export default defineComponent({
     item: {
       type: Object as PropType<RouteRecordRaw>,
       required: true
+    },
+    initLevel: {
+      type: Number,
+      required: true,
+      default: 0
     }
   },
   setup (props) {

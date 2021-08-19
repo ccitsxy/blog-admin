@@ -1,5 +1,6 @@
 <template>
   <q-tabs
+    v-model="tags"
     align="left"
     class="col-12 text-black"
     dense
@@ -10,13 +11,13 @@
   >
     <template v-for="item in tags" :key="item">
       <q-route-tab
-        class="bg-white"
+        class="bg-white shadow-up-1"
         content-class="tagView-q-router-tab"
         :to="item.path"
         active-class="text-primary"
       >
         <template v-slot:default>
-          <q-icon size="18px" :name="item.meta.icon" class="q-mr-xs"/>
+          <q-icon v-if="item.meta.icon" size="18px" :name="item.meta.icon" class="q-mr-xs"/>
           <div class="q-mx-xs" style="text-transform: none">{{ item.meta.title }}</div>
           <q-icon v-if="tags.length > 1" size="18px" name="close" @click.self.prevent="closeTag(item)"/>
         </template>
