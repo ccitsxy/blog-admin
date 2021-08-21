@@ -6,7 +6,7 @@ const mainLayoutRoutes: RouteRecordRaw[] = [
     component: () => import('pages/PageIndex.vue'),
     redirect: '/dashboard/analysis',
     meta: {
-      icon: 'dashboard',
+      icon: 'mdi-view-dashboard-outline',
       title: '仪表盘'
     },
     children: [
@@ -14,7 +14,7 @@ const mainLayoutRoutes: RouteRecordRaw[] = [
         path: '/dashboard/analysis',
         component: () => import('pages/Dashboard/Analysis.vue'),
         meta: {
-          icon: 'home',
+          icon: 'mdi-home-outline',
           title: '分析页'
         }
       }
@@ -25,7 +25,7 @@ const mainLayoutRoutes: RouteRecordRaw[] = [
     component: () => import('pages/PageIndex.vue'),
     redirect: '/editor/markdown',
     meta: {
-      icon: 'edit',
+      icon: 'mdi-pencil-outline',
       title: '编辑器'
     },
     children: [
@@ -33,7 +33,7 @@ const mainLayoutRoutes: RouteRecordRaw[] = [
         path: '/editor/markdown',
         component: () => import('pages/Editor/MarkdownEditor.vue'),
         meta: {
-          icon: 'mdi-language-markdown',
+          icon: 'mdi-language-markdown-outline',
           title: 'Markdown'
         }
       }

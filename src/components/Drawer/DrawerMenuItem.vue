@@ -18,6 +18,8 @@
     :label="item.meta.title"
     :header-class="{'text-primary':$route.path.startsWith(item.path) }"
     :header-inset-level="initLevel"
+    expand-icon="mdi-chevron-down"
+    expanded-icon="mdi-chevron-up"
   >
     <template v-for="item2 in item.children" :key="item2">
       <drawer-menu-item
@@ -40,8 +42,7 @@ export default defineComponent({
     },
     initLevel: {
       type: Number,
-      required: true,
-      default: 0
+      required: true
     }
   },
   setup (props) {

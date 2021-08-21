@@ -1,9 +1,10 @@
 <template>
-    <drawer-menu-item
-      v-for="item in menu"
-      :key="item"
-      :item="item"
-    />
+  <drawer-menu-item
+    v-for="item in menu"
+    :key="item"
+    :item="item"
+    :init-level="0"
+  />
 </template>
 
 <script lang="ts">

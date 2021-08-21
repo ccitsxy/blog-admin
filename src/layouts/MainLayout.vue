@@ -9,8 +9,7 @@
           flat
           dense
           round
-          icon="menu"
-          aria-label="Menu"
+          :icon="leftDrawerOpen?'mdi-menu-open':'mdi-menu'"
           @click="toggleLeftDrawer"
         />
         <q-toolbar-title shrink>Blog</q-toolbar-title>
