@@ -40,35 +40,17 @@
     </template>
     <q-btn
       flat
-      class="q-ml-auto text-center"
+      class="q-ml-auto q-mr-sm text-center"
       style="width: 18px"
       icon="mdi-dots-vertical"
     >
       <q-menu fit>
         <q-list style="min-width: 100px">
           <q-item clickable>
-            <q-item-section>New tab</q-item-section>
+            <q-item-section>关闭其他</q-item-section>
           </q-item>
           <q-item clickable>
-            <q-item-section>New incognito tab</q-item-section>
-          </q-item>
-          <q-separator />
-          <q-item clickable>
-            <q-item-section>Recent tabs</q-item-section>
-          </q-item>
-          <q-item clickable>
-            <q-item-section>History</q-item-section>
-          </q-item>
-          <q-item clickable>
-            <q-item-section>Downloads</q-item-section>
-          </q-item>
-          <q-separator />
-          <q-item clickable>
-            <q-item-section>Settings</q-item-section>
-          </q-item>
-          <q-separator />
-          <q-item clickable>
-            <q-item-section>Help &amp; Feedback</q-item-section>
+            <q-item-section>刷新当前页</q-item-section>
           </q-item>
         </q-list>
       </q-menu>
