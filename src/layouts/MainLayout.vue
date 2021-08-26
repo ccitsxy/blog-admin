@@ -1,9 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header
-      class="bg-white text-black shadow-up-1"
-      elevated
-    >
+    <q-header class="bg-white text-black shadow-1">
       <q-toolbar>
         <q-btn
           flat
@@ -12,8 +9,7 @@
           :icon="leftDrawerOpen?'mdi-menu-open':'mdi-menu'"
           @click="toggleLeftDrawer"
         />
-        <q-toolbar-title shrink>Blog</q-toolbar-title>
-        <breadcrumb/>
+        <breadcrumb class="q-ml-md"/>
       </q-toolbar>
       <q-separator/>
       <tags-view/>
@@ -23,17 +19,19 @@
       v-model="leftDrawerOpen"
       show-if-above
       :width="240"
-      class="bg-white shadow-up-1"
+      class="bg-white shadow-1"
     >
-      <q-list>
-        <q-scroll-area style="height: 100vh;">
+      <q-scroll-area style="height: calc(100vh - 87px);overflow: hidden">
+        <q-list>
           <drawer-menu :menu="menu"/>
-        </q-scroll-area>
-      </q-list>
+        </q-list>
+      </q-scroll-area>
     </q-drawer>
 
     <q-page-container>
-      <page-index class="q-pa-md" style="background-color: #f2f3f8;min-height: calc(100vh - 87px);"/>
+      <q-scroll-area style="height: calc(100vh - 87px);overflow: hidden">
+        <page-index class="q-pa-md" style="min-height: calc(100vh - 87px);"/>
+      </q-scroll-area>
     </q-page-container>
   </q-layout>
 </template>
@@ -64,3 +62,13 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped>
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.q-layout--standard {
+  min-height: 100% !important;
+}
+</style>

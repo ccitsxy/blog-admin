@@ -38,7 +38,25 @@ const mainLayoutRoutes: RouteRecordRaw[] = [
         }
       }
     ]
+  },
+  {
+    path: '/table',
+    component: () => import('pages/PageIndex.vue'),
+    redirect: '/editor/markdown',
+    meta: {
+      icon: 'mdi-table',
+      title: '表格'
+    },
+    children: [{
+      path: '/table/simple',
+      component: () => import('pages/Table/Table.vue'),
+      meta: {
+        icon: 'mdi-table',
+        title: '普通表格'
+      }
+    }]
   }
+
 ]
 
 export default mainLayoutRoutes

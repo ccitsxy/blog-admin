@@ -1,59 +1,89 @@
 <template>
   <q-tabs
     align="left"
-    class="text-black"
     dense
-    swipeable
     inline-label
     :breakpoint="0"
     indicator-color="transparent"
+    swipable
   >
-    <template v-for="item in tags" :key="item">
-      <q-route-tab
-        class="bg-white shadow-up-1"
-        content-class="tagView-q-router-tab"
-        :to="item.path"
-        active-class="text-primary"
-      >
-        <template v-slot:default>
-          <q-icon
-            v-if="item.meta.icon"
-            size="18px"
-            :name="item.meta.icon"
-            class="q-mr-xs"
-          />
-          <div
-            class="q-mx-xs"
-            style="text-transform: none"
-          >
-            {{ item.meta.title }}
-          </div>
-          <q-icon
-            v-if="tags.length > 1"
-            size="18px"
-            name="mdi-close"
-            class="text-black"
-            @click.self.prevent="closeTag(item)"
-          />
-        </template>
-      </q-route-tab>
-    </template>
+    <q-route-tab
+      v-for="item in tags"
+      :key="item"
+      :to="item.path"
+      :class="{'text-primary bg-blue-1':$route.path===item.path}"
+      content-class="tagView-q-router-tab"
+      no-caps
+    >
+      <template v-slot:default>
+        <div
+          class="q-mx-xs"
+        >
+          {{ item.meta.title }}
+        </div>
+        <q-icon
+          v-if="$route.path===item.path"
+          size="16px"
+          name="mdi-refresh"
+          class="q-chip__icon--remove q-mr-xs"
+        />
+        <q-icon
+          v-if="tags.length > 1"
+          size="16px"
+          name="mdi-close"
+          class="q-chip__icon--remove"
+          @click.self.prevent="closeTag(item)"
+        />
+        <q-menu
+          touch-position
+          context-menu
+        >
+          <q-list dense>
+            <q-item clickable v-close-popup>
+              <q-item-section @click="removeOthersTagView(item)">
+                关闭其他
+              </q-item-section>
+            </q-item>
+            <q-item clickable v-close-popup>
+              <q-item-section @click="removeLeftTagView(item)">
+                关闭到左侧
+              </q-item-section>
+            </q-item>
+            <q-item clickable v-close-popup>
+              <q-item-section @click="removeRightTagView(item)">
+                关闭到右侧
+              </q-item-section>
+            </q-item>
+            <q-item clickable v-close-popup>
+              <q-item-section @click="removeAllTagView">
+                刷新当前页
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-menu>
+      </template>
+    </q-route-tab>
     <q-btn
       flat
-      class="q-ml-auto q-mr-sm text-center"
-      style="width: 18px"
-      icon="mdi-dots-vertical"
+      class="q-ml-auto text-center"
+      style="height: 18px;width: 18px"
     >
-      <q-menu fit>
-        <q-list style="min-width: 100px">
-          <q-item clickable>
-            <q-item-section>关闭其他</q-item-section>
-          </q-item>
-          <q-item clickable>
-            <q-item-section>刷新当前页</q-item-section>
-          </q-item>
-        </q-list>
-      </q-menu>
+      <template v-slot:default>
+        <q-icon
+          size="18px"
+          name="mdi-dots-vertical"
+        />
+        <q-menu auto-close>
+          <q-list dense style="min-width: 100px">
+            <q-item clickable>
+              <q-item-section>关闭其他</q-item-section>
+            </q-item>
+            <q-item clickable>
+              <q-item-section>刷新当前页</q-item-section>
+            </q-item>
+          </q-list>
+        </q-menu>
+      </template>
     </q-btn>
   </q-tabs>
 </template>
@@ -72,7 +102,7 @@ export default defineComponent({
 
     const store = useStore(storeKey)
 
-    const tags = computed(() => store.state.tagsView.tabList)
+    const tags = computed<RouteLocationNormalized[]>(() => store.state.tagsView.tabList)
 
     function closeTag (item: RouteLocationNormalized) {
       const index = tags.value.indexOf(item)
@@ -83,10 +113,6 @@ export default defineComponent({
       }
       store.commit('tagsView/removeTag', item)
     }
-
-    /*    watch(() => tags.value.length,
-      () => {
-      }) */
 
     store.commit('tagsView/addTag', router.currentRoute.value)
 
@@ -105,6 +131,6 @@ export default defineComponent({
 <!--suppress CssInvalidPseudoSelector -->
 <style scoped>
 :deep(.tagView-q-router-tab) {
-  min-width: 36px !important;
+  min-width: 48px !important;
 }
 </style>

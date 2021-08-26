@@ -3,7 +3,6 @@
       <q-breadcrumbs-el
         v-for="item in $route.matched.slice(1)"
         :key="item"
-        :icon="item.meta.icon"
         :label="item.meta.title"
         :to="item.path"
       >
