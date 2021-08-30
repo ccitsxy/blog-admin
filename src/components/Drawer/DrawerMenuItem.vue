@@ -3,7 +3,6 @@
     v-if="!item.children"
     :to="item.path"
     active
-    class="q-mx-sm rounded-borders"
     :class="{'text-primary bg-blue-1':$route.path === item.path}"
     :inset-level="initLevel"
   >
@@ -17,7 +16,6 @@
     v-model="expansion"
     :icon="item.meta.icon"
     :label="item.meta.title"
-    header-class="q-mx-sm rounded-borders"
     :class="{'text-primary':$route.path.startsWith(item.path)}"
     :header-inset-level="initLevel"
     :expand-icon-class="{'text-primary':$route.path.startsWith(item.path)}"

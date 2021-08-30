@@ -11,7 +11,7 @@
       v-for="item in tags"
       :key="item"
       :to="item.path"
-      :class="{'text-primary bg-blue-1':$route.path===item.path}"
+      :class="{'bg-primary text-white':$route.path===item.path}"
       content-class="tagView-q-router-tab"
       no-caps
     >
@@ -21,12 +21,12 @@
         >
           {{ item.meta.title }}
         </div>
-        <!--        <q-icon
-                  v-if="$route.path===item.path"
-                  size="16px"
-                  name="mdi-refresh"
-                  class="q-chip__icon&#45;&#45;remove q-mr-xs"
-                />-->
+        <q-icon
+          v-if="$route.path===item.path"
+          size="16px"
+          name="mdi-refresh"
+          class="q-chip__icon--remove q-mr-xs"
+        />
         <q-icon
           v-if="tags.length > 1"
           size="16px"
@@ -40,22 +40,22 @@
         >
           <q-list dense>
             <q-item clickable v-close-popup>
-              <q-item-section @click="removeOthersTagView(item)">
+              <q-item-section>
                 关闭其他
               </q-item-section>
             </q-item>
             <q-item clickable v-close-popup>
-              <q-item-section @click="removeLeftTagView(item)">
+              <q-item-section>
                 关闭到左侧
               </q-item-section>
             </q-item>
             <q-item clickable v-close-popup>
-              <q-item-section @click="removeRightTagView(item)">
+              <q-item-section>
                 关闭到右侧
               </q-item-section>
             </q-item>
             <q-item clickable v-close-popup>
-              <q-item-section @click="removeAllTagView">
+              <q-item-section>
                 刷新当前页
               </q-item-section>
             </q-item>
