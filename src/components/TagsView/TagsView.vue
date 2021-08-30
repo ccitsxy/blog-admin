@@ -21,12 +21,12 @@
         >
           {{ item.meta.title }}
         </div>
-        <q-icon
-          v-if="$route.path===item.path"
-          size="16px"
-          name="mdi-refresh"
-          class="q-chip__icon--remove q-mr-xs"
-        />
+        <!--        <q-icon
+                  v-if="$route.path===item.path"
+                  size="16px"
+                  name="mdi-refresh"
+                  class="q-chip__icon&#45;&#45;remove q-mr-xs"
+                />-->
         <q-icon
           v-if="tags.length > 1"
           size="16px"
@@ -88,7 +88,7 @@
   </q-tabs>
 </template>
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, ref } from 'vue'
 
 import { useRouter, RouteLocationNormalized } from 'vue-router'
 
@@ -103,6 +103,8 @@ export default defineComponent({
     const store = useStore(storeKey)
 
     const tags = computed<RouteLocationNormalized[]>(() => store.state.tagsView.tabList)
+
+    const tab = ref(router.currentRoute.value.meta.name)
 
     function closeTag (item: RouteLocationNormalized) {
       const index = tags.value.indexOf(item)
@@ -122,7 +124,8 @@ export default defineComponent({
 
     return {
       tags,
-      closeTag
+      closeTag,
+      tab
     }
   }
 })
@@ -131,6 +134,6 @@ export default defineComponent({
 <!--suppress CssInvalidPseudoSelector -->
 <style scoped>
 :deep(.tagView-q-router-tab) {
-  min-width: 48px !important;
+  min-width: 36px !important;
 }
 </style>

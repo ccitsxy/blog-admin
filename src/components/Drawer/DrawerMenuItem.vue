@@ -4,7 +4,7 @@
     :to="item.path"
     active
     class="q-mx-sm rounded-borders"
-    :class="{'text-primary bg-blue-1 ':$route.path === item.path}"
+    :class="{'text-primary bg-blue-1':$route.path === item.path}"
     :inset-level="initLevel"
   >
     <q-item-section avatar>
