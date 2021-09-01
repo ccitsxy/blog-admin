@@ -22,16 +22,14 @@
           :name="item.meta.icon"
           class="q-mr-sm"
         />
-        <div
-          class="q-mr-xs"
-        >
+        <div>
           {{ item.meta.title }}
         </div>
         <q-icon
           v-if="tags.length > 1"
           size="16px"
           name="mdi-close"
-          class="q-chip__icon--remove"
+          class="q-ml-xs q-chip__icon--remove"
           @click.self.prevent="closeTag(item)"
         />
       </template>

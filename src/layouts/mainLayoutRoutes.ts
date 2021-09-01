@@ -34,7 +34,7 @@ const mainLayoutRoutes: RouteRecordRaw[] = [
         component: () => import('pages/Editor/MarkdownEditor.vue'),
         meta: {
           icon: 'mdi-language-markdown-outline',
-          title: 'Markdown'
+          title: 'MD'
         }
       }
     ]

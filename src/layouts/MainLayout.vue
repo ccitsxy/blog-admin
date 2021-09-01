@@ -27,8 +27,8 @@
     </q-drawer>
 
     <q-page-container>
-      <q-scroll-area style="height: calc(100vh - 90px);">
-        <page-index class="q-pa-md" style="min-height: calc(100vh - 90px);"/>
+      <q-scroll-area style="height: calc(100vh - 87px);">
+        <page-index class="q-pa-md" style="min-height: calc(100vh - 87px);"/>
       </q-scroll-area>
     </q-page-container>
   </q-layout>
