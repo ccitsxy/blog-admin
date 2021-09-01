@@ -9,7 +9,7 @@
           :icon="leftDrawerOpen?'mdi-menu-open':'mdi-menu'"
           @click="toggleLeftDrawer"
         />
-        <breadcrumb class="q-ml-md"/>
+        <breadcrumb class="q-mx-md"/>
       </q-toolbar>
       <q-separator/>
       <tags-view/>
@@ -21,16 +21,14 @@
       :width="240"
       class="bg-white shadow-1"
     >
-      <q-scroll-area style="height: calc(100vh - 87px);overflow: hidden">
-        <q-list>
-          <drawer-menu :menu="menu"/>
-        </q-list>
+      <q-scroll-area style="height: 100vh;overflow: hidden">
+        <drawer-menu :menu="menu"/>
       </q-scroll-area>
     </q-drawer>
 
     <q-page-container>
-      <q-scroll-area style="height: calc(100vh - 87px);overflow: hidden">
-        <page-index class="q-pa-md" style="min-height: calc(100vh - 87px);"/>
+      <q-scroll-area style="height: calc(100vh - 90px);">
+        <page-index class="q-pa-md" style="min-height: calc(100vh - 90px);"/>
       </q-scroll-area>
     </q-page-container>
   </q-layout>
