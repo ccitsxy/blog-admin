@@ -3,8 +3,7 @@
     v-if="!item.children"
     :to="item.path"
     active
-    class="q-mx-sm rounded-borders"
-    :class="{'text-white bg-primary':$route.path === item.path}"
+    :class="[{'text-primary bg-light-blue-1':$route.path === item.path},'q-mx-xs rounded-borders']"
     :inset-level="initLevel"
   >
     <q-item-section avatar>
@@ -17,10 +16,11 @@
     v-model="expansion"
     :icon="item.meta.icon"
     :label="item.meta.title"
-    header-class="q-mx-sm rounded-borders"
-    :class="{'text-primary':$route.path.startsWith(item.path)}"
+    :header-class="[{'text-primary':$route.path.startsWith(item.path)},'q-mx-xs rounded-borders']"
     :header-inset-level="initLevel"
-    :expand-icon-class="{'text-primary':$route.path.startsWith(item.path)}"
+    :expand-icon-class="$route.path.startsWith(item.path)?'text-primary':'text-black'"
+    expand-icon="mdi-menu-down"
+    expanded-icon="mdi-menu-up"
   >
     <template v-for="item2 in item.children" :key="item2">
       <drawer-menu-item

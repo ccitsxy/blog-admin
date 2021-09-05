@@ -5,23 +5,18 @@
     inline-label
     breakpoint="0"
     indicator-color="transparent"
-    swipable
+    shrink
+    mobile-arrows
   >
     <q-route-tab
       v-for="item in tags"
       :key="item"
       :to="item.path"
-      :class="{'text-white bg-primary':$route.path===item.path}"
+      :class="[{'text-white':$route.path===item.path},'rounded-borders']"
       content-class="tagView-q-router-tab"
       no-caps
     >
       <template v-slot:default>
-        <q-icon
-          v-if="item.meta.icon"
-          size="18px"
-          :name="item.meta.icon"
-          class="q-mr-sm"
-        />
         <div>
           {{ item.meta.title }}
         </div>
