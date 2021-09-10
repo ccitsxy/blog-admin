@@ -1,18 +1,4 @@
-<template>
-  <div>
-    <q-table
-      title="Treats"
-      :rows="rows"
-      :columns="columns"
-      row-key="name"
-      :grid="$q.screen.xs"
-    >
-    </q-table>
-  </div>
-</template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 /* eslint-disable */
 const columns = [
   {
@@ -170,18 +156,17 @@ const rows = [
     iron: '6%'
   }
 ]
-
-export default defineComponent({
-  name: 'MainLayout',
-  setup () {
-    return {
-      columns,
-      rows
-    }
-  }
-})
 </script>
 
-<style scoped>
-
-</style>
+<template>
+  <div>
+    <q-table
+      title="Treats"
+      :rows="rows"
+      :columns="columns"
+      row-key="name"
+      :grid="$q.screen.xs"
+    >
+    </q-table>
+  </div>
+</template>
