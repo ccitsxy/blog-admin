@@ -25,33 +25,8 @@ const options = {
       dense
       clearable
       clear-icon="mdi-close"
-      bg-color="white"
       class="q-mb-md"
     />
-<!--    <div class="row q-col-gutter-xs q-mb-md">
-      <q-select
-        :options="options"
-        label="分类"
-        dense
-        outlined
-        clearable
-        clear-icon="mdi-close"
-        dropdown-icon=""
-        bg-color="white"
-        class="col-6"
-      />
-      <q-select
-        :options="options"
-        label="分类"
-        dense
-        outlined
-        clearable
-        clear-icon="mdi-close"
-        dropdown-icon=""
-        bg-color="white"
-        class="col-6"
-      />
-    </div>-->
     <vue-vditor
       v-model="editor"
       :options="options"

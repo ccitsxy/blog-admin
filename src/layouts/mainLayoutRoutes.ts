@@ -55,6 +55,22 @@ const mainLayoutRoutes: RouteRecordRaw[] = [
         title: '普通表格'
       }
     }]
+  },
+  {
+    path: '/user',
+    component: () => import('pages/PageIndex.vue'),
+    meta: {
+      icon: 'mdi-account',
+      title: '用户'
+    },
+    children: [{
+      path: '/user/login',
+      component: () => import('pages/User/Login.vue'),
+      meta: {
+        icon: 'mdi-login',
+        title: '登录'
+      }
+    }]
   }
 
 ]

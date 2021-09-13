@@ -12,28 +12,42 @@ const menu = mainLayoutRoutes
 
 const leftDrawerOpen = ref(false)
 
-const miniState = ref(false)
-
 function toggleLeftDrawer () {
   leftDrawerOpen.value = !leftDrawerOpen.value
+}
+
+const thumbStyle = {
+  right: '2px',
+  borderRadius: '5px',
+  backgroundColor: '#c1c1c1',
+  width: '5px',
+  height: '5px',
+  opacity: 0.75
 }
 
 </script>
 
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header
-      class="bg-white text-black"
-    >
+  <q-layout view="lHh lpR lFf">
+    <q-header class="bg-white text-black">
       <q-toolbar>
         <q-btn
           flat
           dense
           round
-          icon="mdi-menu"
+          :icon="leftDrawerOpen?'mdi-menu-open':'mdi-menu'"
           @click="toggleLeftDrawer"
         ></q-btn>
         <breadcrumb class="q-mx-md"/>
+        <div class="q-ml-auto">
+          <q-btn
+            flat
+            dense
+            round
+            @click="$q.fullscreen.toggle()"
+            :icon="$q.fullscreen.isActive ? 'mdi-fullscreen-exit' : 'mdi-fullscreen'"
+          />
+        </div>
       </q-toolbar>
       <q-separator/>
       <tags-view/>
@@ -43,26 +57,23 @@ function toggleLeftDrawer () {
       v-model="leftDrawerOpen"
       show-if-above
       :width="240"
-      :mini="miniState"
-      class="bg-white text-black"
+      class="text-black no-scroll"
       bordered
-      style="overflow: hidden;"
     >
-      <q-item style="height: 50px">
-        <q-item-section avatar>
-          <q-img height="24px" width="24px" src="favicon.ico"></q-img>
-        </q-item-section>
-        <q-item-section>Quasar App</q-item-section>
-      </q-item>
-      <q-separator/>
-      <q-scroll-area class="fit" style="overflow: hidden;">
+      <q-scroll-area
+        :thumb-style="thumbStyle"
+        style="height: 100vh"
+      >
         <drawer-menu :menu="menu"/>
       </q-scroll-area>
     </q-drawer>
 
-    <q-page-container class="fit">
-      <q-scroll-area style="height: calc(100vh - 86px);">
-        <page-index class="q-pa-md" style="min-height: calc(100vh - 86px);"/>
+    <q-page-container>
+      <q-scroll-area
+        :thumb-style="thumbStyle"
+        style="height: calc(100vh - 88px);"
+      >
+        <page-index class="q-pa-md"/>
       </q-scroll-area>
     </q-page-container>
   </q-layout>

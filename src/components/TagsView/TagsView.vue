@@ -37,30 +37,31 @@ router.afterEach((to) => {
     inline-label
     breakpoint="0"
     indicator-color="transparent"
-    shrink
     mobile-arrows
+    outside-arrows
     class="tagsView"
+    content-class="bg-grey-2"
   >
     <q-route-tab
       v-for="item in tags"
       :key="item.path"
       :to="item.path"
       class="tagsView-q-router-tab"
-      active-class="text-primary tagsView-q-router-tab-active"
+      active-class="text-primary bg-white tagsView-q-router-tab-active"
       content-class="tagsView-q-router-tab-content"
       no-caps
     >
       <template v-slot:default>
-        <div>
+        <span class="flex items-center">
           {{ item.meta.title }}
-        </div>
-        <q-icon
-          v-if="tags.length > 1"
-          size="16px"
-          name="mdi-close"
-          class="q-ml-xs q-chip__icon--remove"
-          @click.self.prevent="closeTag(item)"
-        />
+          <q-icon
+            v-if="tags.length > 1"
+            size="18px"
+            name="mdi-close"
+            class="q-ml-sm q-chip__icon--remove"
+            @click.self.prevent="closeTag(item)"
+          />
+        </span>
       </template>
     </q-route-tab>
   </q-tabs>
@@ -76,10 +77,10 @@ router.afterEach((to) => {
 }
 
 :deep(.tagsView-q-router-tab-content) {
-  min-width: 36px !important;
+  min-width: 40px !important;
 }
 
-.tagsView-q-router-tab{
+.tagsView-q-router-tab {
   height: 36px;
   border: 1px solid #e0e0e0;
   border-left: none;
@@ -87,7 +88,7 @@ router.afterEach((to) => {
   z-index: 9;
 }
 
-:deep(.q-tabs__content){
+:deep(.q-tabs__content) {
   position: absolute;
 }
 

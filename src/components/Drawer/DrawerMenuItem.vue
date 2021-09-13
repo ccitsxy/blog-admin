@@ -32,8 +32,7 @@ watch(route, () => {
   <q-item
     v-if="!item.children"
     :to="item.path"
-    active
-    active-class="text-primary menu-item-active"
+    :class="$route.path.startsWith(item.path)?'text-primary menu-item-active':'text-black'"
     :inset-level="initLevel"
   >
     <q-item-section v-if="item.meta?.icon" avatar>
@@ -46,7 +45,7 @@ watch(route, () => {
     v-model="expansion"
     :icon="item.meta?.icon"
     :label="item.meta?.title"
-    :header-class="{'text-primary':$route.path.startsWith(item.path)}"
+    :header-class="$route.path.startsWith(item.path)?'text-primary':'text-black'"
     :header-inset-level="initLevel"
     :expand-icon-class="$route.path.startsWith(item.path)?'text-primary':'text-black'"
   >
