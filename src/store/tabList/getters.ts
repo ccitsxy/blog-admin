@@ -1,8 +1,8 @@
 import { GetterTree } from 'vuex'
 import { StateInterface } from '../index'
-import { TagsViewStateInterface } from './state'
+import { TabListStateInterface } from './state'
 
-const getters: GetterTree<TagsViewStateInterface, StateInterface> = {
+const getters: GetterTree<TabListStateInterface, StateInterface> = {
   someAction (/* context */) {
     // your code
   }

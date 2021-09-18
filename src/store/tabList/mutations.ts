@@ -1,14 +1,14 @@
 import { MutationTree } from 'vuex'
-import { TagsViewStateInterface } from './state'
+import { TabListStateInterface } from './state'
 
 import { RouteLocationNormalized } from 'vue-router'
 
-const mutation: MutationTree<TagsViewStateInterface> = {
-  addTag (state: TagsViewStateInterface, payload: RouteLocationNormalized) {
+const mutation: MutationTree<TabListStateInterface> = {
+  addTag (state: TabListStateInterface, payload: RouteLocationNormalized) {
     if (state.tabList.some(p => p.path === payload.path)) return
     state.tabList.push(payload)
   },
-  removeTag (state: TagsViewStateInterface, payload: RouteLocationNormalized) {
+  removeTag (state: TabListStateInterface, payload: RouteLocationNormalized) {
     state.tabList.splice(state.tabList.indexOf(payload), 1)
   }
 }

@@ -4,7 +4,7 @@ import { defineAsyncComponent, ref } from 'vue'
 import mainLayoutRoutes from 'layouts/mainLayoutRoutes'
 
 const PageIndex = defineAsyncComponent(() => import('pages/PageIndex.vue'))
-const TagsView = defineAsyncComponent(() => import('components/TagsView/TagsView.vue'))
+const TabList = defineAsyncComponent(() => import('components/TabList/TabList.vue'))
 const Breadcrumb = defineAsyncComponent(() => import('components/Breadcrumb/Breadcrumb.vue'))
 const DrawerMenu = defineAsyncComponent(() => import('components/Drawer/DrawerMenu.vue'))
 
@@ -29,7 +29,7 @@ const thumbStyle = {
 
 <template>
   <q-layout view="lHh lpR lFf">
-    <q-header class="bg-white text-black">
+    <q-header class="bg-white text-black" bordered>
       <q-toolbar>
         <q-btn
           flat
@@ -50,7 +50,7 @@ const thumbStyle = {
         </div>
       </q-toolbar>
       <q-separator/>
-      <tags-view/>
+      <tab-list/>
     </q-header>
 
     <q-drawer
@@ -73,7 +73,10 @@ const thumbStyle = {
         :thumb-style="thumbStyle"
         style="height: calc(100vh - 88px);"
       >
-        <page-index class="q-pa-md"/>
+        <page-index
+          class="q-pa-md"
+          style="min-height: calc(100vh - 88px);"
+        />
       </q-scroll-area>
     </q-page-container>
   </q-layout>

@@ -6,8 +6,8 @@ import {
   useStore as vuexUseStore
 } from 'vuex'
 
-import tagsView from './tagsView'
-import { TagsViewStateInterface } from './tagsView/state'
+import tabList from './tabList'
+import { TabListStateInterface } from './tabList/state'
 
 /*
  * If not building with SSR mode, you can
@@ -20,7 +20,7 @@ import { TagsViewStateInterface } from './tagsView/state'
 
 export interface StateInterface {
   // Define your own store structure, using submodules if needed
-  tagsView: TagsViewStateInterface;
+  tabList: TabListStateInterface;
   // Declared as unknown to avoid linting issue. Best to strongly type as per the line above.
   // example: unknown
 }
@@ -38,7 +38,7 @@ export const storeKey: InjectionKey<VuexStore<StateInterface>> = Symbol('vuex-ke
 export default store(function (/* { ssrContext } */) {
   const Store = createStore<StateInterface>({
     modules: {
-      tagsView
+      tabList: tabList
     },
 
     // enable strict mode (adds overhead!)

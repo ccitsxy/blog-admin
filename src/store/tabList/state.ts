@@ -1,10 +1,10 @@
 import { RouteLocationNormalized } from 'vue-router'
 
-export interface TagsViewStateInterface {
+export interface TabListStateInterface {
   tabList: RouteLocationNormalized[];
 }
 
-function state (): TagsViewStateInterface {
+function state (): TabListStateInterface {
   return {
     tabList: []
   }
