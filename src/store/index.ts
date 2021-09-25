@@ -1,54 +1,28 @@
-import { store } from 'quasar/wrappers'
-import { InjectionKey } from 'vue'
-import {
-  createStore,
-  Store as VuexStore,
-  useStore as vuexUseStore
-} from 'vuex'
+import { InjectionKey } from "vue";
+import { createStore, useStore as baseUseStore, Store } from "vuex";
+import { RouteLocationNormalized } from "vue-router";
 
-import tabList from './tabList'
-import { TabListStateInterface } from './tabList/state'
-
-/*
- * If not building with SSR mode, you can
- * directly export the Store instantiation;
- *
- * The function below can be async too; either use
- * async/await or return a Promise which resolves
- * with the Store instance.
- */
-
-export interface StateInterface {
-  // Define your own store structure, using submodules if needed
-  tabList: TabListStateInterface;
-  // Declared as unknown to avoid linting issue. Best to strongly type as per the line above.
-  // example: unknown
+// 为 store state 声明类型
+export interface State {
+  tabList: RouteLocationNormalized[];
 }
 
-// provide typings for `this.$store`
-declare module '@vue/runtime-core' {
-  interface ComponentCustomProperties {
-    $store: VuexStore<StateInterface>
-  }
-}
+// 定义 injection key
+export const key: InjectionKey<Store<State>> = Symbol();
 
-// provide typings for `useStore` helper
-export const storeKey: InjectionKey<VuexStore<StateInterface>> = Symbol('vuex-key')
-
-export default store(function (/* { ssrContext } */) {
-  const Store = createStore<StateInterface>({
-    modules: {
-      tabList: tabList
+export const store = createStore<State>({
+  state: {
+    tabList: [],
+  },
+  mutations: {
+    addTab(state: State, payload: RouteLocationNormalized) {
+      if (state.tabList.some(p => p.path === payload.path)) return;
+      state.tabList.push(payload);
     },
+  },
+});
 
-    // enable strict mode (adds overhead!)
-    // for dev mode and --debug builds only
-    strict: !!process.env.DEBUGGING
-  })
-
-  return Store
-})
-
-export function useStore () {
-  return vuexUseStore(storeKey)
+// 定义自己的 `useStore` 组合式函数
+export function useStore() {
+  return baseUseStore(key);
 }
