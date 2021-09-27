@@ -26,7 +26,7 @@ watchEffect(() => {
 })
 
 const { width } = useWidth()
-const menuItemClick = (e: Event) => {
+const menuItemClick = () => {
   if (width.value <= 768) {
     collapsed.value = !collapsed.value
   }
@@ -82,29 +82,28 @@ onMounted(() => {
         <menu-fold-outlined v-else class="trigger" @click="collapsed = !collapsed" />
         <a-breadcrumb style="margin-left: 16px">
           <a-breadcrumb-item v-for="route in $router.currentRoute.value.matched" :key="route.path">
-            <span v-if="$route.matched.indexOf(route) === $route.matched.length - 1">
-              {{ route.meta.title }}
-            </span>
-            <span v-else class="breadcrumb-link" @click="router.push(route.path)">
-              {{ route.meta.title }}
-            </span>
+            <span
+              v-if="$route.matched.indexOf(route) === $route.matched.length - 1"
+            >{{ route.meta.title }}</span>
+            <span
+              v-else
+              class="breadcrumb-link"
+              @click="router.push(route.path)"
+            >{{ route.meta.title }}</span>
           </a-breadcrumb-item>
         </a-breadcrumb>
-        <div style="flex: 1 1 0"></div>
+        <div style="flex: 1 1 0" />
         <a-dropdown>
           <template #overlay>
             <a-menu>
               <a-menu-item key="1">
-                <UserOutlined />
-                1st menu item
+                <UserOutlined />1st menu item
               </a-menu-item>
               <a-menu-item key="2">
-                <UserOutlined />
-                2nd menu item
+                <UserOutlined />2nd menu item
               </a-menu-item>
               <a-menu-item key="3">
-                <UserOutlined />
-                3rd item
+                <UserOutlined />3rd item
               </a-menu-item>
             </a-menu>
           </template>
@@ -124,7 +123,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.layout-header {
+.layout-header .layout-header {
   background: #fff;
   padding: 0 16px;
   height: 48px;
@@ -247,4 +246,3 @@ onMounted(() => {
 :deep(.scrollbar-track) {
   background-color: transparent;
 }
-</style>
