@@ -1,6 +1,6 @@
-import { InjectionKey } from "vue";
-import { createStore, useStore as baseUseStore, Store } from "vuex";
-import { RouteLocationNormalized } from "vue-router";
+import { InjectionKey } from 'vue';
+import { createStore, useStore as baseUseStore, Store } from 'vuex';
+import { RouteLocationNormalized } from 'vue-router';
 
 // 为 store state 声明类型
 export interface State {

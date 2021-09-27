@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, ref } from 'vue';
 
 function useWidth() {
   const width = ref(0);
@@ -8,16 +8,16 @@ function useWidth() {
   }
 
   onMounted(() => {
-    window.addEventListener("resize", onResize);
+    window.addEventListener('resize', onResize);
     onResize();
   });
 
   onUnmounted(() => {
-    window.removeEventListener("resize", onResize);
+    window.removeEventListener('resize', onResize);
   });
 
   return {
-    width
+    width,
   };
 }
 

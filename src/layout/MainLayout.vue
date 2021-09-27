@@ -1,55 +1,56 @@
 <script setup lang="ts">
-import {onMounted, ref, watchEffect} from "vue";
-import {useRouter} from "vue-router";
-import routes from "../router/routes";
-import useWidth from "../utils/useWidth";
+import { onMounted, ref, watchEffect } from 'vue'
+import { useRouter } from 'vue-router'
+import Scrollbar from 'smooth-scrollbar'
+import routes from '../router/routes'
+import useWidth from '../utils/useWidth'
 
-import Scrollbar from 'smooth-scrollbar';
+const selectedKeys = ref<string[]>([])
+const openKeys = ref<string[]>([])
+const collapsed = ref<boolean>(false)
 
-const selectedKeys = ref<string[]>([]);
-const openKeys = ref<string[]>([]);
-const collapsed = ref<boolean>(false);
+const menu = routes[0].children
 
-const menu = routes[0].children;
-
-const router = useRouter();
+const router = useRouter()
 watchEffect(() => {
   if (router.currentRoute) {
-    const matched = router.currentRoute.value.matched.concat();
-    selectedKeys.value = matched.map(r => r.path);
-    if (!collapsed.value) {// 防止侧边菜单收起时切换路由导致侧边菜单弹出
+    const matched = router.currentRoute.value.matched.concat()
+    selectedKeys.value = matched.map(r => r.path)
+    if (!collapsed.value) {
+      // 防止侧边菜单收起时切换路由导致侧边菜单弹出
       openKeys.value = matched
         .filter(r => r.path !== router.currentRoute.value.path)
-        .map(r => r.path);
+        .map(r => r.path)
     }
   }
-});
+})
 
-const {width} = useWidth();
+const { width } = useWidth()
 const menuItemClick = (e: Event) => {
   if (width.value <= 768) {
-    collapsed.value = !collapsed.value;
+    collapsed.value = !collapsed.value
   }
-};
+}
 
 onMounted(() => {
-  Scrollbar.init(<HTMLElement>document.querySelector('.menu-scrollbar'));
-  Scrollbar.init(<HTMLElement>document.querySelector('.content-scrollbar'));
+  Scrollbar.init(document.querySelector('.menu-scrollbar') as HTMLElement)
+  Scrollbar.init(document.querySelector('.content-scrollbar') as HTMLElement)
 })
 </script>
 
 <template>
   <a-layout>
     <a-layout-sider
-      :class="width > 768 ? 'layout-sider' : 'layout-sider-mobile'"
       v-model:collapsed="collapsed"
+      :class="width > 768 ? 'layout-sider' : 'layout-sider-mobile'"
       :trigger="null"
       collapsible
       width="208"
-      :collapsedWidth="width > 768 ? 48 : 0"
+      :collapsed-width="width > 768 ? 48 : 0"
     >
-      <div :class="[{ 'layout-sider-mask-collapsed': collapsed },'layout-sider-mask',]"
-           @click="collapsed = !collapsed"
+      <div
+        :class="[{ 'layout-sider-mask-collapsed': collapsed }, 'layout-sider-mask']"
+        @click="collapsed = !collapsed"
       />
       <div :class="[{ 'logo-collapsed': collapsed }, 'logo']">
         <router-link to="/">
@@ -57,42 +58,31 @@ onMounted(() => {
             height="32"
             width="32"
             src="https://alicdn.antdv.com/v2/assets/logo.1ef800a8.svg"
-            alt="logo"/>
-          <h1 :class="[{ 'logo-title-collapsed': collapsed }, 'logo-title']">
-            Pro Layout
-          </h1>
+            alt="logo"
+          />
+          <h1 :class="[{ 'logo-title-collapsed': collapsed }, 'logo-title']">Pro Layout</h1>
         </router-link>
       </div>
       <div class="menu-scrollbar">
         <a-menu
-          theme="dark"
-          mode="inline"
           v-model:selectedKeys="selectedKeys"
           v-model:openKeys="openKeys"
+          theme="dark"
+          mode="inline"
           @click="menuItemClick"
         >
-          <sider-menu :menu="menu"/>
+          <sider-menu :menu="menu" />
         </a-menu>
       </div>
     </a-layout-sider>
 
     <a-layout>
       <a-layout-header class="layout-header">
-        <menu-unfold-outlined
-          v-if="collapsed"
-          class="trigger"
-          @click="collapsed = !collapsed"
-        />
-        <menu-fold-outlined
-          v-else
-          class="trigger"
-          @click="collapsed = !collapsed"
-        />
+        <menu-unfold-outlined v-if="collapsed" class="trigger" @click="collapsed = !collapsed" />
+        <menu-fold-outlined v-else class="trigger" @click="collapsed = !collapsed" />
         <a-breadcrumb style="margin-left: 16px">
-          <a-breadcrumb-item
-            v-for="route in $router.currentRoute.value.matched"
-          >
-            <span v-if="$route.matched.indexOf(route) ===$route.matched.length - 1">
+          <a-breadcrumb-item v-for="route in $router.currentRoute.value.matched" :key="route.path">
+            <span v-if="$route.matched.indexOf(route) === $route.matched.length - 1">
               {{ route.meta.title }}
             </span>
             <span v-else class="breadcrumb-link" @click="router.push(route.path)">
@@ -100,7 +90,7 @@ onMounted(() => {
             </span>
           </a-breadcrumb-item>
         </a-breadcrumb>
-        <div style="flex: 1 1 0;"></div>
+        <div style="flex: 1 1 0"></div>
         <a-dropdown>
           <template #overlay>
             <a-menu>
@@ -122,11 +112,11 @@ onMounted(() => {
         </a-dropdown>
       </a-layout-header>
 
-      <tabs-view class="layout-tabs"/>
+      <tabs-view class="layout-tabs" />
 
       <div class="content-scrollbar">
         <a-layout-content class="layout-content">
-          <router-view/>
+          <router-view />
         </a-layout-content>
       </div>
     </a-layout>
@@ -177,7 +167,6 @@ onMounted(() => {
     top: 0;
     left: 0;
   }
-
 }
 
 .trigger {

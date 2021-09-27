@@ -1,3 +1,4 @@
+import { resolve } from 'path';
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 
@@ -11,7 +12,17 @@ export default defineConfig({
     Components({
       /* options */
       dts: true,
-      resolvers: [AntDesignVueResolver()],
+      resolvers: [AntDesignVueResolver(
+        {
+          resolveIcons: true
+        }
+      )],
     }),
   ],
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src'),
+      'vue': 'vue/dist/vue.esm-bundler.js'
+    }
+  }
 });

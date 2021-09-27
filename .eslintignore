@@ -1,0 +1,4 @@
+/node_modules
+*.html
+vite.config.ts
+.eslintrc.js

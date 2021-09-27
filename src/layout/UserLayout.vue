@@ -9,39 +9,39 @@
               height="44"
               width="44"
               src="https://alicdn.antdv.com/v2/assets/logo.1ef800a8.svg"
-              alt="logo"/>
+              alt="logo"
+            />
             <span class="title">Ant Design</span>
           </router-link>
         </div>
         <div class="desc">Ant Design 是西湖区最具影响力的 Web 设计规范</div>
       </div>
-      <router-view/>
+      <router-view />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const links = [
+/* const links = [
   {
-    key: "help",
-    title: "帮助",
-    href: ""
+    key: 'help',
+    title: '帮助',
+    href: ''
   },
   {
-    key: "privacy",
-    title: "隐私",
-    href: ""
+    key: 'privacy',
+    title: '隐私',
+    href: ''
   },
   {
-    key: "terms",
-    title: "条款",
-    href: ""
+    key: 'terms',
+    title: '条款',
+    href: ''
   }
-]
+] */
 </script>
 
 <style lang="less" scoped>
-
 .container {
   display: flex;
   flex-direction: column;
@@ -57,7 +57,7 @@ const links = [
 
 @media (min-width: 768px) {
   .container {
-    background-image: url("https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg");
+    background-image: url('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg');
     background-repeat: no-repeat;
     background-position: center 110px;
     background-size: 100%;
@@ -90,7 +90,7 @@ const links = [
 .title {
   font-size: 33px;
   color: black;
-  font-family: "Myriad Pro", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: 600;
   position: relative;
   top: 2px;
