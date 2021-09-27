@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { PropType } from 'vue';
-import { RouteRecordRaw } from 'vue-router';
+import { PropType } from 'vue'
+import { RouteRecordRaw } from 'vue-router'
 
 defineProps({
   item: {
     type: Object as PropType<RouteRecordRaw>,
-    required: true,
-  },
-});
+    required: true
+  }
+})
+
 </script>
 
 <template>
@@ -25,7 +26,7 @@ defineProps({
         <component :is="item.meta?.icon"></component>
       </template>
       <template #title>{{ item.meta?.title }}</template>
-      <sider-menu-item v-for="child in item.children" :key="child.path" :item="child" />
+      <sider-menu-item v-for="child in item.children" :key="child.path" :item="child"/>
     </a-sub-menu>
   </template>
 </template>

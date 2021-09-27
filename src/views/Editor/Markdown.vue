@@ -11,10 +11,17 @@ const options = {
     index: 3000
   }
 }
+
+const spinning = ref(true)
+function after () {
+  spinning.value = false
+}
 </script>
 
 <template>
-  <div id="editor">
-    <vue-vditor v-model="editor" :options="options" />
-  </div>
+  <a-spin :spinning="spinning">
+    <div id="editor">
+      <vue-vditor v-model="editor" :options="options" @after="after()"/>
+    </div>
+  </a-spin>
 </template>

@@ -123,7 +123,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.layout-header .layout-header {
+.layout-header{
   background: #fff;
   padding: 0 16px;
   height: 48px;
@@ -246,3 +246,4 @@ onMounted(() => {
 :deep(.scrollbar-track) {
   background-color: transparent;
 }
+</style>

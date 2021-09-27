@@ -4,7 +4,6 @@ import routes from '../../router/routes'
 import { RouteRecordRaw } from 'vue-router'
 
 const filterIcons: string[] = []
-
 let item: RouteRecordRaw
 
 function filterRoutesIcons (children: RouteRecordRaw[] | undefined) {
@@ -25,8 +24,6 @@ export default (app: App) => {
       if (icons[k].displayName !== undefined) {
         // @ts-ignore
         app.component(icons[k].displayName, icons[k])
-        // @ts-ignore
-        console.log(icons[k].displayName)
       }
     })
 }

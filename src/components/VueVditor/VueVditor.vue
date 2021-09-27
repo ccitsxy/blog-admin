@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Vditor from 'vditor';
-import 'vditor/dist/index.css';
-import { onMounted, ref, watch, toRaw, onUnmounted, unref } from 'vue';
+import Vditor from 'vditor'
+import 'vditor/dist/index.css'
+import { onMounted, ref, watch, toRaw, onUnmounted, unref } from 'vue'
 
 const emit = defineEmits([
   'update:modelValue',
@@ -10,69 +10,68 @@ const emit = defineEmits([
   'blur',
   'esc',
   'ctrlEnter',
-  'select',
-]);
+  'select'
+])
 
 const props = defineProps({
   options: {
-    type: Object,
+    type: Object
   },
   modelValue: {
     type: String,
-    default: '',
-  },
-});
+    default: ''
+  }
+})
 
-const contentEditor = ref<Vditor | null>(null);
-const editorRef = ref<HTMLElement | null>(null);
+const contentEditor = ref<Vditor | null>(null)
+const editorRef = ref<string | HTMLElement>('')
 
 onMounted(() => {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  contentEditor.value = new Vditor(editorRef.value!, {
+  contentEditor.value = new Vditor(editorRef.value, {
     ...props.options,
     value: props.modelValue,
-    after() {
-      emit('after', toRaw(contentEditor.value));
+    after () {
+      emit('after', toRaw(contentEditor.value))
     },
-    input(value: string) {
-      emit('update:modelValue', value);
+    input (value: string) {
+      emit('update:modelValue', value)
     },
-    focus(value: string) {
-      emit('focus', value);
+    focus (value: string) {
+      emit('focus', value)
     },
-    blur(value: string) {
-      emit('blur', value);
+    blur (value: string) {
+      emit('blur', value)
     },
-    esc(value: string) {
-      emit('esc', value);
+    esc (value: string) {
+      emit('esc', value)
     },
-    ctrlEnter(value: string) {
-      emit('ctrlEnter', value);
+    ctrlEnter (value: string) {
+      emit('ctrlEnter', value)
     },
-    select(value: string) {
-      emit('select', value);
-    },
-  });
-});
+    select (value: string) {
+      emit('select', value)
+    }
+  })
+})
 
 watch(
   () => props.modelValue,
   newVal => {
     if (newVal !== contentEditor.value?.getValue()) {
-      contentEditor.value?.setValue(newVal);
+      contentEditor.value?.setValue(newVal)
     }
-  },
-);
+  }
+)
 
 onUnmounted(() => {
-  const editorInstance = unref(contentEditor);
-  if (!editorInstance) return;
+  const editorInstance = unref(contentEditor)
+  if (!editorInstance) return
   try {
-    editorInstance?.destroy?.();
+    editorInstance?.destroy?.()
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
-});
+})
 </script>
 
 <template>
