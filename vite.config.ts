@@ -12,11 +12,11 @@ export default defineConfig({
     Components({
       /* options */
       dts: true,
-      resolvers: [AntDesignVueResolver(
-        {
+      resolvers: [
+        AntDesignVueResolver({
           resolveIcons: true
-        }
-      )],
+        }),
+      ],
     }),
   ],
   resolve: {

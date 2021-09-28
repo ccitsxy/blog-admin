@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { onMounted, ref, watchEffect } from 'vue'
+import { onMounted, onUnmounted, ref, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
 import Scrollbar from 'smooth-scrollbar'
 import routes from '../router/routes'
-import useWidth from '../utils/useWidth'
+
+import { createFromIconfontCN } from '@ant-design/icons-vue'
 
 const selectedKeys = ref<string[]>([])
 const openKeys = ref<string[]>([])
@@ -25,7 +26,18 @@ watchEffect(() => {
   }
 })
 
-const { width } = useWidth()
+const width = ref(0)
+function onResize () {
+  width.value = window.innerWidth
+}
+onMounted(() => {
+  window.addEventListener('resize', onResize)
+  onResize()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', onResize)
+})
 const menuItemClick = () => {
   if (width.value <= 768) {
     collapsed.value = !collapsed.value
@@ -36,6 +48,11 @@ onMounted(() => {
   Scrollbar.init(document.querySelector('.menu-scrollbar') as HTMLElement)
   Scrollbar.init(document.querySelector('.content-scrollbar') as HTMLElement)
 })
+
+const MyIcon = createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_2839510_v2nz5iuq02h.js' // 在 iconfont.cn 上生成
+})
+
 </script>
 
 <template>
@@ -78,9 +95,11 @@ onMounted(() => {
 
     <a-layout>
       <a-layout-header class="layout-header">
-        <menu-unfold-outlined v-if="collapsed" class="trigger" @click="collapsed = !collapsed" />
-        <menu-fold-outlined v-else class="trigger" @click="collapsed = !collapsed" />
-        <a-breadcrumb style="margin-left: 16px">
+        <!-- <menu-unfold-outlined v-if="collapsed" class="trigger" @click="collapsed = !collapsed" /> -->
+        <!-- <menu-fold-outlined v-else class="trigger" @click="collapsed = !collapsed" /> -->
+        <my-icon v-if="collapsed" type="icon-unfold" class="trigger" @click="collapsed = !collapsed"/>
+        <my-icon v-else type="icon-fold" class="trigger" @click="collapsed = !collapsed"/>
+        <a-breadcrumb class="layout-breadcrumb">
           <a-breadcrumb-item v-for="route in $router.currentRoute.value.matched" :key="route.path">
             <span
               v-if="$route.matched.indexOf(route) === $route.matched.length - 1"
@@ -132,6 +151,10 @@ onMounted(() => {
   align-items: center;
 }
 
+.layout-breadcrumb{
+  margin-left: 16px;
+}
+
 .layout-tabs {
   border-bottom: 1px solid #f0f0f0;
 }
@@ -173,7 +196,7 @@ onMounted(() => {
   transition: color 0.3s;
   display: flex;
   align-items: center;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .trigger:hover,

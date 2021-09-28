@@ -11,7 +11,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/dashboard',
         name: 'dashboard',
-        meta: { title: '仪表盘', icon: 'DashboardOutlined' },
+        meta: { title: '仪表盘', icon: 'dashboard' },
         redirect: '/dashboard/monitor',
         component: () => import('../layout/RouteView.vue'),
         children: [
@@ -32,14 +32,14 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/editor',
         name: 'editor',
-        meta: { title: '编辑器', icon: 'EditOutlined' },
+        meta: { title: '编辑器', icon: 'edit' },
         redirect: '/editor/markdown',
         component: () => import('../layout/RouteView.vue'),
         children: [
           {
             path: '/editor/markdown',
             name: 'markdown',
-            meta: { title: 'Markdown', icon: 'FileMarkdownOutlined' },
+            meta: { title: 'Markdown', icon: 'file-markdown' },
             component: () => import('../views/Editor/Markdown.vue')
           }
         ]
@@ -47,7 +47,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/table',
         name: 'table',
-        meta: { title: '表格', icon: 'TableOutlined' },
+        meta: { title: '表格', icon: 'table' },
         component: () => import('../views/Table/Table.vue')
       }
     ]
