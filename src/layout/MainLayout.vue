@@ -87,8 +87,8 @@ onMounted(() => {
 
     <a-layout>
       <a-layout-header class="layout-header">
-        <icon-font v-if="collapsed" type="unfold" class="trigger" @click="collapsed = !collapsed"/>
-        <icon-font v-else type="fold" class="trigger" @click="collapsed = !collapsed"/>
+        <icon-font v-if="collapsed" type="icon-unfold" class="trigger" @click="collapsed = !collapsed"/>
+        <icon-font v-else type="icon-fold" class="trigger" @click="collapsed = !collapsed"/>
         <a-breadcrumb class="layout-breadcrumb">
           <a-breadcrumb-item v-for="route in $router.currentRoute.value.matched" :key="route.path">
             <span
@@ -116,7 +116,7 @@ onMounted(() => {
               </a-menu-item>
             </a-menu>
           </template>
-          <icon-font type="user"/>
+          <icon-font type="icon-user"/>
         </a-dropdown>
       </a-layout-header>
 
