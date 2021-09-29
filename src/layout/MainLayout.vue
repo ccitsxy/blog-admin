@@ -4,8 +4,6 @@ import { useRouter } from 'vue-router'
 import Scrollbar from 'smooth-scrollbar'
 import routes from '../router/routes'
 
-import { createFromIconfontCN } from '@ant-design/icons-vue'
-
 const selectedKeys = ref<string[]>([])
 const openKeys = ref<string[]>([])
 const collapsed = ref<boolean>(false)
@@ -34,7 +32,6 @@ onMounted(() => {
   window.addEventListener('resize', onResize)
   onResize()
 })
-
 onUnmounted(() => {
   window.removeEventListener('resize', onResize)
 })
@@ -48,11 +45,6 @@ onMounted(() => {
   Scrollbar.init(document.querySelector('.menu-scrollbar') as HTMLElement)
   Scrollbar.init(document.querySelector('.content-scrollbar') as HTMLElement)
 })
-
-const MyIcon = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_2839510_v2nz5iuq02h.js' // 在 iconfont.cn 上生成
-})
-
 </script>
 
 <template>
@@ -95,10 +87,8 @@ const MyIcon = createFromIconfontCN({
 
     <a-layout>
       <a-layout-header class="layout-header">
-        <!-- <menu-unfold-outlined v-if="collapsed" class="trigger" @click="collapsed = !collapsed" /> -->
-        <!-- <menu-fold-outlined v-else class="trigger" @click="collapsed = !collapsed" /> -->
-        <my-icon v-if="collapsed" type="icon-unfold" class="trigger" @click="collapsed = !collapsed"/>
-        <my-icon v-else type="icon-fold" class="trigger" @click="collapsed = !collapsed"/>
+        <icon-font v-if="collapsed" type="unfold" class="trigger" @click="collapsed = !collapsed"/>
+        <icon-font v-else type="fold" class="trigger" @click="collapsed = !collapsed"/>
         <a-breadcrumb class="layout-breadcrumb">
           <a-breadcrumb-item v-for="route in $router.currentRoute.value.matched" :key="route.path">
             <span
@@ -116,17 +106,17 @@ const MyIcon = createFromIconfontCN({
           <template #overlay>
             <a-menu>
               <a-menu-item key="1">
-                <UserOutlined />1st menu item
+                1st menu item
               </a-menu-item>
               <a-menu-item key="2">
-                <UserOutlined />2nd menu item
+                2nd menu item
               </a-menu-item>
               <a-menu-item key="3">
-                <UserOutlined />3rd item
+                3rd item
               </a-menu-item>
             </a-menu>
           </template>
-          <UserOutlined />
+          <icon-font type="user"/>
         </a-dropdown>
       </a-layout-header>
 
