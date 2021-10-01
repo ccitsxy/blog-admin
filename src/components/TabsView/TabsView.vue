@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { RouteLocationRaw, useRouter } from 'vue-router'
 
 const router = useRouter()
 
@@ -48,9 +48,8 @@ const onEdit = (targetKey: string | MouseEvent, action: string) => {
   }
 }
 
-const onChange = (targetKey: string | MouseEvent, action: string) => {
-  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-  void router.push(`${targetKey}`)
+const onChange = (targetKey: string | MouseEvent) => {
+  void router.push(targetKey as RouteLocationRaw)
 }
 </script>
 
@@ -65,7 +64,7 @@ const onChange = (targetKey: string | MouseEvent, action: string) => {
       @change="onChange"
     >
       <template #tabBarExtraContent>
-        <icon-font type="icon-more"/>
+        <icon-font type="icon-more" />
       </template>
       <a-tab-pane
         v-for="pane in panes"
@@ -73,9 +72,7 @@ const onChange = (targetKey: string | MouseEvent, action: string) => {
         :tab="pane.title"
         :closable="panes.length > 1"
         style="height: 0"
-      >
-        {{ pane.content }}
-      </a-tab-pane>
+      >{{ pane.content }}</a-tab-pane>
     </a-tabs>
   </div>
 </template>

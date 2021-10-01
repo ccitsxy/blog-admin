@@ -25,9 +25,11 @@ watchEffect(() => {
 })
 
 const width = ref(0)
+
 function onResize () {
   width.value = window.innerWidth
 }
+
 onMounted(() => {
   window.addEventListener('resize', onResize)
   onResize()
@@ -43,7 +45,6 @@ const menuItemClick = () => {
 
 onMounted(() => {
   Scrollbar.init(document.querySelector('.menu-scrollbar') as HTMLElement)
-  Scrollbar.init(document.querySelector('.content-scrollbar') as HTMLElement)
 })
 </script>
 
@@ -51,7 +52,7 @@ onMounted(() => {
   <a-layout>
     <a-layout-sider
       v-model:collapsed="collapsed"
-      :class="width > 768 ? 'layout-sider' : 'layout-sider-mobile'"
+      class="layout-sider"
       :trigger="null"
       collapsible
       width="208"
@@ -80,14 +81,19 @@ onMounted(() => {
           mode="inline"
           @click="menuItemClick"
         >
-          <sider-menu :menu="menu" />
+          <sider-menu :menu="menu"/>
         </a-menu>
       </div>
     </a-layout-sider>
 
     <a-layout>
-      <a-layout-header class="layout-header">
-        <icon-font v-if="collapsed" type="icon-unfold" class="trigger" @click="collapsed = !collapsed"/>
+      <a-layout-header :class="[{ 'layout-header-collapsed': collapsed }, 'layout-header']">
+        <icon-font
+          v-if="collapsed"
+          type="icon-unfold"
+          class="trigger"
+          @click="collapsed = !collapsed"
+        />
         <icon-font v-else type="icon-fold" class="trigger" @click="collapsed = !collapsed"/>
         <a-breadcrumb class="layout-breadcrumb">
           <a-breadcrumb-item v-for="route in $router.currentRoute.value.matched" :key="route.path">
@@ -101,69 +107,90 @@ onMounted(() => {
             >{{ route.meta.title }}</span>
           </a-breadcrumb-item>
         </a-breadcrumb>
-        <div style="flex: 1 1 0" />
+        <div style="flex: 1 1 0"/>
         <a-dropdown>
           <template #overlay>
             <a-menu>
-              <a-menu-item key="1">
-                1st menu item
-              </a-menu-item>
-              <a-menu-item key="2">
-                2nd menu item
-              </a-menu-item>
-              <a-menu-item key="3">
-                3rd item
-              </a-menu-item>
+              <a-menu-item key="1">1st menu item</a-menu-item>
+              <a-menu-item key="2">2nd menu item</a-menu-item>
+              <a-menu-item key="3">3rd item</a-menu-item>
             </a-menu>
           </template>
           <icon-font type="icon-user"/>
         </a-dropdown>
       </a-layout-header>
 
-      <tabs-view class="layout-tabs" />
-
-      <div class="content-scrollbar">
-        <a-layout-content class="layout-content">
-          <router-view />
-        </a-layout-content>
-      </div>
+      <tabs-view :class="[{ 'layout-tabs-collapsed': collapsed }, 'layout-tabs']"/>
+      <a-layout-content :class="[{ 'layout-content-collapsed': collapsed }, 'layout-content']">
+        <router-view/>
+      </a-layout-content>
     </a-layout>
   </a-layout>
 </template>
 
 <style scoped>
-.layout-header{
+.layout-header {
   background: #fff;
   padding: 0 16px;
   height: 48px;
   line-height: 48px;
   display: flex;
   align-items: center;
+  position: fixed;
+  right: 0;
+  width: calc(100% - 208px);
+  transition: all 0.2s;
+  z-index: 10;
 }
 
-.layout-breadcrumb{
+.layout-header-collapsed,
+.layout-tabs-collapsed {
+  width: calc(100% - 48px) !important;
+}
+
+.layout-breadcrumb {
   margin-left: 16px;
 }
 
 .layout-tabs {
+  position: fixed;
+  margin-top: 48px;
+  width: calc(100% - 208px);
+  right: 0;
   border-bottom: 1px solid #f0f0f0;
+  transition: all 0.2s;
+  z-index: 10;
 }
 
 .layout-content {
+  margin-top: 111px;
+  margin-left: 208px;
+  min-height: calc(100vh - 111px);
   padding: 24px;
-  min-height: calc(100vh - 134px);
+  transition: all 0.2s;
 }
 
-.layout-sider-mobile {
+.layout-content-collapsed {
+  margin-left: 48px;
+}
+
+.layout-sider {
   height: 100%;
   display: block;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10;
+  z-index: 11;
 }
 
 @media (max-width: 768px) {
+  .layout-header,
+  .layout-tabs,
+  .layout-content {
+    width: 100% !important;
+    margin-left: 0;
+  }
+
   .layout-sider-mask-collapsed {
     height: 0 !important;
   }
@@ -173,8 +200,6 @@ onMounted(() => {
     height: 100%;
     width: 100%;
     background-color: #2b1e1e73;
-    transition: none;
-    animation: antdDrawerFadeIn 0.3s cubic-bezier(0.7, 0.3, 0.1, 1);
     position: fixed;
     top: 0;
     left: 0;
@@ -183,7 +208,6 @@ onMounted(() => {
 
 .trigger {
   cursor: pointer;
-  transition: color 0.3s;
   display: flex;
   align-items: center;
   font-size: 24px;
@@ -202,6 +226,7 @@ onMounted(() => {
   padding: 16px 16px;
   line-height: 32px;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
 .logo h1 {
@@ -211,10 +236,6 @@ onMounted(() => {
   font-weight: 600;
   font-size: 18px;
   line-height: 32px;
-  -webkit-animation: fade-in;
-  animation: fade-in;
-  -webkit-animation-duration: 0.2s;
-  animation-duration: 0.2s;
 }
 
 .logo h1,
@@ -248,15 +269,11 @@ onMounted(() => {
   background-color: #54626f;
 }
 
-.content-scrollbar {
-  height: calc(100vh - 111px);
-}
-
-.content-scrollbar :deep(.scrollbar-thumb) {
-  background-color: #c1c1c1;
-}
-
 :deep(.scrollbar-track) {
   background-color: transparent;
+}
+
+:deep(.ant-tabs-close-x) {
+  margin-left: 8px !important;
 }
 </style>

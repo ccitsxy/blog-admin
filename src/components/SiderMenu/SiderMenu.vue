@@ -10,5 +10,5 @@ defineProps({
 </script>
 
 <template>
-  <sider-menu-item v-for="item in menu" :key="item.path" :item="item"/>
+  <sider-menu-item v-for="item in menu" :key="item.path" :item="item" />
 </template>

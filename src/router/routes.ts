@@ -11,44 +11,41 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/dashboard',
         name: 'dashboard',
-        meta: { title: '仪表盘', icon: 'icon-dashboard' },
-        redirect: '/dashboard/monitor',
+        meta: {
+          title: '仪表盘',
+          icon: 'icon-dashboard'
+        },
+        component: () => import('../views/Dashboard/Dashboard.vue')
+      },
+      {
+        path: '/blog',
+        name: 'blog',
+        meta: {
+          title: '博客管理',
+          icon: 'icon-edit'
+        },
+        redirect: '/blog/article',
         component: () => import('../layout/RouteView.vue'),
         children: [
           {
-            path: '/dashboard/monitor',
-            name: 'monitor',
-            meta: { title: '监控页' },
-            component: () => import('../views/Dashboard/Monitor.vue')
-          },
-          {
-            path: '/dashboard/workspace',
-            name: 'analysis',
-            meta: { title: '分析页' },
-            component: () => import('../views/Dashboard/Analysis.vue')
+            path: '/blog/article',
+            name: 'article',
+            meta: {
+              title: 'Markdown',
+              icon: 'icon-file-markdown'
+            },
+            component: () => import('../views/Blog/Markdown.vue')
           }
         ]
       },
       {
-        path: '/editor',
-        name: 'editor',
-        meta: { title: '编辑器', icon: 'icon-edit' },
-        redirect: '/editor/markdown',
-        component: () => import('../layout/RouteView.vue'),
-        children: [
-          {
-            path: '/editor/markdown',
-            name: 'markdown',
-            meta: { title: 'Markdown', icon: 'icon-file-markdown' },
-            component: () => import('../views/Editor/Markdown.vue')
-          }
-        ]
-      },
-      {
-        path: '/table',
-        name: 'table',
-        meta: { title: '表格', icon: 'icon-table' },
-        component: () => import('../views/Table/Table.vue')
+        path: '/interface',
+        name: 'interface',
+        meta: {
+          title: '接口管理',
+          icon: 'icon-table'
+        },
+        component: () => import('../views/Interface/Article.vue')
       }
     ]
   },

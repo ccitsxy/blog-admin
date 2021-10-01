@@ -14,9 +14,8 @@ const MyIcon = createFromIconfontCN({
 </script>
 
 <template>
-  <my-icon :type="type"/>
+  <my-icon :type="type" />
 </template>
 
 <style scoped>
-
 </style>
