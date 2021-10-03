@@ -25,6 +25,7 @@ watchEffect(() => {
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const width = ref(0)
 
 function onResize () {
@@ -39,6 +40,10 @@ onUnmounted(() => {
   window.removeEventListener('resize', onResize)
 })
 const menuItemClick = () => {
+=======
+const { width } = useWidth()
+const menuItemClick = (e: Event) => {
+>>>>>>> parent of 5a0cb90 (update)
 =======
 const { width } = useWidth()
 const menuItemClick = (e: Event) => {
@@ -111,6 +116,7 @@ onMounted(() => {
           </a-breadcrumb-item>
         </a-breadcrumb>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <div style="flex: 1 1 0"/>
         <a-dropdown>
           <template #overlay>
@@ -119,6 +125,8 @@ onMounted(() => {
               <a-menu-item key="2">2nd menu item</a-menu-item>
               <a-menu-item key="3">3rd item</a-menu-item>
 =======
+=======
+>>>>>>> parent of 5a0cb90 (update)
         <div style="flex: 1 1 0"></div>
         <a-dropdown>
           <template #overlay>
@@ -295,10 +303,13 @@ onMounted(() => {
   background-color: transparent;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 :deep(.ant-tabs-close-x) {
   margin-left: 8px !important;
 }
+=======
+>>>>>>> parent of 5a0cb90 (update)
 =======
 >>>>>>> parent of 5a0cb90 (update)
 </style>
