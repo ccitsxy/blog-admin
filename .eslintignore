@@ -2,4 +2,3 @@
 *.html
 vite.config.ts
 .eslintrc.js
-icons.ts

@@ -24,14 +24,10 @@ watchEffect(() => {
   }
 })
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 const width = ref(0)
-
 function onResize () {
   width.value = window.innerWidth
 }
-
 onMounted(() => {
   window.addEventListener('resize', onResize)
   onResize()
@@ -39,15 +35,8 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', onResize)
 })
+
 const menuItemClick = () => {
-=======
-const { width } = useWidth()
-const menuItemClick = (e: Event) => {
->>>>>>> parent of 5a0cb90 (update)
-=======
-const { width } = useWidth()
-const menuItemClick = (e: Event) => {
->>>>>>> parent of 5a0cb90 (update)
   if (width.value <= 768) {
     collapsed.value = !collapsed.value
   }
@@ -115,8 +104,7 @@ onMounted(() => {
             </span>
           </a-breadcrumb-item>
         </a-breadcrumb>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         <div style="flex: 1 1 0"/>
         <a-dropdown>
           <template #overlay>
@@ -124,26 +112,6 @@ onMounted(() => {
               <a-menu-item key="1">1st menu item</a-menu-item>
               <a-menu-item key="2">2nd menu item</a-menu-item>
               <a-menu-item key="3">3rd item</a-menu-item>
-=======
-=======
->>>>>>> parent of 5a0cb90 (update)
-        <div style="flex: 1 1 0"></div>
-        <a-dropdown>
-          <template #overlay>
-            <a-menu>
-              <a-menu-item key="1">
-                <UserOutlined />
-                1st menu item
-              </a-menu-item>
-              <a-menu-item key="2">
-                <UserOutlined />
-                2nd menu item
-              </a-menu-item>
-              <a-menu-item key="3">
-                <UserOutlined />
-                3rd item
-              </a-menu-item>
->>>>>>> parent of 5a0cb90 (update)
             </a-menu>
           </template>
           <icon-font type="icon-user"/>
@@ -302,14 +270,8 @@ onMounted(() => {
 :deep(.scrollbar-track) {
   background-color: transparent;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 :deep(.ant-tabs-close-x) {
   margin-left: 8px !important;
 }
-=======
->>>>>>> parent of 5a0cb90 (update)
-=======
->>>>>>> parent of 5a0cb90 (update)
 </style>
