@@ -33,9 +33,12 @@ declare module 'vue' {
     ATag: typeof import('ant-design-vue/es')['Tag']
     ATextarea: typeof import('ant-design-vue/es')['Textarea']
     IconFont: typeof import('C:/Users/11278/Desktop/Project/blog-admin/src/components/IconFont/IconFont.vue')['default']
+    LayoutView: typeof import('C:/Users/11278/Desktop/Project/blog-admin/src/components/Layout/LayoutView.vue')['default']
+    MainLayout: typeof import('C:/Users/11278/Desktop/Project/blog-admin/src/components/Layout/MainLayout.vue')['default']
     SiderMenu: typeof import('C:/Users/11278/Desktop/Project/blog-admin/src/components/SiderMenu/SiderMenu.vue')['default']
     SiderMenuItem: typeof import('C:/Users/11278/Desktop/Project/blog-admin/src/components/SiderMenu/SiderMenuItem.vue')['default']
     TabsView: typeof import('C:/Users/11278/Desktop/Project/blog-admin/src/components/TabsView/TabsView.vue')['default']
+    UserLayout: typeof import('C:/Users/11278/Desktop/Project/blog-admin/src/components/Layout/UserLayout.vue')['default']
     VueVditor: typeof import('C:/Users/11278/Desktop/Project/blog-admin/src/components/VueVditor/VueVditor.vue')['default']
   }
 }

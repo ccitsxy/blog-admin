@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <div class="dashboard">
     <a-row :gutter="[16,16]">
@@ -26,6 +24,3 @@
     </a-row>
   </div>
 </template>
-
-<style scoped>
-</style>

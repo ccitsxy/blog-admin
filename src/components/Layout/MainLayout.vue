@@ -2,8 +2,7 @@
 import { onMounted, onUnmounted, ref, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
 import Scrollbar from 'smooth-scrollbar'
-import routes from '../router/routes'
-
+import routes from '../../router/routes'
 const selectedKeys = ref<string[]>([])
 const openKeys = ref<string[]>([])
 const collapsed = ref<boolean>(false)
@@ -120,7 +119,7 @@ onMounted(() => {
 
       <tabs-view :class="[{ 'layout-tabs-collapsed': collapsed }, 'layout-tabs']"/>
       <a-layout-content :class="[{ 'layout-content-collapsed': collapsed }, 'layout-content']">
-        <router-view/>
+        <layout-view />
       </a-layout-content>
     </a-layout>
   </a-layout>
