@@ -24,6 +24,7 @@ watchEffect(() => {
   }
 })
 
+<<<<<<< HEAD
 const width = ref(0)
 
 function onResize () {
@@ -38,6 +39,10 @@ onUnmounted(() => {
   window.removeEventListener('resize', onResize)
 })
 const menuItemClick = () => {
+=======
+const { width } = useWidth()
+const menuItemClick = (e: Event) => {
+>>>>>>> parent of 5a0cb90 (update)
   if (width.value <= 768) {
     collapsed.value = !collapsed.value
   }
@@ -97,16 +102,15 @@ onMounted(() => {
         <icon-font v-else type="icon-fold" class="trigger" @click="collapsed = !collapsed"/>
         <a-breadcrumb class="layout-breadcrumb">
           <a-breadcrumb-item v-for="route in $router.currentRoute.value.matched" :key="route.path">
-            <span
-              v-if="$route.matched.indexOf(route) === $route.matched.length - 1"
-            >{{ route.meta.title }}</span>
-            <span
-              v-else
-              class="breadcrumb-link"
-              @click="router.push(route.path)"
-            >{{ route.meta.title }}</span>
+            <span v-if="$route.matched.indexOf(route) === $route.matched.length - 1">
+              {{ route.meta.title }}
+            </span>
+            <span v-else class="breadcrumb-link" @click="router.push(route.path)">
+              {{ route.meta.title }}
+            </span>
           </a-breadcrumb-item>
         </a-breadcrumb>
+<<<<<<< HEAD
         <div style="flex: 1 1 0"/>
         <a-dropdown>
           <template #overlay>
@@ -114,6 +118,24 @@ onMounted(() => {
               <a-menu-item key="1">1st menu item</a-menu-item>
               <a-menu-item key="2">2nd menu item</a-menu-item>
               <a-menu-item key="3">3rd item</a-menu-item>
+=======
+        <div style="flex: 1 1 0"></div>
+        <a-dropdown>
+          <template #overlay>
+            <a-menu>
+              <a-menu-item key="1">
+                <UserOutlined />
+                1st menu item
+              </a-menu-item>
+              <a-menu-item key="2">
+                <UserOutlined />
+                2nd menu item
+              </a-menu-item>
+              <a-menu-item key="3">
+                <UserOutlined />
+                3rd item
+              </a-menu-item>
+>>>>>>> parent of 5a0cb90 (update)
             </a-menu>
           </template>
           <icon-font type="icon-user"/>
@@ -272,8 +294,11 @@ onMounted(() => {
 :deep(.scrollbar-track) {
   background-color: transparent;
 }
+<<<<<<< HEAD
 
 :deep(.ant-tabs-close-x) {
   margin-left: 8px !important;
 }
+=======
+>>>>>>> parent of 5a0cb90 (update)
 </style>

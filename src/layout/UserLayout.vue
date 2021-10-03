@@ -57,7 +57,7 @@
 
 @media (min-width: 768px) {
   .container {
-    background-image: url("https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg");
+    background-image: url('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg');
     background-repeat: no-repeat;
     background-position: center 110px;
     background-size: 100%;
@@ -90,7 +90,7 @@
 .title {
   font-size: 33px;
   color: black;
-  font-family: "Myriad Pro", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: 600;
   position: relative;
   top: 2px;
