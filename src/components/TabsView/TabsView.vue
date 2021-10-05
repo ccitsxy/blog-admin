@@ -64,7 +64,7 @@ const onChange = (targetKey: string | MouseEvent) => {
       @change="onChange"
     >
       <template #tabBarExtraContent>
-        <icon-font type="icon-more" />
+        <MoreOutlined />
       </template>
       <a-tab-pane
         v-for="pane in panes"

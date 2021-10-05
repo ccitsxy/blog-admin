@@ -68,6 +68,7 @@ const options = {
     <a-modal
       v-model:visible="visible"
       title="发布文章"
+      cancel-text="取消"
       okText="发布"
       @ok="visible=! visible"
       width="100%"

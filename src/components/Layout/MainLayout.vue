@@ -13,12 +13,12 @@ const router = useRouter()
 watchEffect(() => {
   if (router.currentRoute) {
     const matched = router.currentRoute.value.matched.concat()
-    selectedKeys.value = matched.map(r => r.path)
+    selectedKeys.value = matched.map((r) => r.path)
     if (!collapsed.value) {
       // 防止侧边菜单收起时切换路由导致侧边菜单弹出
       openKeys.value = matched
-        .filter(r => r.path !== router.currentRoute.value.path)
-        .map(r => r.path)
+        .filter((r) => r.path !== router.currentRoute.value.path)
+        .map((r) => r.path)
     }
   }
 })
@@ -79,32 +79,42 @@ onMounted(() => {
           mode="inline"
           @click="menuItemClick"
         >
-          <sider-menu :menu="menu"/>
+          <sider-menu :menu="menu" />
         </a-menu>
       </div>
     </a-layout-sider>
 
     <a-layout>
       <a-layout-header :class="[{ 'layout-header-collapsed': collapsed }, 'layout-header']">
-        <icon-font
+        <MenuUnfoldOutlined
           v-if="collapsed"
-          type="icon-unfold"
           class="trigger"
           @click="collapsed = !collapsed"
         />
-        <icon-font v-else type="icon-fold" class="trigger" @click="collapsed = !collapsed"/>
+        <MenuFoldOutlined
+          v-else
+          class="trigger"
+          @click="collapsed = !collapsed"
+        />
         <a-breadcrumb class="layout-breadcrumb">
-          <a-breadcrumb-item v-for="route in $router.currentRoute.value.matched" :key="route.path">
+          <a-breadcrumb-item
+            v-for="route in $router.currentRoute.value.matched"
+            :key="route.path"
+          >
             <span v-if="$route.matched.indexOf(route) === $route.matched.length - 1">
               {{ route.meta.title }}
             </span>
-            <span v-else class="breadcrumb-link" @click="router.push(route.path)">
+            <span
+              v-else
+              class="breadcrumb-link"
+              @click="router.push(route.path)"
+            >
               {{ route.meta.title }}
             </span>
           </a-breadcrumb-item>
         </a-breadcrumb>
 
-        <div style="flex: 1 1 0"/>
+        <div style="flex: 1 1 0" />
         <a-dropdown>
           <template #overlay>
             <a-menu>
@@ -113,11 +123,11 @@ onMounted(() => {
               <a-menu-item key="3">3rd item</a-menu-item>
             </a-menu>
           </template>
-          <icon-font type="icon-user"/>
+          <UserOutlined />
         </a-dropdown>
       </a-layout-header>
 
-      <tabs-view :class="[{ 'layout-tabs-collapsed': collapsed }, 'layout-tabs']"/>
+      <tabs-view :class="[{ 'layout-tabs-collapsed': collapsed }, 'layout-tabs']" />
       <a-layout-content :class="[{ 'layout-content-collapsed': collapsed }, 'layout-content']">
         <layout-view />
       </a-layout-content>
@@ -207,7 +217,7 @@ onMounted(() => {
   cursor: pointer;
   display: flex;
   align-items: center;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .trigger:hover,

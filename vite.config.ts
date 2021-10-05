@@ -14,7 +14,9 @@ export default defineConfig({
       /* options */
       dts: true,
       resolvers: [
-        AntDesignVueResolver(),
+        AntDesignVueResolver({
+          resolveIcons: true
+        }),
       ],
     }),
     visualizer(
