@@ -1,5 +1,8 @@
 import { RouteRecordRaw } from 'vue-router'
 
+import { renderIcon } from '@/utils/renderIcon'
+import { DashboardOutlined, EditOutlined, ApiOutlined } from '@vicons/antd'
+
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -13,7 +16,7 @@ const routes: RouteRecordRaw[] = [
         name: 'dashboard',
         meta: {
           title: '仪表盘',
-          icon: 'DashboardOutlined'
+          icon: renderIcon(DashboardOutlined)
         },
         component: () => import('../views/Dashboard/Dashboard.vue')
       },
@@ -22,7 +25,7 @@ const routes: RouteRecordRaw[] = [
         name: 'blog',
         meta: {
           title: '博客管理',
-          icon: 'EditOutlined'
+          icon: renderIcon(EditOutlined)
         },
         redirect: '/blog/article',
         component: () => import('../components/Layout/LayoutView.vue'),
@@ -31,7 +34,7 @@ const routes: RouteRecordRaw[] = [
             path: '/blog/article',
             name: 'article',
             meta: {
-              title: 'Markdown'
+              title: '文章管理'
             },
             component: () => import('../views/Blog/Markdown.vue')
           }
@@ -41,7 +44,8 @@ const routes: RouteRecordRaw[] = [
         path: '/interface',
         name: 'interface',
         meta: {
-          title: '接口管理'
+          title: '接口管理',
+          icon: renderIcon(ApiOutlined)
         },
         component: () => import('../views/Interface/Article.vue')
       }

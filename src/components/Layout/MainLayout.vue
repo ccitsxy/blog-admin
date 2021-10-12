@@ -1,13 +1,30 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watchEffect } from 'vue'
-import { useRouter } from 'vue-router'
-import Scrollbar from 'smooth-scrollbar'
+import { onMounted, onUnmounted, ref, watchEffect, h, defineAsyncComponent } from 'vue'
+import { useRouter, RouterLink } from 'vue-router'
 import routes from '../../router/routes'
+
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@vicons/antd'
+
+const LayoutView = defineAsyncComponent(() => import('@/components/Layout/LayoutView.vue'))
+
 const selectedKeys = ref<string[]>([])
 const openKeys = ref<string[]>([])
 const collapsed = ref<boolean>(false)
 
-const menu = routes[0].children
+const menuOptions = routes[0].children?.map(item => ({
+  label: () =>
+    h(
+      RouterLink,
+      {
+        to: {
+          path: item.path
+        }
+      },
+      { default: () => item.meta?.title }
+    ),
+  key: item.path,
+  icon: item.meta?.icon
+}))
 
 const router = useRouter()
 watchEffect(() => {
@@ -24,9 +41,11 @@ watchEffect(() => {
 })
 
 const width = ref(0)
+
 function onResize () {
   width.value = window.innerWidth
 }
+
 onMounted(() => {
   window.addEventListener('resize', onResize)
   onResize()
@@ -35,252 +54,137 @@ onUnmounted(() => {
   window.removeEventListener('resize', onResize)
 })
 
-const menuItemClick = () => {
-  if (width.value <= 768) {
-    collapsed.value = !collapsed.value
-  }
+function triggerCilck () {
+  collapsed.value = !collapsed.value
 }
 
-onMounted(() => {
-  Scrollbar.init(document.querySelector('.menu-scrollbar') as HTMLElement)
-})
+// function menuItemClick () {
+//   if (width.value <= 768) {
+//     collapsed.value = !collapsed.value
+//   }
+// }
 </script>
 
 <template>
-  <a-layout>
-    <a-layout-sider
-      v-model:collapsed="collapsed"
+  <n-layout position="absolute" has-sider>
+    <n-layout-sider
+      collapse-mode="width"
+      :collapsed-width="width > 768 ? 64 : 0"
+      :width="200"
+      :native-scrollbar="false"
+      :collapsed="collapsed"
       class="layout-sider"
-      :trigger="null"
-      collapsible
-      width="208"
-      :collapsed-width="width > 768 ? 48 : 0"
+      inverted
     >
-      <div
-        :class="[{ 'layout-sider-mask-collapsed': collapsed }, 'layout-sider-mask']"
-        @click="collapsed = !collapsed"
+      <div class="layout-sider-logo">
+        <img src="../../assets/logo.png" alt="logo">
+        <h1 v-show="!collapsed">Admin</h1>
+      </div>
+      <n-menu
+        :collapsed-icon-size="20"
+        :options="menuOptions"
+        inverted
       />
-      <div :class="[{ 'logo-collapsed': collapsed }, 'logo']">
-        <router-link to="/">
-          <img
-            height="32"
-            width="32"
-            src="https://alicdn.antdv.com/v2/assets/logo.1ef800a8.svg"
-            alt="logo"
+    </n-layout-sider>
+    <n-layout>
+      <n-layout-header bordered class="layout-header">
+        <n-icon v-if="collapsed" @click="triggerCilck()" size="24" class="layout-header-icon">
+          <menu-unfold-outlined/>
+        </n-icon>
+        <n-icon v-else size="24" @click="triggerCilck()" class="layout-header-icon">
+          <menu-fold-outlined/>
+        </n-icon>
+      </n-layout-header>
+      <n-layout-content
+        content-style="padding: 24px;"
+        position="absolute"
+        :native-scrollbar="false"
+        class="layout-content"
+      >
+        <transition name="fade">
+          <div
+            v-show="!collapsed"
+            class="layout-sider-mask"
+            @click="triggerCilck()"
           />
-          <h1 :class="[{ 'logo-title-collapsed': collapsed }, 'logo-title']">Pro Layout</h1>
-        </router-link>
-      </div>
-      <div class="menu-scrollbar">
-        <a-menu
-          v-model:selectedKeys="selectedKeys"
-          v-model:openKeys="openKeys"
-          theme="dark"
-          mode="inline"
-          @click="menuItemClick"
-        >
-          <sider-menu :menu="menu" />
-        </a-menu>
-      </div>
-    </a-layout-sider>
-
-    <a-layout>
-      <a-layout-header :class="[{ 'layout-header-collapsed': collapsed }, 'layout-header']">
-        <MenuUnfoldOutlined
-          v-if="collapsed"
-          class="trigger"
-          @click="collapsed = !collapsed"
-        />
-        <MenuFoldOutlined
-          v-else
-          class="trigger"
-          @click="collapsed = !collapsed"
-        />
-        <a-breadcrumb class="layout-breadcrumb">
-          <a-breadcrumb-item
-            v-for="route in $router.currentRoute.value.matched"
-            :key="route.path"
-          >
-            <span v-if="$route.matched.indexOf(route) === $route.matched.length - 1">
-              {{ route.meta.title }}
-            </span>
-            <span
-              v-else
-              class="breadcrumb-link"
-              @click="router.push(route.path)"
-            >
-              {{ route.meta.title }}
-            </span>
-          </a-breadcrumb-item>
-        </a-breadcrumb>
-
-        <div style="flex: 1 1 0" />
-        <a-dropdown>
-          <template #overlay>
-            <a-menu>
-              <a-menu-item key="1">1st menu item</a-menu-item>
-              <a-menu-item key="2">2nd menu item</a-menu-item>
-              <a-menu-item key="3">3rd item</a-menu-item>
-            </a-menu>
-          </template>
-          <UserOutlined />
-        </a-dropdown>
-      </a-layout-header>
-
-      <tabs-view :class="[{ 'layout-tabs-collapsed': collapsed }, 'layout-tabs']" />
-      <a-layout-content :class="[{ 'layout-content-collapsed': collapsed }, 'layout-content']">
-        <layout-view />
-      </a-layout-content>
-    </a-layout>
-  </a-layout>
+        </transition>
+        <layout-view/>
+      </n-layout-content>
+    </n-layout>
+  </n-layout>
 </template>
 
 <style scoped>
 .layout-header {
-  background: #fff;
-  padding: 0 16px;
-  height: 48px;
-  line-height: 48px;
   display: flex;
   align-items: center;
-  position: fixed;
-  right: 0;
-  width: calc(100% - 208px);
-  transition: all 0.2s;
+  height: 64px;
   z-index: 10;
-}
-
-.layout-header-collapsed,
-.layout-tabs-collapsed {
-  width: calc(100% - 48px) !important;
-}
-
-.layout-breadcrumb {
-  margin-left: 16px;
-}
-
-.layout-tabs {
-  position: fixed;
-  margin-top: 48px;
-  width: calc(100% - 208px);
-  right: 0;
-  border-bottom: 1px solid #f0f0f0;
-  transition: all 0.2s;
-  z-index: 10;
+  padding: 0 16px 0 16px;
 }
 
 .layout-content {
-  margin-top: 111px;
-  margin-left: 208px;
-  min-height: calc(100vh - 111px);
-  padding: 24px;
-  transition: all 0.2s;
-}
-
-.layout-content-collapsed {
-  margin-left: 48px;
-}
-
-.layout-sider {
-  height: 100%;
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 11;
+  top: 64px;
 }
 
 @media (max-width: 768px) {
-  .layout-header,
-  .layout-tabs,
-  .layout-content {
-    width: 100% !important;
-    margin-left: 0;
-  }
-
-  .layout-sider-mask-collapsed {
-    height: 0 !important;
-  }
-
-  .layout-sider-mask {
-    opacity: 1;
-    height: 100%;
-    width: 100%;
-    background-color: #2b1e1e73;
+  .layout-sider {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 12;
+    height: 100%;
+  }
+
+  .layout-sider-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: #00000073;
   }
 }
 
-.trigger {
-  cursor: pointer;
+.layout-header-icon:hover {
+  color: #2080F0;
+}
+
+:deep(.n-menu-item-content) {
+  padding-left: 22px !important;
+}
+
+:deep(.n-menu-item-content__icon) {
+  margin-right: 16px !important;
+}
+
+.layout-sider-logo {
   display: flex;
   align-items: center;
-  font-size: 20px;
-}
-
-.trigger:hover,
-.breadcrumb-link:hover {
-  color: #1890ff;
-  cursor: pointer;
-}
-
-.logo {
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: 16px 16px;
-  line-height: 32px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.logo h1 {
-  margin: 0 0 0 12px;
+  height: 64px;
+  line-height: 64px;
   overflow: hidden;
-  color: #fff;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 32px;
+  white-space: nowrap;
 }
 
-.logo h1,
-.logo > img {
-  display: inline-block;
+.layout-sider-logo img {
   height: 32px;
-  vertical-align: middle;
+  margin-left: 16px;
 }
 
-.logo > a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 32px;
+.layout-sider-logo h1 {
+  margin: 0 0 0 16px;
 }
 
-.logo-collapsed {
-  padding-left: 8px;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
 }
 
-.logo-title-collapsed {
-  display: none !important;
-}
-
-.menu-scrollbar {
-  height: calc(100vh - 64px);
-  overflow: auto;
-}
-
-.menu-scrollbar :deep(.scrollbar-thumb) {
-  background-color: #54626f;
-}
-
-:deep(.scrollbar-track) {
-  background-color: transparent;
-}
-
-:deep(.ant-tabs-close-x) {
-  margin-left: 8px !important;
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

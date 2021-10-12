@@ -23,11 +23,11 @@ const props = defineProps({
   }
 })
 
-const contentEditor = ref<Vditor | null>(null)
-const editorRef = ref<string | HTMLElement>('')
+const contentEditor = ref<Vditor | null>()
+const editorRef = ref<string | HTMLElement>()
 
 onMounted(() => {
-  contentEditor.value = new Vditor(editorRef.value, {
+  contentEditor.value = new Vditor(editorRef.value as HTMLElement, {
     ...props.options,
     value: props.modelValue,
     after () {

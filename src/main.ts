@@ -3,11 +3,16 @@ import App from './App.vue'
 import router from './router'
 import { store, key } from './store'
 
-import { DashboardOutlined, EditOutlined } from '@ant-design/icons-vue'
+import {
+  // create naive ui
+  create, NLayout, NLayoutSider, NLayoutHeader, NLayoutContent, NMenu, NIcon, NAnchor, NAnchorLink
+  // component
+} from 'naive-ui'
+
+const naive = create({
+  components: [NLayout, NLayoutSider, NLayoutHeader, NLayoutContent, NMenu, NIcon, NAnchor, NAnchorLink]
+})
 
 const app = createApp(App)
 
-app.use(store, key).use(router).mount('#app')
-
-app.component(DashboardOutlined.displayName, DashboardOutlined)
-app.component(EditOutlined.displayName, EditOutlined)
+app.use(store, key).use(router).use(naive).mount('#app')

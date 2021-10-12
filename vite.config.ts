@@ -1,8 +1,6 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-
-import Components from "unplugin-vue-components/vite";
-import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 import { visualizer } from 'rollup-plugin-visualizer';
 
@@ -10,15 +8,7 @@ import { visualizer } from 'rollup-plugin-visualizer';
 export default defineConfig({
   plugins: [
     vue(),
-    Components({
-      /* options */
-      dts: true,
-      resolvers: [
-        AntDesignVueResolver({
-          resolveIcons: true
-        }),
-      ],
-    }),
+    vueJsx(),
     visualizer(
       {
         open: true,
@@ -27,4 +17,9 @@ export default defineConfig({
       }
     )
   ],
+  resolve: {
+    alias: {
+      '@/': new URL('./src/', import.meta.url).pathname
+    }
+  },
 });
