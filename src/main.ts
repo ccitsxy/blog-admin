@@ -7,11 +7,33 @@ import {
   // create naive ui
   create,
   // component
-  NLayout, NLayoutSider, NLayoutHeader, NLayoutContent, NMenu, NIcon, NAnchor, NAnchorLink, NButton
+  NConfigProvider,
+  NLayout,
+  NLayoutSider,
+  NLayoutHeader,
+  NLayoutContent,
+  NMenu,
+  NIcon,
+  NAnchor,
+  NAnchorLink,
+  NButton,
+  NBackTop
 } from 'naive-ui'
 
 const naive = create({
-  components: [NLayout, NLayoutSider, NLayoutHeader, NLayoutContent, NMenu, NIcon, NAnchor, NAnchorLink, NButton]
+  components: [
+    NConfigProvider,
+    NLayout,
+    NLayoutSider,
+    NLayoutHeader,
+    NLayoutContent,
+    NMenu,
+    NIcon,
+    NAnchor,
+    NAnchorLink,
+    NButton,
+    NBackTop
+  ]
 })
 
 const app = createApp(App)

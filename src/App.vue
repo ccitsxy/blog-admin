@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { NConfigProvider } from 'naive-ui'
 
 const themeOverrides = {
   common: {

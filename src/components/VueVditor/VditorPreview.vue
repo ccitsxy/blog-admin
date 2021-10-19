@@ -17,7 +17,7 @@ onMounted(() => {
   preview()
 })
 
-const toc: { id: string; indent: number; }[] = []
+const toc: { id: string; indent: number; text: string; el: HTMLElement; }[] = []
 
 const toggle = ref(false)
 
@@ -37,7 +37,9 @@ function preview () {
       headingElements.forEach((item) => {
         toc.push({
           id: item.id,
-          indent: Number(item.tagName[1])
+          text: item.innerText,
+          indent: Number(item.tagName[1]),
+          el: item
         })
       })
       toggle.value = true
@@ -50,16 +52,19 @@ function preview () {
 <template>
   <div class="preview">
     <div id="preview"/>
-    <n-icon class="toggle-button" size="26" @click="toggle=!toggle">
-      <unordered-list-outlined/>
-    </n-icon>
-    <n-anchor v-if="toggle" class="toc" ignore-gap :bound="80">
+    <n-button @click="toggle=!toggle" circle text color="black" class="toggle-button">
+      <n-icon size="26">
+        <unordered-list-outlined/>
+      </n-icon>
+    </n-button>
+    <n-anchor v-if="toggle" ignore-gap :bound="80" class="toc">
       <n-anchor-link
         v-for="item in toc"
         :key="item.id"
-        :title="item.id"
+        :title="item.text"
         :href="$route.path + '#' + item.id"
         :style="{paddingLeft: item.indent * 16 + 'px'}"
+        @click.prevent="item.el.scrollIntoView({behavior: 'smooth'})"
       />
     </n-anchor>
   </div>
@@ -71,16 +76,17 @@ function preview () {
 }
 
 .toggle-button {
-  padding: 8px;
+  width: 44px;
+  height: 44px;
   position: fixed;
-  bottom: 48px;
+  bottom: 40px;
   right: 48px;
-  border-radius:50%;
-  box-shadow: 0 2px 8px 0px rgba(0, 0, 0, 0.12);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.12);
 }
 
-.toggle-button:hover{
-  color: #2080F0;
+.toggle-button :hover{
+  color: #4098FCFF;
 }
 
 .toc {

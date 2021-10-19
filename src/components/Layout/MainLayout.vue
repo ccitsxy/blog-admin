@@ -13,7 +13,7 @@ const collapsed = ref<boolean>(false)
 
 const menuOptions = routes[0].children?.map(item => mapMenu(item))
 
-function mapMenu (item: RouteRecordRaw) {
+function mapMenu (item: RouteRecordRaw): unknown {
   return {
     label: () =>
       h(
@@ -27,7 +27,7 @@ function mapMenu (item: RouteRecordRaw) {
       ),
     key: item.path,
     icon: item.meta?.icon,
-    // children: item.children?.map(item2 => mapMenu(item2))
+    children: item.children?.map((item2) => mapMenu(item2))
   }
 }
 
@@ -73,13 +73,13 @@ function triggerCilck () {
 <template>
   <n-layout position="absolute" has-sider>
     <n-layout-sider
+      :collapsed="collapsed"
       collapse-mode="width"
       :collapsed-width="width > 768 ? 64 : 0"
       :width="200"
       :native-scrollbar="false"
-      :collapsed="collapsed"
-      class="layout-sider"
       inverted
+      class="layout-sider"
     >
       <div class="layout-sider-logo">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512">
@@ -91,21 +91,24 @@ function triggerCilck () {
       </div>
       <n-menu
         :value="$route.path"
+        :collapsed-width="width > 768 ? 64 : 0"
         :collapsed-icon-size="20"
         :options="menuOptions"
+        :root-indent="22"
+        :indent="48"
         inverted
-        :root-indent="24"
-        :indent="24"
       />
     </n-layout-sider>
     <n-layout>
       <n-layout-header bordered class="layout-header">
-        <n-icon v-if="collapsed" @click="triggerCilck()" size="24" class="layout-header-icon">
-          <menu-unfold-outlined/>
-        </n-icon>
-        <n-icon v-else size="24" @click="triggerCilck()" class="layout-header-icon">
-          <menu-fold-outlined/>
-        </n-icon>
+        <n-button @click="triggerCilck()" text color="black">
+          <n-icon v-if="collapsed" size="24" class="layout-header-icon">
+            <menu-unfold-outlined/>
+          </n-icon>
+          <n-icon v-else size="24" class="layout-header-icon">
+            <menu-fold-outlined/>
+          </n-icon>
+        </n-button>
       </n-layout-header>
       <n-layout-content
         content-style="padding: 24px;"
@@ -121,6 +124,7 @@ function triggerCilck () {
           />
         </transition>
         <layout-view/>
+        <n-back-top :right="100"/>
       </n-layout-content>
     </n-layout>
   </n-layout>
@@ -132,7 +136,11 @@ function triggerCilck () {
   align-items: center;
   height: 64px;
   z-index: 10;
-  padding: 0 16px 0 16px;
+  padding: 0 24px 0 24px;
+}
+
+.layout-header-icon:hover {
+  color: #4098FCFF;
 }
 
 .layout-content {
@@ -160,17 +168,9 @@ function triggerCilck () {
   }
 }
 
-.layout-header-icon:hover {
-  color: #2080F0;
+:deep(.n-menu-item-content__icon) {
+  margin-right: 16px !important;
 }
-
-/*:deep(.n-menu-item-content) {*/
-/*  !*padding-left: 22px !important;*!*/
-/*}*/
-
-/*:deep(.n-menu-item-content__icon) {*/
-/*  margin-right: 16px !important;*/
-/*}*/
 
 .layout-sider-logo {
   display: flex;
@@ -179,11 +179,12 @@ function triggerCilck () {
   line-height: 64px;
   overflow: hidden;
   white-space: nowrap;
+  justify-content: center;
 }
 
 .layout-sider-logo svg {
   height: 32px;
-  margin-left: 16px;
+  padding-left: 4px;
 }
 
 .layout-sider-logo h1 {
