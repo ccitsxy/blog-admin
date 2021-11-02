@@ -17,7 +17,8 @@ import {
   NAnchor,
   NAnchorLink,
   NButton,
-  NBackTop
+  NBackTop,
+  NLoadingBarProvider
 } from 'naive-ui'
 
 const naive = create({
@@ -32,7 +33,8 @@ const naive = create({
     NAnchor,
     NAnchorLink,
     NButton,
-    NBackTop
+    NBackTop,
+    NLoadingBarProvider
   ]
 })
 

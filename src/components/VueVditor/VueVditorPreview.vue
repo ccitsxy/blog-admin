@@ -83,10 +83,7 @@ function preview () {
   right: 48px;
   border-radius: 50%;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.12);
-}
-
-.toggle-button :hover{
-  color: #4098FCFF;
+  background-color: white;
 }
 
 .toc {

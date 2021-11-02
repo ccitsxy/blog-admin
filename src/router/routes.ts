@@ -8,7 +8,7 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     name: 'index',
     meta: { title: '主页' },
-    component: () => import('../components/Layout/MainLayout.vue'),
+    component: () => import('../Layout/MainLayout.vue'),
     redirect: '/dashboard',
     children: [
       {
@@ -28,7 +28,7 @@ const routes: RouteRecordRaw[] = [
           icon: renderIcon(EditOutlined)
         },
         redirect: '/blog/article',
-        component: () => import('../components/Layout/LayoutView.vue'),
+        component: () => import('../Layout/LayoutView.vue'),
         children: [
           {
             path: '/blog/article',
@@ -53,7 +53,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/user',
-    component: () => import('../components/Layout/UserLayout.vue'),
+    component: () => import('../Layout/UserLayout.vue'),
     redirect: '/user/login',
     children: [
       {

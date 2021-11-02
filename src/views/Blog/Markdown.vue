@@ -5,10 +5,9 @@ const VueVditor = defineAsyncComponent(() => import('@/components/VueVditor/VueV
 
 // const title = ref('')
 // const description = ref('')
-const editor = ref('')
+const content = ref('')
 const options = {
   toolbar: [
-    'emoji',
     'headings',
     'bold',
     'italic',
@@ -63,9 +62,10 @@ const options = {
 
 <template>
   <div class="markdown">
-    <vue-vditor v-model="editor" :options="options"/>
+    <vue-vditor v-model="content" :options="options"/>
   </div>
 </template>
 
 <style scoped>
+
 </style>

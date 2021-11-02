@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import VditorPreview from '@/components/VueVditor/VditorPreview.vue'
+import VditorPreview from '@/components/VueVditor/VueVditorPreview.vue'
 
 const markdown = ref('# 博客 #\n' +
   '\n' +

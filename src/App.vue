@@ -8,10 +8,14 @@ const themeOverrides = {
     primaryColorSuppl: '#4098FCFF'
   }
 }
+
+
 </script>
 
 <template>
   <n-config-provider :theme-overrides="themeOverrides">
-    <router-view/>
+    <n-loading-bar-provider>
+      <router-view/>
+    </n-loading-bar-provider>
   </n-config-provider>
 </template>
