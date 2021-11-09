@@ -57,7 +57,7 @@ function preview () {
         <unordered-list-outlined/>
       </n-icon>
     </n-button>
-    <n-anchor v-if="toggle" ignore-gap :bound="80" class="toc">
+    <n-anchor v-if="toggle" ignore-gap :bound="12" class="toc">
       <n-anchor-link
         v-for="item in toc"
         :key="item.id"
@@ -89,7 +89,7 @@ function preview () {
 .toc {
   background-color: #fff;
   position: fixed;
-  top: 64px;
-  right: 24px;
+  top: 90px;
+  right: 26px;
 }
 </style>
