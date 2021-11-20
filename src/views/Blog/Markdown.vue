@@ -1,11 +1,11 @@
-<script setup lang="ts">
-import { ref, defineAsyncComponent } from 'vue'
+<script lang="ts" setup>
+import { ref, defineAsyncComponent } from 'vue';
 
-const VueVditor = defineAsyncComponent(() => import('@/components/VueVditor/VueVditor.vue'))
+const VueVditor = defineAsyncComponent(() => import('@/components/VueVditor/VueVditor.vue'));
 
 // const title = ref('')
 // const description = ref('')
-const content = ref('')
+const content = ref('');
 const options = {
   toolbar: [
     'headings',
@@ -57,12 +57,12 @@ const options = {
   fullscreen: {
     index: 3000
   }
-}
+};
 </script>
 
 <template>
   <div class="markdown">
-    <vue-vditor v-model="content" :options="options"/>
+    <vue-vditor v-model="content" :options="options" />
   </div>
 </template>
 

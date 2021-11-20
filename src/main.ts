@@ -1,7 +1,7 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import { store, key } from './store'
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import { store, key } from './store';
 
 import {
   // create naive ui
@@ -18,8 +18,8 @@ import {
   NAnchorLink,
   NButton,
   NBackTop,
-  NLoadingBarProvider
-} from 'naive-ui'
+  NLoadingBarProvider,
+} from 'naive-ui';
 
 const naive = create({
   components: [
@@ -34,10 +34,10 @@ const naive = create({
     NAnchorLink,
     NButton,
     NBackTop,
-    NLoadingBarProvider
-  ]
-})
+    NLoadingBarProvider,
+  ],
+});
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(store, key).use(router).use(naive).mount('#app')
+app.use(store, key).use(router).use(naive).mount('#app');

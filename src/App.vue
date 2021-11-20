@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 
 const themeOverrides = {
   common: {
@@ -7,7 +7,7 @@ const themeOverrides = {
     primaryColorPressed: '#1060C9FF',
     primaryColorSuppl: '#4098FCFF'
   }
-}
+};
 
 
 </script>
@@ -15,7 +15,7 @@ const themeOverrides = {
 <template>
   <n-config-provider :theme-overrides="themeOverrides">
     <n-loading-bar-provider>
-      <router-view/>
+      <router-view />
     </n-loading-bar-provider>
   </n-config-provider>
 </template>

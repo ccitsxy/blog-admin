@@ -16,7 +16,7 @@ export const store = createStore<State>({
   },
   mutations: {
     addTab(state: State, payload: RouteLocationNormalized) {
-      if (state.tabList.some(p => p.path === payload.path)) return;
+      if (state.tabList.some((p) => p.path === payload.path)) return;
       state.tabList.push(payload);
     },
   },

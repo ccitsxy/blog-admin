@@ -1,25 +1,25 @@
-<script setup lang="ts">
-import { onMounted, ref } from 'vue'
+<script lang="ts" setup>
+import { onMounted, ref } from 'vue';
 
-import Vditor from 'vditor'
-import 'vditor/dist/index.css'
+import Vditor from 'vditor';
+import 'vditor/dist/index.css';
 
-import { UnorderedListOutlined } from '@vicons/antd'
+import { UnorderedListOutlined } from '@vicons/antd';
 
 const props = defineProps({
   modelValue: {
     type: String,
     default: ''
   }
-})
+});
 
 onMounted(() => {
-  preview()
-})
+  preview();
+});
 
-const toc: { id: string; indent: number; text: string; el: HTMLElement; }[] = []
+const toc: { id: string; indent: number; text: string; el: HTMLElement; }[] = [];
 
-const toggle = ref(false)
+const toggle = ref(false);
 
 function preview () {
   void Vditor.preview(document.getElementById('preview') as HTMLDivElement, props.modelValue, {
@@ -28,42 +28,42 @@ function preview () {
       lineNumber: true
     },
     after () {
-      const headingElements: HTMLElement[] = []
+      const headingElements: HTMLElement[] = [];
       Array.from(document.getElementById('preview')!.children).forEach((item) => {
         if (item.tagName.length === 2 && item.tagName !== 'HR' && item.tagName.indexOf('H') === 0) {
-          headingElements.push(<HTMLElement>item)
+          headingElements.push(<HTMLElement>item);
         }
-      })
+      });
       headingElements.forEach((item) => {
         toc.push({
           id: item.id,
           text: item.innerText,
           indent: Number(item.tagName[1]),
           el: item
-        })
-      })
-      toggle.value = true
+        });
+      });
+      toggle.value = true;
     }
-  })
+  });
 }
 
 </script>
 
 <template>
   <div class="preview">
-    <div id="preview"/>
-    <n-button @click="toggle=!toggle" circle text color="black" class="toggle-button">
+    <div id="preview" />
+    <n-button circle class="toggle-button" color="black" text @click="toggle=!toggle">
       <n-icon size="26">
-        <unordered-list-outlined/>
+        <unordered-list-outlined />
       </n-icon>
     </n-button>
-    <n-anchor v-if="toggle" ignore-gap :bound="12" class="toc">
+    <n-anchor v-if="toggle" :bound="12" class="toc" ignore-gap>
       <n-anchor-link
         v-for="item in toc"
         :key="item.id"
-        :title="item.text"
         :href="$route.path + '#' + item.id"
         :style="{paddingLeft: item.indent * 16 + 'px'}"
+        :title="item.text"
         @click.prevent="item.el.scrollIntoView({behavior: 'smooth'})"
       />
     </n-anchor>

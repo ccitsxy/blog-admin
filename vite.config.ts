@@ -1,6 +1,6 @@
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-import vueJsx from '@vitejs/plugin-vue-jsx'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 
 import { visualizer } from 'rollup-plugin-visualizer';
 
@@ -9,20 +9,18 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
-    visualizer(
-      {
-        open: true,
-        gzipSize: true,
-        brotliSize: true,
-      }
-    )
+    visualizer({
+      open: true,
+      gzipSize: true,
+      brotliSize: true,
+    }),
   ],
   resolve: {
     alias: {
-      '@/': new URL('./src/', import.meta.url).pathname
-    }
+      '@/': new URL('./src/', import.meta.url).pathname,
+    },
   },
-  server:{
-    open: true
-  }
+  server: {
+    open: true,
+  },
 });

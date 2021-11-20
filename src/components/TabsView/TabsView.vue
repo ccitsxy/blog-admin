@@ -1,8 +1,8 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+<script lang="ts" setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-const router = useRouter()
+const router = useRouter();
 
 const panes = ref([
   {
@@ -10,19 +10,19 @@ const panes = ref([
     content: 'Content of Tab',
     key: router.currentRoute.value.path
   }
-])
+]);
 
-const activeKey = ref(panes.value[0].key)
+const activeKey = ref(panes.value[0].key);
 
 router.beforeEach(to => {
-  activeKey.value = to.path
-  if (panes.value.some(p => p.key === to.path)) return
+  activeKey.value = to.path;
+  if (panes.value.some(p => p.key === to.path)) return;
   panes.value.push({
     title: to.meta?.title,
     content: 'Content of Tab',
     key: to.path
-  })
-})
+  });
+});
 
 // const remove = (targetKey: string) => {
 //   let lastIndex = 0

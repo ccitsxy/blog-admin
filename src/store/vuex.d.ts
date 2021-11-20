@@ -1,6 +1,6 @@
-import { ComponentCustomProperties } from 'vue'
-import { Store } from 'vuex'
-import { RouteLocationNormalized } from 'vue-router'
+import { ComponentCustomProperties } from 'vue';
+import { Store } from 'vuex';
+import { RouteLocationNormalized } from 'vue-router';
 
 declare module '@vue/runtime-core' {
   // 声明自己的 store state

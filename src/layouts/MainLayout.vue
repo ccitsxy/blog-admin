@@ -1,21 +1,13 @@
-<script setup lang="ts">
-import {
-  onMounted,
-  onUnmounted,
-  ref,
-  watchEffect,
-  defineAsyncComponent
-} from 'vue';
-import { useRouter, RouteRecordRaw } from 'vue-router';
+<script lang="ts" setup>
+import { defineAsyncComponent, onMounted, onUnmounted, ref, watchEffect } from 'vue';
+import { RouteRecordRaw, useRouter } from 'vue-router';
 import routes from '../router/routes';
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@vicons/antd';
 import { MenuOption, useLoadingBar } from 'naive-ui';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@vicons/antd';
 
 const LayoutView = defineAsyncComponent(
-  () => import('@/Layout/LayoutView.vue')
+  () => import('@/layouts/LayoutView.vue')
 );
-
-const router = useRouter();
 
 const collapsed = ref<boolean>(false);
 
@@ -34,10 +26,10 @@ function mapMenu (item: RouteRecordRaw): MenuOption {
   };
 }
 
+const router = useRouter();
 const updateValue = (key: string) => {
   void router.push(key);
 };
-
 const openKeys = ref<string[]>([]);
 watchEffect(() => {
   if (router.currentRoute) {
@@ -80,21 +72,21 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <n-layout position="absolute" has-sider>
+  <n-layout has-sider position="absolute">
     <n-layout-sider
       :collapsed="collapsed"
-      collapse-mode="width"
       :collapsed-width="width > 768 ? 64 : 0"
-      :width="208"
       :native-scrollbar="false"
+      :width="208"
       class="layout-sider"
-    >
+      collapse-mode="width"
+    >j
       <div class="layout-sider-logo">
         <svg
           height="32"
+          viewBox="0 0 448 512"
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
-          viewBox="0 0 448 512"
         >
           <path
             d="M399.36 362.23c29.49-34.69 47.1-78.34 47.1-125.79C446.46 123.49 346.86 32 224 32S1.54 123.49 1.54 236.44S101.14 440.87 224 440.87a239.28 239.28 0 0 0 79.44-13.44a7.18 7.18 0 0 1 8.12 2.56c18.58 25.09 47.61 42.74 79.89 49.92a4.42 4.42 0 0 0 5.22-3.43a4.37 4.37 0 0 0-.85-3.62a87 87 0 0 1 3.69-110.69zM329.52 212.4l-57.3 43.49L293 324.75a6.5 6.5 0 0 1-9.94 7.22L224 290.92L164.94 332a6.51 6.51 0 0 1-9.95-7.22l20.79-68.86l-57.3-43.49a6.5 6.5 0 0 1 3.8-11.68l71.88-1.51l23.66-67.92a6.5 6.5 0 0 1 12.28 0l23.66 67.92l71.88 1.51a6.5 6.5 0 0 1 3.88 11.68z"
@@ -104,26 +96,26 @@ onUnmounted(() => {
         <h1>Blog</h1>
       </div>
       <n-menu
-        :value="$route.path"
-        :collapsed-width="width > 768 ? 64 : 0"
         :collapsed-icon-size="20"
+        :collapsed-width="width > 768 ? 64 : 0"
+        :indent="48"
         :options="menuOptions"
         :root-indent="22"
-        :indent="48"
+        :value="$route.path"
         @update-value="updateValue"
       />
     </n-layout-sider>
     <n-layout :native-scrollbar="false">
       <n-layout-header class="layout-header" position="absolute">
-        <n-icon size="24" @click="triggerClick()" class="layout-header-button">
+        <n-icon class="layout-header-button" size="24" @click="triggerClick()">
           <menu-unfold-outlined v-if="collapsed" />
           <menu-fold-outlined v-else />
         </n-icon>
       </n-layout-header>
       <n-layout-content
-        content-style="padding: 24px;"
         :native-scrollbar="false"
         class="layout-content"
+        content-style="padding: 24px;"
       >
         <transition name="fade">
           <div
