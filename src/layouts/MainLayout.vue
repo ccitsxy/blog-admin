@@ -80,7 +80,7 @@ onUnmounted(() => {
       :width="208"
       class="layout-sider"
       collapse-mode="width"
-    >j
+    >
       <div class="layout-sider-logo">
         <svg
           height="32"
