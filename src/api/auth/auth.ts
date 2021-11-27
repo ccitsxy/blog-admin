@@ -7,4 +7,5 @@ interface User {
 
 export async function login(user:User) {
   const response = await api.post('/auth/login',user);
+  console.log(response);
 }

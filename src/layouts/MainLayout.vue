@@ -82,20 +82,17 @@ onUnmounted(() => {
       collapse-mode="width"
     >
       <div class="layout-sider-logo">
-        <svg
+        <img
+          alt="logo"
+          class="logo"
+          width="32"
           height="32"
-          viewBox="0 0 448 512"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-        >
-          <path
-            d="M399.36 362.23c29.49-34.69 47.1-78.34 47.1-125.79C446.46 123.49 346.86 32 224 32S1.54 123.49 1.54 236.44S101.14 440.87 224 440.87a239.28 239.28 0 0 0 79.44-13.44a7.18 7.18 0 0 1 8.12 2.56c18.58 25.09 47.61 42.74 79.89 49.92a4.42 4.42 0 0 0 5.22-3.43a4.37 4.37 0 0 0-.85-3.62a87 87 0 0 1 3.69-110.69zM329.52 212.4l-57.3 43.49L293 324.75a6.5 6.5 0 0 1-9.94 7.22L224 290.92L164.94 332a6.51 6.51 0 0 1-9.95-7.22l20.79-68.86l-57.3-43.49a6.5 6.5 0 0 1 3.8-11.68l71.88-1.51l23.66-67.92a6.5 6.5 0 0 1 12.28 0l23.66 67.92l71.88 1.51a6.5 6.5 0 0 1 3.88 11.68z"
-            fill="currentColor"
-          ></path>
-        </svg>
-        <h1>Blog</h1>
+          src="https://www.naiveui.com/assets/naivelogo.93278402.svg"
+        />
+        <h1 class="layout-sider-logo-title">Naive UI</h1>
       </div>
       <n-menu
+        :icon-size="20"
         :collapsed-icon-size="20"
         :collapsed-width="width > 768 ? 64 : 0"
         :indent="48"
@@ -107,10 +104,25 @@ onUnmounted(() => {
     </n-layout-sider>
     <n-layout :native-scrollbar="false">
       <n-layout-header class="layout-header" position="absolute">
-        <n-icon class="layout-header-button" size="24" @click="triggerClick()">
-          <menu-unfold-outlined v-if="collapsed" />
-          <menu-fold-outlined v-else />
-        </n-icon>
+        <n-grid :y-gap="8" :cols="1" item-style="height:32px;">
+          <n-grid-item class="layout-header-row">
+            <n-icon class="layout-header-button" size="24" @click="triggerClick()">
+              <menu-unfold-outlined v-if="collapsed" />
+              <menu-fold-outlined v-else />
+            </n-icon>
+            <n-breadcrumb class="layout-header-breadcrumb">
+              <n-breadcrumb-item>1</n-breadcrumb-item>
+              <n-breadcrumb-item>1</n-breadcrumb-item>
+            </n-breadcrumb>
+          </n-grid-item>
+          <n-grid-item>
+            <n-tabs type="card" closable>
+              <n-tab name="幸福">寂寞围绕着电视</n-tab>
+              <n-tab name="的">垂死坚持</n-tab>
+              <n-tab name="旁边">在两点半消失</n-tab>
+            </n-tabs>
+          </n-grid-item>
+        </n-grid>
       </n-layout-header>
       <n-layout-content
         :native-scrollbar="false"
@@ -135,9 +147,14 @@ onUnmounted(() => {
 .layout-header {
   display: flex;
   align-items: center;
-  height: 64px;
+  height: 96px;
   padding: 0 16px;
   z-index: 10;
+}
+
+.layout-header-row{
+  display: flex;
+  align-items: center;
 }
 
 .layout-header-button :hover {
@@ -145,8 +162,12 @@ onUnmounted(() => {
   cursor: pointer;
 }
 
+.layout-header-breadcrumb{
+  margin-left: 16px;
+}
+
 .layout-content {
-  padding-top: 64px;
+  padding-top: 96px;
   min-height: 100vh;
   background-color: #f0f2f5;
 }
@@ -163,14 +184,22 @@ onUnmounted(() => {
 .layout-sider-logo {
   height: 64px;
   display: grid;
-  grid: auto-flow / 64px 80px;
+  padding-left: 8px;
+  grid: auto-flow / 50px 80px;
   place-items: center;
   color: #2080f0ff;
 }
 
+.layout-sider-logo-title {
+  font-weight: 600;
+  font-size: 18px;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-variant: tabular-nums;
+}
+
 @media (max-width: 768px) {
   .layout-sider {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     height: 100%;

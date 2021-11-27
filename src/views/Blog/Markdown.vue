@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, defineAsyncComponent } from 'vue';
+import { defineAsyncComponent, ref } from 'vue';
 
 const VueVditor = defineAsyncComponent(() => import('@/components/VueVditor/VueVditor.vue'));
 
@@ -62,7 +62,9 @@ const options = {
 
 <template>
   <div class="markdown">
-    <vue-vditor v-model="content" :options="options" />
+    <n-form>
+      <vue-vditor v-model="content" :options="options" />
+    </n-form>
   </div>
 </template>
 

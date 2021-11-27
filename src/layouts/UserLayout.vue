@@ -1,3 +1,7 @@
+<script setup lang="ts">
+
+</script>
+
 <template>
   <div class="container">
     <div class="content">
@@ -7,39 +11,21 @@
             <img
               alt="logo"
               class="logo"
-              height="44"
-              src="https://alicdn.antdv.com/v2/assets/logo.1ef800a8.svg"
               width="44"
+              height="44"
+              src="https://www.naiveui.com/assets/naivelogo.93278402.svg"
             />
-            <span class="title">Ant Design</span>
+            <span class="title">Naive UI</span>
           </router-link>
         </div>
-        <div class="desc">Ant Design 是西湖区最具影响力的 Web 设计规范</div>
+        <div class="desc">一个 Vue 3 组件库</div>
       </div>
-      <router-view />
+      <div class="main">
+        <router-view />
+      </div>
     </div>
   </div>
 </template>
-
-<script lang="ts" setup>
-/* const links = [
-  {
-    key: 'help',
-    title: '帮助',
-    href: ''
-  },
-  {
-    key: 'privacy',
-    title: '隐私',
-    href: ''
-  },
-  {
-    key: 'terms',
-    title: '条款',
-    href: ''
-  }
-] */
-</script>
 
 <style scoped>
 .container {
@@ -47,29 +33,17 @@
   flex-direction: column;
   height: 100vh;
   overflow: auto;
-  background: #ffffff;
+  background: #ffffff url('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg') no-repeat center 110px;
+  background-size: 100%;
 }
 
 .content {
   padding: 32px 0;
-  flex: 1;
-}
-
-@media (min-width: 768px) {
-  .container {
-    background-image: url('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg');
-    background-repeat: no-repeat;
-    background-position: center 110px;
-    background-size: 100%;
-  }
-
-  .content {
-    padding: 112px 0 24px 0;
-  }
 }
 
 .top {
   text-align: center;
+  margin-bottom: 80px;
 }
 
 .header {
@@ -100,5 +74,11 @@
   color: #00000073;
   margin-top: 12px;
   margin-bottom: 40px;
+}
+
+.main {
+  min-width: 260px;
+  width: 368px;
+  margin: 0 auto;
 }
 </style>

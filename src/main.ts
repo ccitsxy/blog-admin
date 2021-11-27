@@ -1,40 +1,50 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
-import { store, key } from './store';
+import { key, store } from './store';
 
 import {
-  // create naive ui
   create,
-  // component
-  NConfigProvider,
-  NLayout,
-  NLayoutSider,
-  NLayoutHeader,
-  NLayoutContent,
-  NMenu,
-  NIcon,
-  NAnchor,
-  NAnchorLink,
+  NBackTop, NBreadcrumb, NBreadcrumbItem,
   NButton,
-  NBackTop,
+  NConfigProvider,
+  NForm,
+  NFormItemRow, NGrid, NGridItem,
+  NIcon,
+  NInput,
+  NLayout,
+  NLayoutContent,
+  NLayoutHeader,
+  NLayoutSider,
   NLoadingBarProvider,
+  NMenu,
+  NSpace,
+  NTab,
+  NTabs
 } from 'naive-ui';
 
 const naive = create({
   components: [
-    NConfigProvider,
-    NLayout,
-    NLayoutSider,
-    NLayoutHeader,
-    NLayoutContent,
-    NMenu,
-    NIcon,
-    NAnchor,
-    NAnchorLink,
-    NButton,
     NBackTop,
+    NButton,
+    NConfigProvider,
+    NForm,
+    NFormItemRow,
+    NIcon,
+    NInput,
+    NLayout,
+    NLayoutContent,
+    NLayoutHeader,
+    NLayoutSider,
     NLoadingBarProvider,
+    NMenu,
+    NSpace,
+    NTab,
+    NTabs,
+    NGrid,
+    NGridItem,
+    NBreadcrumb,
+    NBreadcrumbItem
   ],
 });
 
