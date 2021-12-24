@@ -1,28 +1,26 @@
-<script lang="ts" setup>
-import { defineAsyncComponent, onMounted, onUnmounted, ref, watchEffect } from 'vue';
+<script setup lang="ts">
+import { onMounted, onUnmounted, ref, watchEffect } from 'vue';
 import { RouteRecordRaw, useRouter } from 'vue-router';
 import routes from '../router/routes';
 import { MenuOption, useLoadingBar } from 'naive-ui';
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@vicons/antd';
 
-const LayoutView = defineAsyncComponent(
-  () => import('@/layouts/LayoutView.vue')
-);
+import { MenuFoldOutlined,MenuUnfoldOutlined } from '@vicons/antd'
+import LayoutView from '@/layouts/LayoutView.vue';
 
 const collapsed = ref<boolean>(false);
 
-function triggerClick () {
+function triggerClick() {
   collapsed.value = !collapsed.value;
 }
 
 const menuOptions = routes[0].children?.map((item) => mapMenu(item));
 
-function mapMenu (item: RouteRecordRaw): MenuOption {
+function mapMenu(item: RouteRecordRaw): MenuOption {
   return {
     label: item.meta?.title,
     key: item.path,
     icon: item.meta?.icon,
-    children: item.children?.map((item2) => mapMenu(item2))
+    children: item.children?.map((item2) => mapMenu(item2)),
   };
 }
 
@@ -53,7 +51,7 @@ router.afterEach(() => {
 
 const width = ref(0);
 
-function onResize () {
+function onResize() {
   width.value = window.innerWidth;
 }
 
@@ -68,7 +66,6 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', onResize);
 });
-
 </script>
 
 <template>
@@ -80,6 +77,7 @@ onUnmounted(() => {
       :width="208"
       class="layout-sider"
       collapse-mode="width"
+      inverted
     >
       <div class="layout-sider-logo">
         <img
@@ -100,29 +98,22 @@ onUnmounted(() => {
         :root-indent="22"
         :value="$route.path"
         @update-value="updateValue"
+        inverted
       />
     </n-layout-sider>
     <n-layout :native-scrollbar="false">
       <n-layout-header class="layout-header" position="absolute">
-        <n-grid :y-gap="8" :cols="1" item-style="height:32px;">
-          <n-grid-item class="layout-header-row">
-            <n-icon class="layout-header-button" size="24" @click="triggerClick()">
-              <menu-unfold-outlined v-if="collapsed" />
-              <menu-fold-outlined v-else />
-            </n-icon>
-            <n-breadcrumb class="layout-header-breadcrumb">
-              <n-breadcrumb-item>1</n-breadcrumb-item>
-              <n-breadcrumb-item>1</n-breadcrumb-item>
-            </n-breadcrumb>
-          </n-grid-item>
-          <n-grid-item>
-            <n-tabs type="card" closable>
-              <n-tab name="幸福">寂寞围绕着电视</n-tab>
-              <n-tab name="的">垂死坚持</n-tab>
-              <n-tab name="旁边">在两点半消失</n-tab>
-            </n-tabs>
-          </n-grid-item>
-        </n-grid>
+        <n-icon class="layout-header-button" size="24" @click="triggerClick()">
+          <menu-unfold-outlined v-if="collapsed" />
+          <menu-fold-outlined v-else />
+        </n-icon>
+        <n-breadcrumb class="layout-header-breadcrumb">
+          <n-breadcrumb-item
+            v-for="item in $route.matched.slice(1)"
+            :key="item.path"
+            >{{ item.meta.title }}
+          </n-breadcrumb-item>
+        </n-breadcrumb>
       </n-layout-header>
       <n-layout-content
         :native-scrollbar="false"
@@ -144,37 +135,40 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+:deep(.n-scrollbar-rail__scrollbar) {
+  z-index: 11;
+}
+
 .layout-header {
   display: flex;
   align-items: center;
-  height: 96px;
-  padding: 0 16px;
+  height: 64px;
+  padding: 0;
   z-index: 10;
 }
 
-.layout-header-row{
-  display: flex;
-  align-items: center;
+.layout-header-button {
+  margin-left: 16px;
 }
 
 .layout-header-button :hover {
-  color: #4098FCFF;
+  color: #4098fcff;
   cursor: pointer;
 }
 
-.layout-header-breadcrumb{
+.layout-header-breadcrumb {
   margin-left: 16px;
 }
 
 .layout-content {
-  padding-top: 96px;
+  padding-top: 64px;
   min-height: 100vh;
   background-color: #f0f2f5;
 }
 
 .layout-header,
 .layout-sider {
-  box-shadow: 0 1px 4px #00152914
+  box-shadow: 0 1px 4px #00152914;
 }
 
 .layout-sider {
@@ -187,13 +181,15 @@ onUnmounted(() => {
   padding-left: 8px;
   grid: auto-flow / 50px 80px;
   place-items: center;
-  color: #2080f0ff;
+  color: #fff;
 }
 
 .layout-sider-logo-title {
   font-weight: 600;
   font-size: 18px;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   font-variant: tabular-nums;
 }
 

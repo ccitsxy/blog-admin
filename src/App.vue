@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 
 const themeOverrides = {
   common: {
@@ -15,7 +15,7 @@ const themeOverrides = {
 <template>
   <n-config-provider :theme-overrides="themeOverrides">
     <n-loading-bar-provider>
-      <router-view />
+      <router-view/>
     </n-loading-bar-provider>
   </n-config-provider>
 </template>

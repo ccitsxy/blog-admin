@@ -5,11 +5,15 @@ import { key, store } from './store';
 
 import {
   create,
-  NBackTop, NBreadcrumb, NBreadcrumbItem,
+  NBackTop,
+  NBreadcrumb,
+  NBreadcrumbItem,
   NButton,
   NConfigProvider,
   NForm,
-  NFormItemRow, NGrid, NGridItem,
+  NFormItemRow,
+  NGrid,
+  NGridItem,
   NIcon,
   NInput,
   NLayout,
@@ -19,8 +23,7 @@ import {
   NLoadingBarProvider,
   NMenu,
   NSpace,
-  NTab,
-  NTabs
+  NSpin,
 } from 'naive-ui';
 
 const naive = create({
@@ -39,12 +42,11 @@ const naive = create({
     NLoadingBarProvider,
     NMenu,
     NSpace,
-    NTab,
-    NTabs,
     NGrid,
     NGridItem,
     NBreadcrumb,
-    NBreadcrumbItem
+    NBreadcrumbItem,
+    NSpin,
   ],
 });
 

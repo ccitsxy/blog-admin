@@ -21,7 +21,7 @@
         <div class="desc">一个 Vue 3 组件库</div>
       </div>
       <div class="main">
-        <router-view />
+        <router-view/>
       </div>
     </div>
   </div>
@@ -31,10 +31,11 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   overflow: auto;
   background: #ffffff url('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg') no-repeat center 110px;
   background-size: 100%;
+  padding-top: 80px;
 }
 
 .content {
@@ -77,8 +78,7 @@
 }
 
 .main {
-  min-width: 260px;
-  width: 368px;
+  width: 320px;
   margin: 0 auto;
 }
 </style>

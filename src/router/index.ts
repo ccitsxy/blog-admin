@@ -7,4 +7,13 @@ const router = createRouter({
   routes,
 });
 
+// router.beforeEach((to, from, next) => {
+//   if (to.path.startsWith('/user') || localStorage.getItem('token')) next();
+//   else void router.push('/user/login')
+// });
+
+// router.afterEach(() => {
+//   //
+// });
+
 export default router;

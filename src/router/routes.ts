@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from 'vue-router';
 
 import { renderIcon } from '@/utils/renderIcon';
-import { DashboardOutlined, EditOutlined, ApiOutlined } from '@vicons/antd';
+import { EditOutlined, SettingOutlined } from '@vicons/antd';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -12,20 +12,11 @@ const routes: RouteRecordRaw[] = [
     redirect: '/dashboard',
     children: [
       {
-        path: '/dashboard',
-        name: 'dashboard',
-        meta: {
-          title: '仪表盘',
-          icon: renderIcon(DashboardOutlined),
-        },
-        component: () => import('../views/Dashboard/Dashboard.vue'),
-      },
-      {
         path: '/blog',
         name: 'blog',
         meta: {
           title: '博客管理',
-          icon: renderIcon(EditOutlined),
+          icon: renderIcon(SettingOutlined),
         },
         redirect: '/blog/article',
         component: () => import('../layouts/LayoutView.vue'),
@@ -36,19 +27,10 @@ const routes: RouteRecordRaw[] = [
             meta: {
               title: '文章管理',
             },
-            component: () => import('../views/Blog/Markdown.vue'),
+            component: () => import('../views/Manager/ArticleManager.vue'),
           },
         ],
-      },
-      {
-        path: '/interface',
-        name: 'interface',
-        meta: {
-          title: '接口管理',
-          icon: renderIcon(ApiOutlined),
-        },
-        component: () => import('../views/Interface/Article.vue'),
-      },
+      }
     ],
   },
   {
@@ -58,11 +40,11 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '/user/login',
-        component: () => import('../views/User/Login.vue'),
+        component: () => import('../views/User/UserLogin.vue'),
       },
       {
         path: '/user/register',
-        component: () => import('../views/User/Register.vue'),
+        component: () => import('../views/User/UserRegister.vue'),
       },
     ],
   },

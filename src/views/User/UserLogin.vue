@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import { login } from '@/api/auth/auth';
+
+void login({ username: 'sxy', password: '' });
+</script>
+
 <template>
   <div class="login">
     <n-form>
@@ -12,5 +18,4 @@
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

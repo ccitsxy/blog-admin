@@ -5,7 +5,7 @@ interface User {
   password: string;
 }
 
-export async function login(user:User) {
-  const response = await api.post('/auth/login',user);
-  console.log(response);
+export async function login(user: User) {
+  const response = await api.post('/auth/login', user);
+  localStorage.setItem('Authorization', response.headers.Authorization);
 }
