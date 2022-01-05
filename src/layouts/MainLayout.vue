@@ -12,6 +12,8 @@ import {
 } from '@ant-design-vue/pro-layout';
 import type { RouteContextProps } from '@ant-design-vue/pro-layout';
 import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
   ReloadOutlined,
   CloseOutlined,
   MoreOutlined,
@@ -94,6 +96,7 @@ const reloadPage = () => {
     v-model:openKeys="state.openKeys"
     :menu-data="menuData"
     v-bind="proConfig"
+    :collapsedButtonRender="false"
   >
     <template #menuHeaderRender>
       <router-link :to="{ path: '/' }">
@@ -107,6 +110,16 @@ const reloadPage = () => {
 
     <template #headerContentRender>
       <div class="layout-breadcrumb">
+        <menu-unfold-outlined
+          v-if="state.collapsed"
+          @click="state.collapsed = !state.collapsed"
+          class="layout-breadcrumb-icon"
+        />
+        <menu-fold-outlined
+          v-else
+          @click="state.collapsed = !state.collapsed"
+          class="layout-breadcrumb-icon"
+        />
         <reload-outlined @click="reloadPage" class="layout-breadcrumb-icon" />
         <a-breadcrumb>
           <a-breadcrumb-item v-for="item in breadcrumb" :key="item.path">
@@ -215,6 +228,40 @@ const reloadPage = () => {
 /* firefox */
 .ant-layout-sider-children > div:nth-child(2) {
   scrollbar-width: thin;
+}
+
+.ant-pro-sider-logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 16px 16px;
+  line-height: 32px;
+  cursor: pointer;
+}
+
+.ant-pro-sider-logo > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+}
+
+.ant-pro-sider-logo > a > img {
+  width: 32px;
+  height: 32px;
+}
+
+.ant-pro-sider-logo h1 {
+  display: inline-block;
+  height: 32px;
+  margin: 0 0 0 12px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 32px;
+  vertical-align: middle;
+  animation: fade-in;
+  animation-duration: 0.2s;
 }
 
 .layout-breadcrumb {
