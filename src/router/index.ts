@@ -59,6 +59,10 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: '/:catchAll(.*)*',
+      component: () => import('@/views/ErrorView.vue')
+    }
   ],
 });
 

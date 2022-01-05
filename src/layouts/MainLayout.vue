@@ -16,6 +16,7 @@ import {
   CloseOutlined,
   MoreOutlined,
 } from '@ant-design/icons-vue';
+import LayoutView from '@/layouts/LayoutView.vue';
 
 const router = useRouter();
 const { menuData } = getMenuData(clearMenuItem(router.getRoutes()));
@@ -169,7 +170,7 @@ const reloadPage = () => {
     </a-tabs>
 
     <div class="layout-content">
-      <router-view />
+      <layout-view />
     </div>
 
     <!-- <template #footerRender>
