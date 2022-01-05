@@ -1,229 +1,274 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watchEffect } from 'vue';
-import { RouteRecordRaw, useRouter } from 'vue-router';
-import routes from '../router/routes';
-import { MenuOption, useLoadingBar } from 'naive-ui';
-
-import { MenuFoldOutlined,MenuUnfoldOutlined } from '@vicons/antd'
-import LayoutView from '@/layouts/LayoutView.vue';
-
-const collapsed = ref<boolean>(false);
-
-function triggerClick() {
-  collapsed.value = !collapsed.value;
-}
-
-const menuOptions = routes[0].children?.map((item) => mapMenu(item));
-
-function mapMenu(item: RouteRecordRaw): MenuOption {
-  return {
-    label: item.meta?.title,
-    key: item.path,
-    icon: item.meta?.icon,
-    children: item.children?.map((item2) => mapMenu(item2)),
-  };
-}
+import { reactive, watchEffect, computed, ref } from 'vue';
+import {
+  useRouter,
+  RouterLink,
+  RouteLocationNormalizedLoaded,
+} from 'vue-router';
+import {
+  // GlobalFooter,
+  getMenuData,
+  clearMenuItem,
+} from '@ant-design-vue/pro-layout';
+import type { RouteContextProps } from '@ant-design-vue/pro-layout';
+import {
+  ReloadOutlined,
+  CloseOutlined,
+  MoreOutlined,
+} from '@ant-design/icons-vue';
 
 const router = useRouter();
-const updateValue = (key: string) => {
-  void router.push(key);
-};
-const openKeys = ref<string[]>([]);
+const { menuData } = getMenuData(clearMenuItem(router.getRoutes()));
+
+const state = reactive<Omit<RouteContextProps, 'menuData'>>({
+  collapsed: false, // default collapsed
+  openKeys: [], // default openKeys
+  selectedKeys: [], // default selectedKeys
+});
+
+const tabs = ref<RouteLocationNormalizedLoaded[]>([]);
+
+const proConfig = ref({
+  layout: 'side',
+  fixedHeader: false,
+  fixSiderbar: false,
+  splitMenus: false,
+  menuHeaderRender: undefined,
+  footerRender: undefined,
+  headerRender: undefined,
+});
+
+const breadcrumb = computed(() =>
+  router.currentRoute.value.matched
+    .slice(1)
+    .concat()
+    .map((item) => {
+      return {
+        path: item.path,
+        breadcrumbName: item.meta.title || '',
+      };
+    })
+);
+
 watchEffect(() => {
   if (router.currentRoute) {
+    // console.log("router", router.currentRoute.value);
+
     const matched = router.currentRoute.value.matched.concat();
-    if (!collapsed.value) {
-      // 防止侧边菜单收起时切换路由导致侧边菜单弹出
-      openKeys.value = matched
-        .filter((r) => r.path !== router.currentRoute.value.path)
-        .map((r) => r.path);
-    }
+    state.selectedKeys = matched
+      .filter((r) => r.name !== 'index')
+      .map((r) => r.path);
+
+    state.openKeys = matched
+      .filter((r) => r.path !== router.currentRoute.value.path)
+      .map((r) => r.path);
+
+    if (
+      tabs.value.some(
+        (p: { path: string }) => p.path === router.currentRoute.value.path
+      ) ||
+      router.currentRoute.value.path.startsWith('/redirect')
+    )
+      return;
+
+    tabs.value.push(router.currentRoute.value);
   }
 });
 
-const loadingBar = useLoadingBar();
-router.beforeEach(() => {
-  loadingBar.start();
-});
-router.afterEach(() => {
-  loadingBar.finish();
-});
+// const onChange = (targetKey: string) => {
+//   router.push(`${targetKey}`);
+// };
 
-const width = ref(0);
-
-function onResize() {
-  width.value = window.innerWidth;
-}
-
-onResize();
-if (width.value <= 768) {
-  collapsed.value = !collapsed.value;
-}
-onMounted(() => {
-  window.addEventListener('resize', onResize);
-  onResize();
-});
-onUnmounted(() => {
-  window.removeEventListener('resize', onResize);
-});
+const reloadPage = () => {
+  void router.push({
+    path: '/redirect' + router.currentRoute.value.fullPath,
+  });
+};
 </script>
 
 <template>
-  <n-layout has-sider position="absolute">
-    <n-layout-sider
-      :collapsed="collapsed"
-      :collapsed-width="width > 768 ? 64 : 0"
-      :native-scrollbar="false"
-      :width="208"
-      class="layout-sider"
-      collapse-mode="width"
-      inverted
-    >
-      <div class="layout-sider-logo">
+  <pro-layout
+    v-model:collapsed="state.collapsed"
+    v-model:selectedKeys="state.selectedKeys"
+    v-model:openKeys="state.openKeys"
+    :menu-data="menuData"
+    v-bind="proConfig"
+  >
+    <template #menuHeaderRender>
+      <router-link :to="{ path: '/' }">
         <img
+          src="https://alicdn.antdv.com/v2/assets/logo.1ef800a8.svg"
           alt="logo"
-          class="logo"
-          width="32"
-          height="32"
-          src="https://www.naiveui.com/assets/naivelogo.93278402.svg"
         />
-        <h1 class="layout-sider-logo-title">Naive UI</h1>
+        <h1>Preview Pro</h1>
+      </router-link>
+    </template>
+
+    <template #headerContentRender>
+      <div class="layout-breadcrumb">
+        <reload-outlined @click="reloadPage" class="layout-breadcrumb-icon" />
+        <a-breadcrumb>
+          <a-breadcrumb-item v-for="item in breadcrumb" :key="item.path">
+            <router-link :to="item.path">{{ item.breadcrumbName }}</router-link>
+          </a-breadcrumb-item>
+        </a-breadcrumb>
       </div>
-      <n-menu
-        :icon-size="20"
-        :collapsed-icon-size="20"
-        :collapsed-width="width > 768 ? 64 : 0"
-        :indent="48"
-        :options="menuOptions"
-        :root-indent="22"
-        :value="$route.path"
-        @update-value="updateValue"
-        inverted
-      />
-    </n-layout-sider>
-    <n-layout :native-scrollbar="false">
-      <n-layout-header class="layout-header" position="absolute">
-        <n-icon class="layout-header-button" size="24" @click="triggerClick()">
-          <menu-unfold-outlined v-if="collapsed" />
-          <menu-fold-outlined v-else />
-        </n-icon>
-        <n-breadcrumb class="layout-header-breadcrumb">
-          <n-breadcrumb-item
-            v-for="item in $route.matched.slice(1)"
-            :key="item.path"
-            >{{ item.meta.title }}
-          </n-breadcrumb-item>
-        </n-breadcrumb>
-      </n-layout-header>
-      <n-layout-content
-        :native-scrollbar="false"
-        class="layout-content"
-        content-style="padding: 24px;"
+    </template>
+
+    <template #rightContentRender>
+      <a-button type="primary">测试</a-button>
+    </template>
+
+    <a-tabs
+      :activeKey="$route.path"
+      type="editable-card"
+      hideAdd
+      class="layout-tabs"
+    >
+      <a-tab-pane
+        v-for="tab in tabs"
+        style="height: 0"
+        :key="tab.path"
+        :closable="false"
       >
-        <transition name="fade">
-          <div
-            v-show="!collapsed"
-            class="layout-sider-mask"
-            @click="triggerClick()"
-          />
-        </transition>
-        <layout-view />
-        <n-back-top :right="100" />
-      </n-layout-content>
-    </n-layout>
-  </n-layout>
+        <template #tab>
+          <a-dropdown :trigger="['contextmenu']">
+            <router-link class="layout-tabs-tab" :to="tab.path">
+              {{ tab.meta.title }}
+              <close-outlined class="layout-tabs-tab-icon" />
+            </router-link>
+            <template #overlay>
+              <a-menu>
+                <a-menu-item key="1">关闭</a-menu-item>
+                <a-menu-item key="2">关闭其他</a-menu-item>
+                <a-menu-item key="3">关闭到左侧</a-menu-item>
+                <a-menu-item key="4">关闭到右侧</a-menu-item>
+              </a-menu>
+            </template>
+          </a-dropdown>
+        </template>
+      </a-tab-pane>
+
+      <template #leftExtra>
+        <span style="margin-left: 16px" />
+      </template>
+
+      <template #rightExtra>
+        <a-dropdown>
+          <more-outlined style="margin-right: 16px; font-size: 1rem" />
+          <template #overlay>
+            <a-menu>
+              <a-menu-item key="1">关闭当前</a-menu-item>
+              <a-menu-item key="2">关闭其他</a-menu-item>
+              <a-menu-item key="3">关闭到左侧</a-menu-item>
+              <a-menu-item key="4">关闭到右侧</a-menu-item>
+            </a-menu>
+          </template>
+        </a-dropdown>
+      </template>
+    </a-tabs>
+
+    <div class="layout-content">
+      <router-view />
+    </div>
+
+    <!-- <template #footerRender>
+      <GlobalFooter
+        :links="[
+          { title: 'Github', href: 'https://github.com/ccitsxy/blog-admin' },
+          { title: 'Ant Design Vue', href: 'https://next.antdv.com' },
+        ]"
+        copyright="2021 &copy; SXY"
+      />
+    </template>-->
+  </pro-layout>
 </template>
 
-<style scoped>
-:deep(.n-scrollbar-rail__scrollbar) {
-  z-index: 11;
+<style>
+.ant-pro-basicLayout-content {
+  margin: 0;
 }
 
-.layout-header {
+.ant-tabs-nav .ant-tabs-tab {
+  display: flex !important;
+  transition: none !important;
+}
+
+.ant-tabs-nav:before {
+  display: unset !important;
+  margin-bottom: -1px !important;
+}
+
+.ant-tabs-tab {
+  padding: 0 !important;
+}
+
+.ant-tabs-tab-btn > .ant-dropdown-trigger {
+  padding: 8px 16px;
+}
+
+.ant-tabs-tab-btn > a {
+  transition: none !important;
+}
+
+/* firefox */
+.ant-layout-sider-children > div:nth-child(2) {
+  scrollbar-width: thin;
+}
+
+.layout-breadcrumb {
+  height: 100%;
   display: flex;
   align-items: center;
-  height: 64px;
-  padding: 0;
-  z-index: 10;
-}
-
-.layout-header-button {
   margin-left: 16px;
 }
 
-.layout-header-button :hover {
-  color: #4098fcff;
+.layout-breadcrumb-icon {
+  font-size: 20px;
+  margin-right: 16px;
   cursor: pointer;
 }
 
-.layout-header-breadcrumb {
-  margin-left: 16px;
+.layout-tabs {
+  background-color: #fff;
+  padding-top: 6px;
+}
+
+.layout-tabs-tab {
+  width: 100%;
+  color: inherit;
+}
+
+.layout-tabs-tab-icon {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 12px;
+  margin-left: 8px;
+  margin-right: 0 !important;
 }
 
 .layout-content {
-  padding-top: 64px;
-  min-height: 100vh;
-  background-color: #f0f2f5;
+  height: calc(100vh - 110px);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  //padding: 16px;
+  /* firefox */
+  scrollbar-width: thin;
 }
 
-.layout-header,
-.layout-sider {
-  box-shadow: 0 1px 4px #00152914;
+/* webkit */
+.layout-content::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
 }
 
-.layout-sider {
-  z-index: 12;
-}
-
-.layout-sider-logo {
-  height: 64px;
-  display: grid;
-  padding-left: 8px;
-  grid: auto-flow / 50px 80px;
-  place-items: center;
-  color: #fff;
-}
-
-.layout-sider-logo-title {
-  font-weight: 600;
-  font-size: 18px;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
-    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-  font-variant: tabular-nums;
-}
-
-@media (max-width: 768px) {
-  .layout-sider {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-  }
-
-  .layout-sider-mask {
-    position: fixed;
-    top: 0;
-    left: 0;
-    opacity: 1;
-    width: 100%;
-    height: 100%;
-    z-index: 11;
-    background-color: #00000073;
-  }
-}
-
-:deep(.n-menu-item-content__icon) {
-  margin-right: 16px !important;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+.layout-content::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-color: #cdcdcd;
+  background-clip: padding-box;
 }
 </style>
