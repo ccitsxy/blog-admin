@@ -17,6 +17,7 @@ import {
   ReloadOutlined,
   CloseOutlined,
   MoreOutlined,
+  UserOutlined,
 } from '@ant-design/icons-vue';
 import LayoutView from '@/layouts/LayoutView.vue';
 
@@ -130,7 +131,18 @@ const reloadPage = () => {
     </template>
 
     <template #rightContentRender>
-      <a-button type="primary">测试</a-button>
+      <a-dropdown>
+        <user-outlined class="layout-right-icon"/>
+        <template #overlay>
+          <a-menu>
+            <a-menu-item key="1">关闭当前</a-menu-item>
+            <a-menu-item key="2">关闭其他</a-menu-item>
+            <a-menu-item key="3">关闭到左侧</a-menu-item>
+            <a-menu-item key="4">关闭到右侧</a-menu-item>
+          </a-menu>
+        </template>
+      </a-dropdown>
+
     </template>
 
     <a-tabs
@@ -274,6 +286,13 @@ const reloadPage = () => {
 .layout-breadcrumb-icon {
   font-size: 20px;
   margin-right: 16px;
+  cursor: pointer;
+}
+
+.layout-right-icon {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
   cursor: pointer;
 }
 
