@@ -60,6 +60,10 @@ const router = createRouter({
       ],
     },
     {
+      path: '/user',
+      component: () => import('@/layouts/UserLayout.vue')
+    },
+    {
       path: '/:catchAll(.*)*',
       component: () => import('@/views/ErrorView.vue')
     }
