@@ -6,14 +6,12 @@ declare module 'vue' {
   export interface GlobalComponents {
     ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb']
     ABreadcrumbItem: typeof import('ant-design-vue/es')['BreadcrumbItem']
-    AButton: typeof import('ant-design-vue/es')['Button']
     ADropdown: typeof import('ant-design-vue/es')['Dropdown']
     AMenu: typeof import('ant-design-vue/es')['Menu']
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
     ATabPane: typeof import('ant-design-vue/es')['TabPane']
     ATabs: typeof import('ant-design-vue/es')['Tabs']
-    Redirect: typeof import('./src/components/redirect/index.vue')['default']
-    VueTiptap: typeof import('./src/components/tiptap/VueTiptap.vue')['default']
+    Redirect: typeof import('./src/components/redirect/Redirect.vue')['default']
   }
 }
 

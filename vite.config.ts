@@ -6,6 +6,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 
 import Components from "unplugin-vue-components/vite";
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,6 +16,11 @@ export default defineConfig({
     Components({
       dts: true,
       resolvers: [AntDesignVueResolver()],
+    }),
+    visualizer({
+      open: true,
+      gzipSize: true,
+      brotliSize: true,
     }),
   ],
   resolve: {

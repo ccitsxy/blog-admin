@@ -2,10 +2,12 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import { App } from 'vue';
 
-import { CloseOutlined, DashboardOutlined } from '@ant-design/icons-vue';
+import { useTitle } from '@vueuse/core';
+
+import { HomeOutlined, FundOutlined } from '@ant-design/icons-vue';
 
 // manually import menu icons
-const components = [DashboardOutlined, CloseOutlined];
+const components = [HomeOutlined, FundOutlined];
 
 export function icons(app: App) {
   components.forEach((item) => {
@@ -19,27 +21,29 @@ const router = createRouter({
     {
       path: '/',
       name: 'index',
-      meta: { title: '主页', icon: DashboardOutlined.name },
-      component: () => import('@/layouts/MainLayout.vue'),
-      redirect: '/dashboard',
+      meta: { title: '主页', icon: HomeOutlined.name },
+      component: () => import('@/layouts/MainLayout/MainLayout.vue'),
+      redirect: '/home',
       children: [
         {
-          path: '/dashboard',
-          name: 'dashboard',
-          meta: { title: 'Dashboard', icon: DashboardOutlined.name },
+          path: '/home',
+          name: 'home',
+          meta: { title: '主页', icon: HomeOutlined.name },
+          component: () => import('@/views/HomeView.vue'),
+        },
+        {
+          path: '/manager',
+          name: 'manager',
+          meta: { title: '管理', icon: FundOutlined.name },
           component: () => import('@/layouts/LayoutView.vue'),
-          redirect: '/dashboard/monitor',
+          redirect: '/manager/article',
           children: [
             {
-              path: 'workspace',
-              name: 'workspace',
-              meta: { title: 'Workspace', icon: DashboardOutlined.name },
-              component: () => import('@/views/HomeView.vue'),
-            },
-            {
-              path: 'monitor',
-              name: 'monitor',
-              meta: { title: 'Monitor', icon: CloseOutlined.name },
+              path: '/manager/article',
+              name: 'article',
+              meta: {
+                title: '文章管理',
+              },
               component: () => import('@/views/AboutView.vue'),
             },
           ],
@@ -49,25 +53,29 @@ const router = createRouter({
     {
       path: '/redirect',
       name: 'redirectIndex',
-      component: () => import('@/layouts/MainLayout.vue'),
+      component: () => import('@/layouts/MainLayout/MainLayout.vue'),
       children: [
         {
           path: '/redirect/:path(.*)',
           name: 'redirectChild',
-          component: () => import('@/components/redirect/index.vue'),
+          component: () => import('@/components/redirect/Redirect.vue'),
           meta: { title: '加载中...' },
         },
       ],
     },
     {
       path: '/user',
-      component: () => import('@/layouts/UserLayout.vue')
+      component: () => import('@/layouts/UserLayout/UserLayout.vue'),
     },
     {
       path: '/:catchAll(.*)*',
-      component: () => import('@/views/ErrorView.vue')
-    }
+      component: () => import('@/views/ErrorView.vue'),
+    },
   ],
+});
+
+router.afterEach(() => {
+  useTitle(router.currentRoute.value.meta.title);
 });
 
 export default router;

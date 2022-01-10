@@ -6,10 +6,11 @@ import {
   RouteLocationNormalizedLoaded,
 } from 'vue-router';
 import {
-  // GlobalFooter,
   getMenuData,
   clearMenuItem,
 } from '@ant-design-vue/pro-layout';
+import ProLayout from '@ant-design-vue/pro-layout';
+import '@ant-design-vue/pro-layout/dist/style.css';
 import type { RouteContextProps } from '@ant-design-vue/pro-layout';
 import {
   MenuFoldOutlined,
@@ -79,10 +80,6 @@ watchEffect(() => {
   }
 });
 
-// const onChange = (targetKey: string) => {
-//   router.push(`${targetKey}`);
-// };
-
 const reloadPage = () => {
   void router.push({
     path: '/redirect' + router.currentRoute.value.fullPath,
@@ -132,7 +129,7 @@ const reloadPage = () => {
 
     <template #rightContentRender>
       <a-dropdown>
-        <user-outlined class="layout-right-icon"/>
+        <user-outlined class="layout-right-icon" />
         <template #overlay>
           <a-menu>
             <a-menu-item key="1">关闭当前</a-menu-item>
@@ -142,7 +139,6 @@ const reloadPage = () => {
           </a-menu>
         </template>
       </a-dropdown>
-
     </template>
 
     <a-tabs
@@ -197,145 +193,9 @@ const reloadPage = () => {
     <div class="layout-content">
       <layout-view />
     </div>
-
-    <!-- <template #footerRender>
-      <GlobalFooter
-        :links="[
-          { title: 'Github', href: 'https://github.com/ccitsxy/blog-admin' },
-          { title: 'Ant Design Vue', href: 'https://next.antdv.com' },
-        ]"
-        copyright="2021 &copy; SXY"
-      />
-    </template>-->
   </pro-layout>
 </template>
 
-<style>
-.ant-pro-basicLayout-content {
-  margin: 0;
-}
-
-.ant-tabs-nav .ant-tabs-tab {
-  display: flex !important;
-  transition: none !important;
-}
-
-.ant-tabs-nav:before {
-  display: unset !important;
-  margin-bottom: -1px !important;
-}
-
-.ant-tabs-tab {
-  padding: 0 !important;
-}
-
-.ant-tabs-tab-btn > .ant-dropdown-trigger {
-  padding: 8px 16px;
-}
-
-.ant-tabs-tab-btn > a {
-  transition: none !important;
-}
-
-/* firefox */
-.ant-layout-sider-children > div:nth-child(2) {
-  scrollbar-width: thin;
-}
-
-.ant-pro-sider-logo {
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: 16px 16px;
-  line-height: 32px;
-  cursor: pointer;
-}
-
-.ant-pro-sider-logo > a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 32px;
-}
-
-.ant-pro-sider-logo > a > img {
-  width: 32px;
-  height: 32px;
-}
-
-.ant-pro-sider-logo h1 {
-  display: inline-block;
-  height: 32px;
-  margin: 0 0 0 12px;
-  color: #fff;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 32px;
-  vertical-align: middle;
-  animation: fade-in;
-  animation-duration: 0.2s;
-}
-
-.layout-breadcrumb {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  margin-left: 16px;
-}
-
-.layout-breadcrumb-icon {
-  font-size: 20px;
-  margin-right: 16px;
-  cursor: pointer;
-}
-
-.layout-right-icon {
-  display: flex;
-  align-items: center;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.layout-tabs {
-  background-color: #fff;
-  padding-top: 6px;
-}
-
-.layout-tabs-tab {
-  width: 100%;
-  color: inherit;
-}
-
-.layout-tabs-tab-icon {
-  color: rgba(0, 0, 0, 0.45);
-  font-size: 12px;
-  margin-left: 8px;
-  margin-right: 0 !important;
-}
-
-.layout-content {
-  height: calc(100vh - 110px);
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  overflow-y: auto;
-  overflow-x: hidden;
-  //padding: 16px;
-  /* firefox */
-  scrollbar-width: thin;
-}
-
-/* webkit */
-.layout-content::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
-}
-
-.layout-content::-webkit-scrollbar-thumb {
-  border-radius: 6px;
-  border: 2px solid transparent;
-  background-color: #cdcdcd;
-  background-clip: padding-box;
-}
+<style scoped>
+@import url(MainLayout.css);
 </style>
