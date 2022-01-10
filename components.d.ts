@@ -11,7 +11,7 @@ declare module 'vue' {
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
     ATabPane: typeof import('ant-design-vue/es')['TabPane']
     ATabs: typeof import('ant-design-vue/es')['Tabs']
-    Redirect: typeof import('./src/components/redirect/Redirect.vue')['default']
+    VueVditor: typeof import('./src/components/VueVditor/VueVditor.vue')['default']
   }
 }
 

@@ -58,7 +58,7 @@ const router = createRouter({
         {
           path: '/redirect/:path(.*)',
           name: 'redirectChild',
-          component: () => import('@/components/redirect/Redirect.vue'),
+          component: () => import('@/views/redirect/RedirectView.vue'),
           meta: { title: '加载中...' },
         },
       ],
