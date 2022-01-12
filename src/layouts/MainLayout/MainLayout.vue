@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import { reactive, watchEffect, computed, ref } from 'vue';
+import {
+  reactive,
+  watchEffect,
+  computed,
+  ref,
+  defineAsyncComponent,
+} from 'vue';
 import {
   useRouter,
   RouterLink,
   RouteLocationNormalizedLoaded,
 } from 'vue-router';
-import {
-  getMenuData,
-  clearMenuItem,
-} from '@ant-design-vue/pro-layout';
-import ProLayout from '@ant-design-vue/pro-layout';
-import '@ant-design-vue/pro-layout/dist/style.css';
+import { getMenuData, clearMenuItem } from '@ant-design-vue/pro-layout';
 import type { RouteContextProps } from '@ant-design-vue/pro-layout';
 import {
   MenuFoldOutlined,
@@ -20,7 +21,10 @@ import {
   MoreOutlined,
   UserOutlined,
 } from '@ant-design/icons-vue';
-import LayoutView from '@/layouts/LayoutView.vue';
+
+const LayoutView = defineAsyncComponent(
+  () => import('@/layouts/LayoutView.vue')
+);
 
 const router = useRouter();
 const { menuData } = getMenuData(clearMenuItem(router.getRoutes()));
