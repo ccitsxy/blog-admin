@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue';
 
-import LayoutView from '@/layouts/LayoutView.vue';
+const LayoutView = defineAsyncComponent(
+  () => import('@/layouts/LayoutView.vue')
+);
 </script>
 
 <template>
