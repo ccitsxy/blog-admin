@@ -3,8 +3,6 @@ import Vditor from 'vditor';
 import 'vditor/dist/index.css';
 import { onMounted, ref, watch, toRaw, onUnmounted, unref } from 'vue';
 
-import { useFetch } from '@vueuse/core';
-
 const emit = defineEmits([
   'update:modelValue',
   'after',
