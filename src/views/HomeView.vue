@@ -1,24 +1,28 @@
-<script setup lang="ts">
-import { defineAsyncComponent, ref } from 'vue';
-
-const VueVditor = defineAsyncComponent(
-  () => import('@/components/VueVditor/VueVditor.vue')
-);
-
-const editor = ref('');
-const options = {
-  height: 360,
-  cache: {
-    enable: false,
-  },
-  fullscreen: {
-    index: 3000,
-  },
-};
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div id="home">
-    <vue-vditor v-model="editor" :options="options" />
+  <div>
+    <a-row :gutter="[16,16]">
+      <a-col :span="24" :md="6">
+        <a-card title="Card title" :bordered="false">
+          <p>card content</p>
+        </a-card>
+      </a-col>
+      <a-col :span="24" :md="6">
+        <a-card title="Card title" :bordered="false">
+          <p>card content</p>
+        </a-card>
+      </a-col>
+      <a-col :span="24" :md="6">
+        <a-card title="Card title" :bordered="false">
+          <p>card content</p>
+        </a-card>
+      </a-col>
+      <a-col :span="24" :md="6">
+        <a-card title="Card title" :bordered="false">
+          <p>card content</p>
+        </a-card>
+      </a-col>
+    </a-row>
   </div>
 </template>

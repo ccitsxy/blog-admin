@@ -4,10 +4,14 @@ import { App } from 'vue';
 
 import { useTitle } from '@vueuse/core';
 
-import { HomeOutlined, FundOutlined } from '@ant-design/icons-vue';
+import {
+  HomeOutlined,
+  EditOutlined,
+  FundOutlined,
+} from '@ant-design/icons-vue';
 
 // manually import menu icons
-const components = [HomeOutlined, FundOutlined];
+const components = [HomeOutlined, EditOutlined, FundOutlined];
 
 export function icons(app: App) {
   components.forEach((item) => {
@@ -32,6 +36,15 @@ const router = createRouter({
           component: () => import('@/views/HomeView.vue'),
         },
         {
+          path: '/editor',
+          name: 'editor',
+          meta: {
+            title: '写文章',
+            icon: EditOutlined.name,
+          },
+          component: () => import('@/views/EditorView.vue'),
+        },
+        {
           path: '/manager',
           name: 'manager',
           meta: { title: '管理', icon: FundOutlined.name },
@@ -44,22 +57,9 @@ const router = createRouter({
               meta: {
                 title: '文章管理',
               },
-              component: () => import('@/views/AboutView.vue'),
+              component: () => import('@/views/manager/ArticleManager.vue'),
             },
           ],
-        },
-      ],
-    },
-    {
-      path: '/redirect',
-      name: 'redirectIndex',
-      component: () => import('@/layouts/MainLayout/MainLayout.vue'),
-      children: [
-        {
-          path: '/redirect/:path(.*)',
-          name: 'redirectChild',
-          component: () => import('@/views/redirect/RedirectView.vue'),
-          meta: { title: '加载中...' },
         },
       ],
     },

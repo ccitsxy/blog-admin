@@ -4,7 +4,6 @@ import {
   watchEffect,
   computed,
   ref,
-  defineAsyncComponent,
 } from 'vue';
 import {
   useRouter,
@@ -16,15 +15,12 @@ import type { RouteContextProps } from '@ant-design-vue/pro-layout';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  ReloadOutlined,
   CloseOutlined,
   MoreOutlined,
   UserOutlined,
 } from '@ant-design/icons-vue';
 
-const LayoutView = defineAsyncComponent(
-  () => import('@/layouts/LayoutView.vue')
-);
+import LayoutView from '@/layouts/LayoutView.vue';
 
 const router = useRouter();
 const { menuData } = getMenuData(clearMenuItem(router.getRoutes()));
@@ -84,11 +80,6 @@ watchEffect(() => {
   }
 });
 
-const reloadPage = () => {
-  void router.push({
-    path: '/redirect' + router.currentRoute.value.fullPath,
-  });
-};
 </script>
 
 <template>
@@ -122,7 +113,6 @@ const reloadPage = () => {
           @click="state.collapsed = !state.collapsed"
           class="layout-breadcrumb-icon"
         />
-        <reload-outlined @click="reloadPage" class="layout-breadcrumb-icon" />
         <a-breadcrumb>
           <a-breadcrumb-item v-for="item in breadcrumb" :key="item.path">
             <router-link :to="item.path">{{ item.breadcrumbName }}</router-link>
