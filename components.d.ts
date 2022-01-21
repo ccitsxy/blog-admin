@@ -20,7 +20,6 @@ declare module 'vue' {
     ASpace: typeof import('ant-design-vue/es')['Space']
     ATabPane: typeof import('ant-design-vue/es')['TabPane']
     ATabs: typeof import('ant-design-vue/es')['Tabs']
-    AUpload: typeof import('ant-design-vue/es')['Upload']
     VueVditor: typeof import('./src/components/VueVditor/VueVditor.vue')['default']
   }
 }

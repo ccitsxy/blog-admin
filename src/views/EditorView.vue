@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import { message, UploadChangeParam } from 'ant-design-vue';
-import { UploadOutlined } from '@ant-design/icons-vue';
 import 'ant-design-vue/lib/message/style/index.css';
 
 import VueVditor from '@/components/VueVditor/VueVditor.vue';
@@ -20,8 +18,6 @@ const contentOptions = {
 const descriptionOptions = {
   minHeight: 120,
 };
-
-const fileList = ref([]);
 </script>
 
 <template>
@@ -44,18 +40,6 @@ const fileList = ref([]);
     <a-form-item>
       <a-space>
         <a-button type="primary">提交</a-button>
-        <a-upload
-          v-model:file-list="fileList"
-          name="smfile"
-          action="https://sm.ms/api/v2/upload"
-          list-type="picture"
-          :headers="{'Authorization': 'yNZj1wpzatYYsYq0OnkJzaQn4kmQOEbv'}"
-        >
-          <a-button>
-            <upload-outlined></upload-outlined>
-            Click to Upload
-          </a-button>
-        </a-upload>
       </a-space>
     </a-form-item>
   </a-form>

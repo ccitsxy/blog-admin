@@ -81,6 +81,10 @@ onMounted(() => {
     fullscreen: {
       index: 3000,
     },
+    upload: {
+      url: 'http://localhost:3001/upload',
+      fieldName: 'file',
+    },
     value: props.modelValue,
     after() {
       emit('after', toRaw(contentEditor.value));
