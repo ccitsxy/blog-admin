@@ -57,7 +57,7 @@ const router = createRouter({
               meta: {
                 title: '文章管理',
               },
-              component: () => import('@/views/manager/ArticleManager.vue'),
+              component: () => import('@/views/manager/ArticlesManager.vue'),
             },
           ],
         },

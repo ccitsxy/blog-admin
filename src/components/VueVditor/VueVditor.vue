@@ -84,6 +84,7 @@ onMounted(() => {
     upload: {
       url: 'https://api.ccitsxy.vercel.app/upload',
       fieldName: 'file',
+      multiple: false
     },
     value: props.modelValue,
     after() {

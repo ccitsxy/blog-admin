@@ -19,7 +19,7 @@ export default defineConfig({
     Components({
       dts: true,
       resolvers: [AntDesignVueResolver(), PrimeVueResolver({
-        importTheme: 'saga-blue'
+        importTheme: 'lara-light-blue'
       })],
     }),
     visualizer({
