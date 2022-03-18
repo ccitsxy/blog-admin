@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { api } from '@/utils/api';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons-vue';
 
 const articles = ref([
   {
@@ -23,12 +21,14 @@ const articles = ref([
         </a-button>
       </div>
     </template>
-    <column field="id" header="序号"></column>
-    <column field="title" header="标题"></column>
-    <column field="description" header="简介"></column>
-    <column field="content" header="内容"></column>
-    <column field="category" header="分类"></column>
-    <column field="tags" header="标签"></column>
+    <column field="id" header="序号" />
+    <column field="title" header="标题" />
+    <column field="description" header="简介" />
+    <column field="content" header="内容" />
+    <column field="category" header="分类" />
+    <column field="tags" header="标签" />
+    <column field="createdAt" header="创建时间" />
+    <column field="updatedAt" header="修改时间" />
     <column header="操作">
       <template #body="slotProps">
         <router-link :to="`${slotProps.data.id}`">编辑</router-link>

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import { api } from '@/utils/api';
-
 import VueVditor from '@/components/VueVditor/VueVditor.vue';
 
 const title = ref('');
@@ -10,6 +8,14 @@ const description = ref('');
 const content = ref('');
 const category = ref('');
 const tags = ref([]);
+
+// const article = reactive({
+//   title: title,
+//   description: description,
+//   content: content,
+//   category: category,
+//   tags: tags,
+// });
 
 const contentOptions = {
   minHeight: 360,
@@ -19,21 +25,6 @@ const descriptionOptions = {
   minHeight: 120,
 };
 
-api.post(
-  '/articles',
-  {
-    title: title,
-    description: description,
-    content: content,
-    category: category,
-    tags: tags,
-  },
-  {
-    headers: {
-      Authorization: `Bearer${localStorage.getItem('token')}`
-    },
-  }
-);
 </script>
 
 <template>
