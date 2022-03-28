@@ -1,7 +1,4 @@
-<script setup lang="ts">
-
-import LayoutView from '@/layouts/LayoutView.vue';
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="container">
@@ -22,12 +19,12 @@ import LayoutView from '@/layouts/LayoutView.vue';
         <div class="desc">Ant Design 是西湖区最具影响力的 Web 设计规范</div>
       </div>
       <div class="main">
-        <layout-view />
+        <nested-view />
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-@import url(UserLayout.css);
+@import './UserLayout.css';
 </style>

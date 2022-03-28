@@ -48,7 +48,7 @@ const router = createRouter({
           path: '/manager',
           name: 'manager',
           meta: { title: '管理', icon: FundOutlined.name },
-          component: () => import('@/layouts/LayoutView.vue'),
+          component: () => import('@/components/NestedView/NestedView.vue'),
           redirect: '/manager/article',
           children: [
             {

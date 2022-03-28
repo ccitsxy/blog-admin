@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { api } from '@/utils/api';
+// import { api } from '@/utils/api';
 
 const categories = ref([]);
 </script>
@@ -16,11 +16,11 @@ const categories = ref([]);
     <column field="name" header="名称" />
     <column field="createdAt" header="创建时间" />
     <column field="updatedAt" header="修改时间" />
-    <column header="操作">
+    <!-- <column header="操作">
       <template #body="slotProps">
         <a>编辑</a>
       </template>
-    </column>
+    </column> -->
   </data-table>
 </template>
 

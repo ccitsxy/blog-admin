@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { reactive, watchEffect, computed, ref } from 'vue';
-import {
-  useRouter,
-  RouterLink,
-} from 'vue-router';
+import { useRouter, RouterLink } from 'vue-router';
 import { getMenuData, clearMenuItem } from '@ant-design-vue/pro-layout';
 import type { RouteContextProps } from '@ant-design-vue/pro-layout';
 import {
@@ -11,8 +8,6 @@ import {
   MenuUnfoldOutlined,
   UserOutlined,
 } from '@ant-design/icons-vue';
-
-import LayoutView from '@/layouts/LayoutView.vue';
 
 const router = useRouter();
 const { menuData } = getMenuData(clearMenuItem(router.getRoutes()));
@@ -59,6 +54,11 @@ watchEffect(() => {
       .map((r) => r.path);
   }
 });
+
+ondragstart = function (event) {
+  event.preventDefault();
+  event.stopPropagation();
+};
 </script>
 
 <template>
@@ -71,7 +71,7 @@ watchEffect(() => {
     :collapsedButtonRender="false"
   >
     <template #menuHeaderRender>
-      <router-link :to="{ path: '/' }">
+      <router-link to="/">
         <img
           src="https://alicdn.antdv.com/v2/assets/logo.1ef800a8.svg"
           alt="logo"
@@ -114,12 +114,14 @@ watchEffect(() => {
       </a-dropdown>
     </template>
 
+    <tabs-view />
+
     <div class="layout-content">
-      <layout-view />
+      <nested-view />
     </div>
   </pro-layout>
 </template>
 
 <style scoped>
-@import url(MainLayout.css);
+@import './MainLayout.css';
 </style>

@@ -38,6 +38,15 @@ const articles = ref([
 </template>
 
 <style scoped>
+/* table */
+.p-datatable {
+  font-size: unset !important;
+}
+
+.p-datatable :deep(.p-datatable-header){
+  border-top: 0;
+}
+
 .table-header {
   display: flex;
   justify-content: flex-end;

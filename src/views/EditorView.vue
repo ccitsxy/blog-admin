@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref,reactive } from 'vue';
 
 import VueVditor from '@/components/VueVditor/VueVditor.vue';
 
@@ -10,11 +10,11 @@ const category = ref('');
 const tags = ref([]);
 
 // const article = reactive({
-//   title: title,
-//   description: description,
-//   content: content,
-//   category: category,
-//   tags: tags,
+//   title,
+//   description,
+//   content,
+//   category,
+//   tags,
 // });
 
 const contentOptions = {

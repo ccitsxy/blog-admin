@@ -37,7 +37,11 @@ watchEffect(() => {
     >
       <template #tab>
         <a-dropdown :trigger="['contextmenu']">
-          <router-link class="layout-tabs-tab" :to="tab.path">
+          <router-link
+            class="layout-tabs-tab"
+            :to="tab.path"
+            ondragstart="return false"
+          >
             {{ tab.meta.title }}
             <close-outlined class="layout-tabs-tab-icon" />
           </router-link>
@@ -73,4 +77,31 @@ watchEffect(() => {
   </a-tabs>
 </template>
 
-<style scoped></style>
+<style scoped>
+.layout-tabs :deep(.ant-tabs-tab) {
+  padding: 0 !important;
+}
+
+.layout-tabs .ant-dropdown-trigger {
+  transition: none !important;
+}
+
+.layout-tabs {
+  background-color: #fff;
+  padding-top: 6px;
+}
+
+.layout-tabs-tab {
+  line-height: 38px;
+  width: 100%;
+  color: inherit;
+  padding: 8px 16px;
+}
+
+.layout-tabs-tab-icon {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 12px;
+  margin-left: 8px;
+  margin-right: 0 !important;
+}
+</style>
