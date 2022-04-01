@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { reactive, watchEffect, computed, ref } from 'vue';
-import { useRouter, RouterLink } from 'vue-router';
+import { reactive, watchEffect, computed, ref, unref } from 'vue';
+import { useRoute, useRouter, RouterLink } from 'vue-router';
 import { getMenuData, clearMenuItem } from '@ant-design-vue/pro-layout';
 import type { RouteContextProps } from '@ant-design-vue/pro-layout';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UserOutlined,
+  ReloadOutlined,
 } from '@ant-design/icons-vue';
 
+const route = useRoute();
 const router = useRouter();
 const { menuData } = getMenuData(clearMenuItem(router.getRoutes()));
 
@@ -55,10 +57,16 @@ watchEffect(() => {
   }
 });
 
-ondragstart = function (event) {
+window.ondragstart = function (event) {
   event.preventDefault();
   event.stopPropagation();
 };
+
+function reloadPage() {
+  void router.push({
+    path: '/redirect' + unref(route).fullPath,
+  });
+}
 </script>
 
 <template>
@@ -92,6 +100,7 @@ ondragstart = function (event) {
           @click="state.collapsed = !state.collapsed"
           class="layout-breadcrumb-icon"
         />
+        <reload-outlined class="layout-breadcrumb-icon" @click="reloadPage()" />
         <a-breadcrumb>
           <a-breadcrumb-item v-for="item in breadcrumb" :key="item.path">
             <router-link :to="item.path">{{ item.breadcrumbName }}</router-link>

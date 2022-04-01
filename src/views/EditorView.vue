@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref,reactive } from 'vue';
+import { ref, reactive } from 'vue';
 
 import VueVditor from '@/components/VueVditor/VueVditor.vue';
 
@@ -9,13 +9,16 @@ const content = ref('');
 const category = ref('');
 const tags = ref([]);
 
-// const article = reactive({
-//   title,
-//   description,
-//   content,
-//   category,
-//   tags,
-// });
+const article = reactive({
+  title,
+  description,
+  content,
+  category,
+  tags,
+});
+
+console.log(article);
+
 
 const contentOptions = {
   minHeight: 360,

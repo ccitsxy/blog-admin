@@ -68,7 +68,20 @@ const router = createRouter({
       component: () => import('@/layouts/UserLayout/UserLayout.vue'),
     },
     {
+      path: '/redirect',
+      name: 're',
+      component: () => import('@/layouts/MainLayout/MainLayout.vue'),
+      children: [
+        {
+          path: '/redirect/:path(.*)',
+          name: 'redirect',
+          component: () => import('@/components/RedirectView/RedirectView.vue'),
+        },
+      ],
+    },
+    {
       path: '/:catchAll(.*)*',
+      name: 'error',
       component: () => import('@/views/ErrorView.vue'),
     },
   ],
