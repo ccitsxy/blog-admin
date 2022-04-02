@@ -89,6 +89,7 @@ onMounted(() => {
     value: props.modelValue,
     after() {
       emit('after', toRaw(contentEditor.value));
+      contentEditor.value?.blur()
     },
     input(value: string) {
       emit('update:modelValue', value);

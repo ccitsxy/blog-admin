@@ -20,6 +20,8 @@ declare module 'vue' {
     ASpace: typeof import('ant-design-vue/es')['Space']
     ATabPane: typeof import('ant-design-vue/es')['TabPane']
     ATabs: typeof import('ant-design-vue/es')['Tabs']
+    Column: typeof import('primevue/column')['default']
+    DataTable: typeof import('primevue/datatable')['default']
     NestedView: typeof import('./src/components/NestedView/NestedView.vue')['default']
     RedirectView: typeof import('./src/components/RedirectView/RedirectView.vue')['default']
     TabsView: typeof import('./src/components/TabsView/TabsView.vue')['default']
