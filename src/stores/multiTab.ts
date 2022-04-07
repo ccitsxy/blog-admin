@@ -3,15 +3,22 @@ import { RouteLocationNormalized } from 'vue-router';
 
 interface MultiTabState {
   tabList: RouteLocationNormalized[];
-  cachedTavList: Set<string>;
+  cachedTabList: Set<string>;
 }
 
 export const useCounterStore = defineStore({
   id: 'multi-tab',
   state: (): MultiTabState => ({
     tabList: [],
-    cachedTavList: new Set(),
+    cachedTabList: new Set(),
   }),
-  getters: {},
+  getters: {
+    getTabList(): RouteLocationNormalized[] {
+      return this.tabList;
+    },
+    getCachedTabList(): string[] {
+      return Array.from(this.cachedTabList);
+    },
+  },
   actions: {},
 });

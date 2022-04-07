@@ -6,10 +6,7 @@ import { useWindowSize } from '@vueuse/core';
 
 import { getMenuData, clearMenuItem } from '@ant-design-vue/pro-layout';
 import type { RouteContextProps } from '@ant-design-vue/pro-layout';
-import {
-  UserOutlined,
-  ReloadOutlined,
-} from '@ant-design/icons-vue';
+import { UserOutlined, ReloadOutlined } from '@ant-design/icons-vue';
 
 import MultiTab from '@/layouts/MultiTab/MultiTab.vue';
 import NestedPage from '@/layouts/NestedPage/NestedPage.vue';
@@ -26,15 +23,7 @@ const state = reactive<Omit<RouteContextProps, 'menuData'>>({
   selectedKeys: [], // default selectedKeys
 });
 
-const proConfig = ref({
-  layout: 'side',
-  fixedHeader: false,
-  fixSiderbar: false,
-  splitMenus: false,
-  menuHeaderRender: undefined,
-  footerRender: undefined,
-  headerRender: undefined,
-});
+const collapsed = ref(false)
 
 const breadcrumb = computed(() =>
   router.currentRoute.value.matched
@@ -60,7 +49,7 @@ watchEffect(() => {
       .map((r) => r.path);
   }
   if (width.value > 768 && state.collapsed) {
-    state.openKeys = []
+    state.openKeys = [];
   }
 });
 
@@ -78,11 +67,14 @@ function reloadPage() {
 
 <template>
   <pro-layout
-    v-model:collapsed="state.collapsed"
+    v-model:collapsed="collapsed"
     v-model:selectedKeys="state.selectedKeys"
     v-model:openKeys="state.openKeys"
     :menu-data="menuData"
-    v-bind="proConfig"
+    fixed-header="false"
+    fix-siderbar="false"
+    split-menus="false"
+    layout="side"
   >
     <template #menuHeaderRender>
       <router-link to="/">
@@ -96,7 +88,7 @@ function reloadPage() {
 
     <template #menuItemRender="{ item, icon }">
       <a-menu-item :key="item.path" :icon="icon">
-        <router-link :to="{ path: item.path }">
+        <router-link :to="item.path">
           <span class="ant-pro-menu-item">
             <span class="ant-pro-menu-item-title">{{ item.meta.title }}</span>
           </span>

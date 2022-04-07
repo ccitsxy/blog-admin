@@ -28,15 +28,15 @@ function closeTab(tab: RouteLocationNormalizedLoaded) {
 
 <template>
   <a-tabs
-    :activeKey="$route.path"
+    :active-key="$route.path"
     type="editable-card"
-    hideAdd
+    hide-add
     class="layout-tabs"
   >
     <a-tab-pane
       v-for="tab in tabs"
-      style="height: 0"
       :key="tab.path"
+      style="height: 0"
       :closable="false"
     >
       <template #tab>
