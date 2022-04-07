@@ -6,7 +6,7 @@ const categories = ref([]);
 </script>
 
 <template>
-  <data-table :value="categories" responsiveLayout="stack" breakpoint="960px">
+  <data-table :value="categories" responsive-layout="stack" breakpoint="960px">
     <template #header>
       <div class="table-header">
         <a-button type="primary">新建</a-button>

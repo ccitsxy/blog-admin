@@ -1,18 +1,24 @@
 <script setup lang="ts">
 import { reactive, watchEffect, computed, ref, unref } from 'vue';
 import { useRoute, useRouter, RouterLink } from 'vue-router';
+
+import { useWindowSize } from '@vueuse/core';
+
 import { getMenuData, clearMenuItem } from '@ant-design-vue/pro-layout';
 import type { RouteContextProps } from '@ant-design-vue/pro-layout';
 import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   UserOutlined,
   ReloadOutlined,
 } from '@ant-design/icons-vue';
 
+import MultiTab from '@/layouts/MultiTab/MultiTab.vue';
+import NestedPage from '@/layouts/NestedPage/NestedPage.vue';
+
 const route = useRoute();
 const router = useRouter();
 const { menuData } = getMenuData(clearMenuItem(router.getRoutes()));
+
+const { width } = useWindowSize();
 
 const state = reactive<Omit<RouteContextProps, 'menuData'>>({
   collapsed: false, // default collapsed
@@ -44,8 +50,6 @@ const breadcrumb = computed(() =>
 
 watchEffect(() => {
   if (router.currentRoute) {
-    // console.log("router", router.currentRoute.value);
-
     const matched = router.currentRoute.value.matched.concat();
     state.selectedKeys = matched
       .filter((r) => r.name !== 'index')
@@ -54,6 +58,9 @@ watchEffect(() => {
     state.openKeys = matched
       .filter((r) => r.path !== router.currentRoute.value.path)
       .map((r) => r.path);
+  }
+  if (width.value > 768 && state.collapsed) {
+    state.openKeys = []
   }
 });
 
@@ -76,7 +83,6 @@ function reloadPage() {
     v-model:openKeys="state.openKeys"
     :menu-data="menuData"
     v-bind="proConfig"
-    :collapsedButtonRender="false"
   >
     <template #menuHeaderRender>
       <router-link to="/">
@@ -88,18 +94,18 @@ function reloadPage() {
       </router-link>
     </template>
 
+    <template #menuItemRender="{ item, icon }">
+      <a-menu-item :key="item.path" :icon="icon">
+        <router-link :to="{ path: item.path }">
+          <span class="ant-pro-menu-item">
+            <span class="ant-pro-menu-item-title">{{ item.meta.title }}</span>
+          </span>
+        </router-link>
+      </a-menu-item>
+    </template>
+
     <template #headerContentRender>
       <div class="layout-breadcrumb">
-        <menu-unfold-outlined
-          v-if="state.collapsed"
-          @click="state.collapsed = !state.collapsed"
-          class="layout-breadcrumb-icon"
-        />
-        <menu-fold-outlined
-          v-else
-          @click="state.collapsed = !state.collapsed"
-          class="layout-breadcrumb-icon"
-        />
         <reload-outlined class="layout-breadcrumb-icon" @click="reloadPage()" />
         <a-breadcrumb>
           <a-breadcrumb-item v-for="item in breadcrumb" :key="item.path">
@@ -123,10 +129,10 @@ function reloadPage() {
       </a-dropdown>
     </template>
 
-    <tabs-view />
+    <multi-tab />
 
     <div class="layout-content">
-      <nested-view />
+      <nested-page />
     </div>
   </pro-layout>
 </template>

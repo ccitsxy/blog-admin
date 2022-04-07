@@ -36,19 +36,10 @@ const router = createRouter({
           component: () => import('@/views/HomeView.vue'),
         },
         {
-          path: '/editor',
-          name: 'editor',
-          meta: {
-            title: '写文章',
-            icon: EditOutlined.name,
-          },
-          component: () => import('@/views/EditorView.vue'),
-        },
-        {
           path: '/manager',
           name: 'manager',
           meta: { title: '管理', icon: FundOutlined.name },
-          component: () => import('@/components/NestedView/NestedView.vue'),
+          component: () => import('@/layouts/NestedPage/NestedPage.vue'),
           redirect: '/manager/article',
           children: [
             {
@@ -58,6 +49,14 @@ const router = createRouter({
                 title: '文章管理',
               },
               component: () => import('@/views/manager/ArticlesManager.vue'),
+            },
+            {
+              path: '/manager/category',
+              name: 'category',
+              meta: {
+                title: '分类管理',
+              },
+              component: () => import('@/views/manager/CategoriesManager.vue'),
             },
           ],
         },
@@ -75,7 +74,7 @@ const router = createRouter({
         {
           path: '/redirect/:path(.*)',
           name: 'redirect',
-          component: () => import('@/components/RedirectView/RedirectView.vue'),
+          component: () => import('@/views/redirect/RedirectView.vue'),
         },
       ],
     },

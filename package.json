@@ -8,10 +8,10 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@ant-design-vue/pro-layout": "^3.2.0-rc.4",
+    "@ant-design-vue/pro-layout": "^3.2.0",
     "@ant-design/icons-vue": "^6.1.0",
     "@vueuse/core": "^8.2.0",
-    "ant-design-vue": "^3.1.0-rc.4",
+    "ant-design-vue": "^3.1.0",
     "axios": "^0.26.1",
     "pinia": "^2.0.12",
     "primeicons": "^5.0.0",

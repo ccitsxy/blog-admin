@@ -20,6 +20,10 @@ watchEffect(() => {
     tabs.value.push(router.currentRoute.value);
   }
 });
+
+function closeTab(tab: RouteLocationNormalizedLoaded) {
+  console.log(tab);
+}
 </script>
 
 <template>
@@ -43,7 +47,10 @@ watchEffect(() => {
             ondragstart="return false"
           >
             {{ tab.meta.title }}
-            <close-outlined class="layout-tabs-tab-icon" />
+            <close-outlined
+              class="layout-tabs-tab-icon"
+              @click="closeTab(tab)"
+            />
           </router-link>
           <template #overlay>
             <a-menu>

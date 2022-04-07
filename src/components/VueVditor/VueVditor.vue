@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import Vditor from 'vditor';
 import 'vditor/dist/index.css';
-import { onMounted, ref, watch, toRaw, onUnmounted, unref } from 'vue';
+import {
+  onMounted,
+  ref,
+  watch,
+  toRaw,
+  onUnmounted,
+  unref,
+} from 'vue';
 
 const emit = defineEmits([
   'update:modelValue',
@@ -84,12 +91,11 @@ onMounted(() => {
     upload: {
       url: 'https://api.ccitsxy.vercel.app/upload',
       fieldName: 'file',
-      multiple: false
+      multiple: false,
     },
     value: props.modelValue,
     after() {
       emit('after', toRaw(contentEditor.value));
-      contentEditor.value?.blur()
     },
     input(value: string) {
       emit('update:modelValue', value);
