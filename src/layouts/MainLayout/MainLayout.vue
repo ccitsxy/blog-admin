@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { reactive, watchEffect, computed, ref, unref } from 'vue';
+import { watchEffect, computed, ref, unref } from 'vue';
 import { useRoute, useRouter, RouterLink } from 'vue-router';
 
 import { useWindowSize } from '@vueuse/core';
 
 import { getMenuData, clearMenuItem } from '@ant-design-vue/pro-layout';
-import type { RouteContextProps } from '@ant-design-vue/pro-layout';
 import { UserOutlined, ReloadOutlined } from '@ant-design/icons-vue';
 
 import MultiTab from '@/layouts/MultiTab/MultiTab.vue';
@@ -13,17 +12,14 @@ import NestedPage from '@/layouts/NestedPage/NestedPage.vue';
 
 const route = useRoute();
 const router = useRouter();
-const { menuData } = getMenuData(clearMenuItem(router.getRoutes()));
 
 const { width } = useWindowSize();
 
-const state = reactive<Omit<RouteContextProps, 'menuData'>>({
-  collapsed: false, // default collapsed
-  openKeys: [], // default openKeys
-  selectedKeys: [], // default selectedKeys
-});
+const { menuData } = getMenuData(clearMenuItem(router.getRoutes()));
 
-const collapsed = ref(false)
+const collapsed = ref(false);
+const openKeys = ref<string[]>([]);
+const selectedKeys = ref<string[]>([]);
 
 const breadcrumb = computed(() =>
   router.currentRoute.value.matched
@@ -40,23 +36,18 @@ const breadcrumb = computed(() =>
 watchEffect(() => {
   if (router.currentRoute) {
     const matched = router.currentRoute.value.matched.concat();
-    state.selectedKeys = matched
+    selectedKeys.value = matched
       .filter((r) => r.name !== 'index')
       .map((r) => r.path);
 
-    state.openKeys = matched
+    openKeys.value = matched
       .filter((r) => r.path !== router.currentRoute.value.path)
       .map((r) => r.path);
   }
-  if (width.value > 768 && state.collapsed) {
-    state.openKeys = [];
+  if (width.value > 768 && collapsed.value) {
+    openKeys.value = [];
   }
 });
-
-window.ondragstart = function (event) {
-  event.preventDefault();
-  event.stopPropagation();
-};
 
 function reloadPage() {
   void router.push({
@@ -68,12 +59,12 @@ function reloadPage() {
 <template>
   <pro-layout
     v-model:collapsed="collapsed"
-    v-model:selectedKeys="state.selectedKeys"
-    v-model:openKeys="state.openKeys"
+    v-model:selectedKeys="selectedKeys"
+    v-model:openKeys="openKeys"
     :menu-data="menuData"
-    fixed-header="false"
-    fix-siderbar="false"
-    split-menus="false"
+    :fixed-header="false"
+    :fix-siderbar="false"
+    :split-menus="false"
     layout="side"
   >
     <template #menuHeaderRender>
@@ -88,11 +79,11 @@ function reloadPage() {
 
     <template #menuItemRender="{ item, icon }">
       <a-menu-item :key="item.path" :icon="icon">
-        <router-link :to="item.path">
+        <div @click="$router.push(item.path)">
           <span class="ant-pro-menu-item">
             <span class="ant-pro-menu-item-title">{{ item.meta.title }}</span>
           </span>
-        </router-link>
+        </div>
       </a-menu-item>
     </template>
 
@@ -101,7 +92,7 @@ function reloadPage() {
         <reload-outlined class="layout-breadcrumb-icon" @click="reloadPage()" />
         <a-breadcrumb>
           <a-breadcrumb-item v-for="item in breadcrumb" :key="item.path">
-            <router-link :to="item.path">{{ item.breadcrumbName }}</router-link>
+            <span @click="$router.push(item.path)">{{ item.breadcrumbName }}</span>
           </a-breadcrumb-item>
         </a-breadcrumb>
       </div>

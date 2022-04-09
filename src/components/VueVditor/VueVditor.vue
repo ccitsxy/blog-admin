@@ -1,14 +1,7 @@
 <script setup lang="ts">
 import Vditor from 'vditor';
 import 'vditor/dist/index.css';
-import {
-  onMounted,
-  ref,
-  watch,
-  toRaw,
-  onUnmounted,
-  unref,
-} from 'vue';
+import { onMounted, ref, watch, toRaw, onUnmounted, unref } from 'vue';
 
 const emit = defineEmits([
   'update:modelValue',
@@ -23,6 +16,9 @@ const emit = defineEmits([
 const props = defineProps({
   options: {
     type: Object,
+    default() {
+      return {};
+    },
   },
   modelValue: {
     type: String,
@@ -37,6 +33,7 @@ onMounted(() => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   contentEditor.value = new Vditor(editorRef.value!, {
     ...props.options,
+    value: props.modelValue,
     toolbar: [
       // "emoji",
       'headings',
@@ -93,7 +90,7 @@ onMounted(() => {
       fieldName: 'file',
       multiple: false,
     },
-    value: props.modelValue,
+
     after() {
       emit('after', toRaw(contentEditor.value));
     },

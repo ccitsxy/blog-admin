@@ -19,7 +19,7 @@ const content = ref('');
 const category = ref('');
 const tags = ref([]);
 
-const contentOptions = {
+const editorOptions = {
   minHeight: 360,
   placeholder: '请输入正文',
 };
@@ -62,7 +62,7 @@ const contentOptions = {
         </a-col>
         <a-col :span="24">
           <a-form-item>
-            <vue-vditor v-model="content" :options="contentOptions" />
+            <vue-vditor v-model="content" :options="editorOptions" />
           </a-form-item>
         </a-col>
         <a-col :span="12">

@@ -1,28 +1,27 @@
 <script setup lang="ts">
-import { CloseOutlined, MoreOutlined } from '@ant-design/icons-vue';
-import { ref, watchEffect } from 'vue';
-import { RouteLocationNormalizedLoaded, useRouter } from 'vue-router';
+import { watch } from 'vue';
+import { useRouter, RouteLocationNormalized } from 'vue-router';
 
-const tabs = ref<RouteLocationNormalizedLoaded[]>([]);
+import { useMultiTabStore } from '@/stores/multiTab';
+
+import { CloseOutlined, MoreOutlined } from '@ant-design/icons-vue';
+
+const tabList = useMultiTabStore().tabList;
 
 const router = useRouter();
 
-watchEffect(() => {
-  if (router.currentRoute) {
-    if (
-      tabs.value.some(
-        (p: { path: string }) => p.path === router.currentRoute.value.path
-      ) ||
-      router.currentRoute.value.path.startsWith('/redirect')
-    )
-      return;
-
-    tabs.value.push(router.currentRoute.value);
+watch(
+  () => router.currentRoute.value.path,
+  () => {
+    useMultiTabStore().addTab();
+  },
+  {
+    immediate: true,
   }
-});
+);
 
-function closeTab(tab: RouteLocationNormalizedLoaded) {
-  console.log(tab);
+function closeTab(tab: RouteLocationNormalized) {
+  useMultiTabStore().closeTab(tab);
 }
 </script>
 
@@ -34,24 +33,21 @@ function closeTab(tab: RouteLocationNormalizedLoaded) {
     class="layout-tabs"
   >
     <a-tab-pane
-      v-for="tab in tabs"
+      v-for="tab in tabList"
       :key="tab.path"
       style="height: 0"
       :closable="false"
     >
       <template #tab>
         <a-dropdown :trigger="['contextmenu']">
-          <router-link
-            class="layout-tabs-tab"
-            :to="tab.path"
-            ondragstart="return false"
-          >
+          <span class="layout-tabs-tab" @click="$router.push(tab.path)">
             {{ tab.meta.title }}
             <close-outlined
+              v-if="tabList.length > 1"
               class="layout-tabs-tab-icon"
-              @click="closeTab(tab)"
+              @click.stop.prevent="closeTab(tab)"
             />
-          </router-link>
+          </span>
           <template #overlay>
             <a-menu>
               <a-menu-item key="1">关闭</a-menu-item>
