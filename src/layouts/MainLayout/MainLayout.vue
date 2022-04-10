@@ -92,7 +92,7 @@ function reloadPage() {
         <reload-outlined class="layout-breadcrumb-icon" @click="reloadPage()" />
         <a-breadcrumb>
           <a-breadcrumb-item v-for="item in breadcrumb" :key="item.path">
-            <span @click="$router.push(item.path)">{{ item.breadcrumbName }}</span>
+            <a @click="$router.push(item.path)">{{ item.breadcrumbName }}</a>
           </a-breadcrumb-item>
         </a-breadcrumb>
       </div>

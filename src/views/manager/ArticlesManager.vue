@@ -23,6 +23,12 @@ const editorOptions = {
   minHeight: 360,
   placeholder: '请输入正文',
 };
+
+const spinning = ref(true);
+
+function changeSpinning() {
+  spinning.value = false;
+}
 </script>
 
 <template>
@@ -53,41 +59,47 @@ const editorOptions = {
     wrap-class-name="full-modal"
     :footer="false"
   >
-    <a-form layout="vertical">
-      <a-row :gutter="16">
-        <a-col :span="24">
-          <a-form-item>
-            <a-input v-model="title" placeholder="标题" size="large" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24">
-          <a-form-item>
-            <vue-vditor v-model="content" :options="editorOptions" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item>
-            <a-select v-model="category" placeholder="分类" size="large" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item>
-            <a-select
-              v-model="tags"
-              placeholder="标签"
-              mode="tags"
-              size="large"
-            />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24" style="text-align: center">
-          <a-form-item>
-            <a-button type="primary" size="large">提交文章</a-button>
-            <a-button size="large" style="margin-left: 16px">存草稿</a-button>
-          </a-form-item>
-        </a-col>
-      </a-row>
-    </a-form>
+    <a-spin :spinning="spinning">
+      <a-form layout="vertical">
+        <a-row :gutter="16">
+          <a-col :span="24">
+            <a-form-item>
+              <a-input v-model="title" placeholder="标题" size="large" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item>
+              <vue-vditor
+                v-model="content"
+                :options="editorOptions"
+                @after="changeSpinning"
+              />
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item>
+              <a-select v-model="category" placeholder="分类" size="large" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item>
+              <a-select
+                v-model="tags"
+                placeholder="标签"
+                mode="tags"
+                size="large"
+              />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24" style="text-align: center">
+            <a-form-item>
+              <a-button type="primary" size="large">提交文章</a-button>
+              <a-button size="large" style="margin-left: 16px">存草稿</a-button>
+            </a-form-item>
+          </a-col>
+        </a-row>
+      </a-form>
+    </a-spin>
   </a-modal>
 </template>
 
@@ -119,7 +131,8 @@ const editorOptions = {
 :global(.full-modal .ant-modal-content) {
   display: flex;
   flex-direction: column;
-  height: calc(100vh);
+  height: 100%;
+  min-height: 100vh;
 }
 :global(.full-modal .ant-modal-body) {
   flex: 1;

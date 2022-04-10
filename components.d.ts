@@ -18,6 +18,7 @@ declare module 'vue' {
     AModal: typeof import('ant-design-vue/es')['Modal']
     ARow: typeof import('ant-design-vue/es')['Row']
     ASelect: typeof import('ant-design-vue/es')['Select']
+    ASpin: typeof import('ant-design-vue/es')['Spin']
     ATabPane: typeof import('ant-design-vue/es')['TabPane']
     ATabs: typeof import('ant-design-vue/es')['Tabs']
     Column: typeof import('primevue/column')['default']
