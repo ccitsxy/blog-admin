@@ -58,6 +58,14 @@ const router = createRouter({
               },
               component: () => import('@/views/manager/CategoriesManager.vue'),
             },
+            {
+              path: '/manager/tag',
+              name: 'tag',
+              meta: {
+                title: '标签管理',
+              },
+              component: () => import('@/views/manager/TagsManager.vue'),
+            },
           ],
         },
       ],

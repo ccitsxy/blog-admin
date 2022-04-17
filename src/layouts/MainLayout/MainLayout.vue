@@ -6,6 +6,8 @@ import { useWindowSize } from '@vueuse/core';
 
 import { getMenuData, clearMenuItem } from '@ant-design-vue/pro-layout';
 import { UserOutlined, ReloadOutlined } from '@ant-design/icons-vue';
+import { ProLayout } from '@ant-design-vue/pro-layout';
+import '@ant-design-vue/pro-layout/dist/style.css';
 
 import MultiTab from '@/layouts/MultiTab/MultiTab.vue';
 import NestedPage from '@/layouts/NestedPage/NestedPage.vue';

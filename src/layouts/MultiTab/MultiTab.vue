@@ -45,7 +45,7 @@ function closeTab(tab: RouteLocationNormalized) {
             <close-outlined
               v-if="tabList.length > 1"
               class="layout-tabs-tab-icon"
-              @click.stop.prevent="closeTab(tab)"
+              @click.stop="closeTab(tab)"
             />
           </span>
           <template #overlay>
