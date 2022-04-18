@@ -16,8 +16,6 @@ specifiers:
   eslint-plugin-vue: ^8.5.0
   pinia: ^2.0.12
   prettier: ^2.6.1
-  primeicons: ^5.0.0
-  primevue: ^3.12.2
   rollup-plugin-visualizer: ^5.6.0
   typescript: ^4.6.3
   unplugin-vue-components: ^0.18.5
@@ -34,8 +32,6 @@ dependencies:
   ant-design-vue: 3.1.0_vue@3.2.31
   axios: 0.26.1
   pinia: 2.0.12_typescript@4.6.3+vue@3.2.31
-  primeicons: 5.0.0
-  primevue: 3.12.2_primeicons@5.0.0+vue@3.2.31
   vditor: 3.8.12
   vue: 3.2.31
   vue-router: 4.0.14_vue@3.2.31
@@ -2107,20 +2103,6 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
-
-  /primeicons/5.0.0:
-    resolution: {integrity: sha512-heygWF0X5HFI1otlZE62pp6ye7sZ8om78J9au2BRkg8O7Y8AHTZ9qKMRzchZUHLe8zUAvdi6hZzzm9XxgwIExw==}
-    dev: false
-
-  /primevue/3.12.2_primeicons@5.0.0+vue@3.2.31:
-    resolution: {integrity: sha512-v0ZphJSphbyisj9BnqSJWzEZxOEJKUqvTPEi120/x1ZplrupHJtSitDl7mw+d/OoyRQ19V1BplM0vlqJeiAMEg==}
-    peerDependencies:
-      primeicons: ^5.0.0
-      vue: ^3.0.0
-    dependencies:
-      primeicons: 5.0.0
-      vue: 3.2.31
-    dev: false
 
   /pug-error/2.0.0:
     resolution: {integrity: sha512-sjiUsi9M4RAGHktC1drQfCr5C5eriu24Lfbt4s+7SykztEOwVZtbFk1RRq0tzLxcMxMYTBR+zMQaG07J/btayQ==}

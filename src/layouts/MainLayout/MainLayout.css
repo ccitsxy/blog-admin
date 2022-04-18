@@ -42,7 +42,7 @@
   overflow-x: hidden;
   padding: 16px;
   /* firefox */
-  scrollbar-width: thin;
+  
 }
 
 /* webkit */
@@ -67,13 +67,4 @@
   .layout-content::-webkit-scrollbar-thumb {
     border-radius: 3px;
   }
-}
-
-/* primevue table */
-:global(.p-datatable) {
-  font-size: unset !important;
-}
-
-:global(.p-datatable .p-datatable-header) {
-  border-top: 0;
 }

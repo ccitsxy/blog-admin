@@ -14,8 +14,6 @@
     "ant-design-vue": "^3.1.0",
     "axios": "^0.26.1",
     "pinia": "^2.0.12",
-    "primeicons": "^5.0.0",
-    "primevue": "^3.12.2",
     "vditor": "^3.8.12",
     "vue": "^3.2.31",
     "vue-router": "^4.0.14"

@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 
 import { EditOutlined } from '@ant-design/icons-vue';
-import { message } from 'ant-design-vue';
+import { message, TablePaginationConfig } from 'ant-design-vue';
 import 'ant-design-vue/es/message/style/css';
 
 import VueVditor from '@/components/VueVditor/VueVditor.vue';
@@ -13,6 +13,23 @@ const articles = ref([
     title: 1,
   },
 ]);
+
+const columns = [
+  {
+    title: 'ID',
+    dataIndex: 'id',
+    key: 'id',
+  },
+  {
+    title: 'Title',
+    dataIndex: 'id',
+    key: 'id',
+  },
+];
+
+for (let i = 2; i < 51; i++) {
+  articles.value.push({ id: i, title: i });
+}
 
 const visible = ref(false);
 
@@ -36,6 +53,13 @@ const spinning = ref(true);
 
 const titleRef = ref<HTMLElement>();
 
+const currentPage = ref(10);
+
+const pagination: TablePaginationConfig = {
+  current: currentPage.value,
+  showSizeChanger: true,
+};
+
 function changeSpinning() {
   spinning.value = false;
   titleRef.value?.focus();
@@ -53,27 +77,20 @@ function addDraft() {
 </script>
 
 <template>
-  <div class="article-manager">
-    <data-table :value="articles" responsive-layout="stack" breakpoint="960px">
-      <template #header>
-        <div class="table-header">
-          <a-button type="primary" @click="visible = true">
-            <edit-outlined /> 写文章
-          </a-button>
-        </div>
-      </template>
-      <column field="id" header="序号" />
-      <column field="title" header="标题" />
-      <column field="category" header="分类" />
-      <column field="tags" header="标签" />
-      <column field="createdAt" header="创建时间" />
-      <column field="updatedAt" header="修改时间" />
-      <column header="操作">
-        <template #body="slotProps">
-          <a>{{ slotProps.data }}</a>
-        </template>
-      </column>
-    </data-table>
+  <div class="articles-manager">
+    <div class="table-header">
+      <a-button type="primary" @click="visible = true">
+        <edit-outlined /> 写文章
+      </a-button>
+    </div>
+
+    <a-table
+      :columns="columns"
+      :data-source="articles"
+      :pagination="pagination"
+    >
+    </a-table>
+
     <a-modal
       v-model:visible="visible"
       title="Basic Modal"
@@ -150,16 +167,22 @@ function addDraft() {
 </template>
 
 <style scoped>
-.article-manager {
+.articles-manager {
   background-color: white;
-  padding: -16px;
 }
 /* table */
 .table-header {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  padding: 8px;
 }
 
+.table-header-icon {
+  font-size: 1rem;
+  margin-right: 8px;
+  cursor: pointer;
+}
 :deep(.vditor-toolbar) {
   padding: unset !important;
 }

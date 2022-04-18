@@ -2,10 +2,15 @@
 import { watchEffect, computed, ref, unref } from 'vue';
 import { useRoute, useRouter, RouterLink } from 'vue-router';
 
-import { useWindowSize } from '@vueuse/core';
+import { useWindowSize, useFullscreen } from '@vueuse/core';
 
 import { getMenuData, clearMenuItem } from '@ant-design-vue/pro-layout';
-import { UserOutlined, ReloadOutlined } from '@ant-design/icons-vue';
+import {
+  UserOutlined,
+  ReloadOutlined,
+  FullscreenOutlined,
+  FullscreenExitOutlined,
+} from '@ant-design/icons-vue';
 import { ProLayout } from '@ant-design-vue/pro-layout';
 import '@ant-design-vue/pro-layout/dist/style.css';
 
@@ -16,6 +21,8 @@ const route = useRoute();
 const router = useRouter();
 
 const { width } = useWindowSize();
+
+const { enter, exit, isFullscreen } = useFullscreen();
 
 const { menuData } = getMenuData(clearMenuItem(router.getRoutes()));
 
@@ -71,11 +78,8 @@ function reloadPage() {
   >
     <template #menuHeaderRender>
       <router-link to="/">
-        <img
-          src="https://alicdn.antdv.com/v2/assets/logo.1ef800a8.svg"
-          alt="logo"
-        />
-        <h1>Preview Pro</h1>
+        <img src="@/assets/logo.svg" alt="logo" width="32" height="32" />
+        <h1 v-show="!collapsed">Preview Pro</h1>
       </router-link>
     </template>
 
@@ -101,6 +105,18 @@ function reloadPage() {
     </template>
 
     <template #rightContentRender>
+      <fullscreen-exit-outlined
+        v-if="isFullscreen"
+        class="layout-right-icon"
+        style="margin-right: 8px;"
+        @click="exit"
+      />
+      <fullscreen-outlined
+        v-else
+        class="layout-right-icon"
+        style="margin-right: 8px;"
+        @click="enter"
+      />
       <a-dropdown>
         <user-outlined class="layout-right-icon" />
         <template #overlay>

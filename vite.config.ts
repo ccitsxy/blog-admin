@@ -18,9 +18,7 @@ export default defineConfig({
     vueJsx(),
     Components({
       dts: true,
-      resolvers: [AntDesignVueResolver(), PrimeVueResolver({
-        importTheme: 'fluent-light'
-      })],
+      resolvers: [AntDesignVueResolver()],
     }),
     visualizer({
       open: true,
