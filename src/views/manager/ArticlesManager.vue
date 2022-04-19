@@ -11,6 +11,8 @@ const articles = ref([
   {
     id: 1,
     title: 1,
+    content: 1,
+    description: 1,
   },
 ]);
 
@@ -25,10 +27,20 @@ const columns = [
     dataIndex: 'id',
     key: 'id',
   },
+  {
+    title: 'Content',
+    dataIndex: 'content',
+    key: 'content',
+  },
+  {
+    title: 'Description',
+    dataIndex: 'description',
+    key: 'description',
+  },
 ];
 
 for (let i = 2; i < 51; i++) {
-  articles.value.push({ id: i, title: i });
+  articles.value.push({ id: i, title: i, content: i, description: i });
 }
 
 const visible = ref(false);
@@ -53,11 +65,9 @@ const spinning = ref(true);
 
 const titleRef = ref<HTMLElement>();
 
-const currentPage = ref(10);
-
 const pagination: TablePaginationConfig = {
-  current: currentPage.value,
   showSizeChanger: true,
+  position: ['bottomCenter'],
 };
 
 function changeSpinning() {
@@ -88,6 +98,8 @@ function addDraft() {
       :columns="columns"
       :data-source="articles"
       :pagination="pagination"
+      :scroll="{ x: 1500 }"
+      :sticky="true"
     >
     </a-table>
 
@@ -183,6 +195,11 @@ function addDraft() {
   margin-right: 8px;
   cursor: pointer;
 }
+
+.articles-manager :deep(.ant-table-sticky-scroll){
+  overflow-x: hidden !important;
+}
+
 :deep(.vditor-toolbar) {
   padding: unset !important;
 }

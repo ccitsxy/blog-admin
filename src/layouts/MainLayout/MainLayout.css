@@ -42,7 +42,7 @@
   overflow-x: hidden;
   padding: 16px;
   /* firefox */
-  
+  scrollbar-width: thin;
 }
 
 /* webkit */
