@@ -95,11 +95,13 @@ function addDraft() {
     </div>
 
     <a-table
+      class="manager-table"
       :columns="columns"
       :data-source="articles"
       :pagination="pagination"
-      :scroll="{ x: 1500 }"
-      :sticky="true"
+      :row-class-name="
+        (_record, index) => (index % 2 === 1 ? 'table-striped' : undefined)
+      "
     >
     </a-table>
 
@@ -179,52 +181,5 @@ function addDraft() {
 </template>
 
 <style scoped>
-.articles-manager {
-  background-color: white;
-}
-/* table */
-.table-header {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 8px;
-}
-
-.table-header-icon {
-  font-size: 1rem;
-  margin-right: 8px;
-  cursor: pointer;
-}
-
-.articles-manager :deep(.ant-table-sticky-scroll){
-  overflow-x: hidden !important;
-}
-
-:deep(.vditor-toolbar) {
-  padding: unset !important;
-}
-
-@media (min-width: 960px) {
-  :deep(.vditor-toolbar) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-:global(.full-modal .ant-modal) {
-  max-width: 100%;
-  top: 0;
-  padding-bottom: 0;
-  margin: 0;
-}
-:global(.full-modal .ant-modal-content) {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 100vh;
-}
-:global(.full-modal .ant-modal-body) {
-  flex: 1;
-}
+@import './ArticlesManager.css';
 </style>

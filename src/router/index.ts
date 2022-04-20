@@ -48,7 +48,7 @@ const router = createRouter({
               meta: {
                 title: '文章管理',
               },
-              component: () => import('@/views/manager/ArticlesManager.vue'),
+              component: () => import('@/views/manager/ArticlesManager/ArticlesManager.vue'),
             },
             {
               path: '/manager/category',
