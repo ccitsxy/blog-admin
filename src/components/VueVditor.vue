@@ -85,6 +85,7 @@ onMounted(() => {
     fullscreen: {
       index: 3000,
     },
+    cdn: "/vditor", // local
     after() {
       emit("after", toRaw(contentEditor.value));
     },
