@@ -1,101 +1,92 @@
-import { createRouter, createWebHistory } from 'vue-router';
-
-import { App } from 'vue';
-
-import { useTitle } from '@vueuse/core';
-
-import {
-  HomeOutlined,
-  EditOutlined,
-  FundOutlined,
-} from '@ant-design/icons-vue';
-
-// manually import menu icons
-const components = [HomeOutlined, EditOutlined, FundOutlined];
-
-export function icons(app: App) {
-  components.forEach((item) => {
-    app.component(item.name, item);
-  });
-}
+import { createRouter, createWebHistory } from "vue-router";
+import { EditOutlined, SettingOutlined } from "@vicons/antd";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'index',
-      meta: { title: '主页', icon: HomeOutlined.name },
-      component: () => import('@/layouts/MainLayout/MainLayout.vue'),
-      redirect: '/home',
+      path: "/",
+      name: "index",
+      meta: { title: "主页" },
+      component: () => import("@/layouts/MainLayout.vue"),
+      redirect: "/home",
       children: [
         {
-          path: '/home',
-          name: 'home',
-          meta: { title: '主页', icon: HomeOutlined.name },
-          component: () => import('@/views/HomeView.vue'),
+          path: "/home",
+          name: "home",
+          meta: { title: "主页", icon: EditOutlined },
+          component: () => import("@/views/HomeView.vue"),
         },
         {
-          path: '/manager',
-          name: 'manager',
-          meta: { title: '管理', icon: FundOutlined.name },
-          component: () => import('@/layouts/NestedPage/NestedPage.vue'),
-          redirect: '/manager/article',
+          path: "/manager",
+          name: "manager",
+          meta: { title: "管理", icon: SettingOutlined },
+          component: () => import("@/layouts/NestedPage.vue"),
+          redirect: "/manager/article",
           children: [
             {
-              path: '/manager/article',
-              name: 'article',
+              path: "/manager/article",
+              name: "article",
               meta: {
-                title: '文章管理',
+                title: "文章管理",
               },
-              component: () => import('@/views/manager/ArticlesManager/ArticlesManager.vue'),
+              component: () => import("@/views/AboutView.vue"),
             },
             {
-              path: '/manager/category',
-              name: 'category',
+              path: "/manager/category",
+              name: "category",
               meta: {
-                title: '分类管理',
+                title: "分类管理",
               },
-              component: () => import('@/views/manager/CategoriesManager.vue'),
+              component: () => import("@/views/AboutView.vue"),
             },
             {
-              path: '/manager/tag',
-              name: 'tag',
+              path: "/manager/tag",
+              name: "tag",
               meta: {
-                title: '标签管理',
+                title: "标签管理",
               },
-              component: () => import('@/views/manager/TagsManager.vue'),
+              component: () => import("@/views/AboutView.vue"),
+            },
+          ],
+        },
+        {
+          path: "/test",
+          name: "test",
+          meta: { title: "测试", icon: EditOutlined },
+          component: () => import("@/layouts/NestedPage.vue"),
+          redirect: "/test/1",
+          children: [
+            {
+              path: "/test/1",
+              name: "test1",
+              meta: {
+                title: "测试1",
+              },
+              component: () => import("@/views/AboutView.vue"),
             },
           ],
         },
       ],
     },
     {
-      path: '/user',
-      component: () => import('@/layouts/UserLayout/UserLayout.vue'),
-    },
-    {
-      path: '/redirect',
-      name: 'redirect',
-      component: () => import('@/layouts/MainLayout/MainLayout.vue'),
+      path: "/redirect",
+      name: "redirect",
+      component: () => import("@/layouts/MainLayout.vue"),
       children: [
         {
-          path: '/redirect/:path(.*)',
-          name: 'redirect',
-          component: () => import('@/views/redirect/RedirectView.vue'),
+          path: "/redirect/:path(.*)",
+          name: "redirect",
+          component: () => import("@/views/RedirectView.vue"),
         },
       ],
     },
     {
-      path: '/:catchAll(.*)*',
-      name: 'error',
-      component: () => import('@/views/ErrorView.vue'),
+      path: "/:catchAll(.*)*",
+      name: "error",
+      component: () => import("@/views/ErrorView.vue"),
     },
   ],
-});
-
-router.afterEach(() => {
-  useTitle(router.currentRoute.value.meta.title);
 });
 
 export default router;
