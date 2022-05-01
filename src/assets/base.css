@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.n-layout-scroll-container {
+  scrollbar-width: thin;
+}
+
+.n-layout-scroll-container ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+@media (max-width: 768px) {
+  .n-layout-scroll-container ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+}
+.n-layout-scroll-container ::-webkit-scrollbar-thumb {
+  background-color: #cdcdcd;
+  background-clip: padding-box;
+}

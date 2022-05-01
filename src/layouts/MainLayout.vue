@@ -95,7 +95,6 @@ watchEffect(() => {
         collapse-mode="width"
         :collapsed-width="width > 768 ? 64 : 0"
         :width="224"
-        :native-scrollbar="false"
         inverted
       >
         <div class="h-12 flex justify-center items-center whitespace-nowrap">
@@ -161,11 +160,10 @@ watchEffect(() => {
         <n-layout-content
           class="top-24"
           style="height: calc(100vh - 96px)"
-          content-style="padding: 24px"
-          :native-scrollbar="false"
+          content-style="padding: 24px;"
         >
           <router-view />
-          <n-back-top :right="100" />
+          <n-back-top />
         </n-layout-content>
       </n-layout>
     </n-layout>
