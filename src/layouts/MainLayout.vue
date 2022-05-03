@@ -123,7 +123,7 @@ watchEffect(() => {
       </n-layout-sider>
       <n-layout>
         <n-layout-header
-          class="flex items-center h-12 space-x-2 px-4"
+          class="flex items-center h-12 space-x-4 px-4"
           bordered
           position="absolute"
         >
@@ -156,7 +156,7 @@ watchEffect(() => {
             <n-icon size="24" :component="BulbFilled" />
           </n-button>
         </n-layout-header>
-        <multi-tab class="h-12 pt-1 absolute top-12" />
+        <multi-tab class="h-12 pt-2 absolute top-12" />
         <n-layout-content
           class="top-24"
           style="height: calc(100vh - 96px)"
