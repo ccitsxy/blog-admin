@@ -1,7 +1,18 @@
 <script setup lang="ts">
+import type { GlobalTheme } from "naive-ui";
 import Vditor from "vditor";
 import "vditor/dist/index.css";
-import { onMounted, ref, watch, toRaw, onUnmounted, unref } from "vue";
+import {
+  onMounted,
+  ref,
+  watch,
+  toRaw,
+  onUnmounted,
+  unref,
+  inject,
+  type Ref,
+  computed,
+} from "vue";
 
 const emit = defineEmits([
   "update:modelValue",
@@ -28,6 +39,8 @@ const props = defineProps({
 
 const contentEditor = ref<Vditor | null>(null);
 const editorRef = ref<HTMLElement | null>(null);
+
+const theme = inject<Ref<GlobalTheme | null>>("theme");
 
 onMounted(() => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -87,6 +100,7 @@ onMounted(() => {
     },
     after() {
       emit("after", toRaw(contentEditor.value));
+      contentEditor.value?.setTheme(theme?.value ? "dark" : "classic");
     },
     input(value: string) {
       emit("update:modelValue", value);
@@ -115,6 +129,13 @@ watch(
     if (newVal !== contentEditor.value?.getValue()) {
       contentEditor.value?.setValue(newVal);
     }
+  }
+);
+
+watch(
+  () => theme?.value,
+  (newVal) => {
+    contentEditor?.value?.setTheme(newVal ? "dark" : "classic");
   }
 );
 

@@ -35,7 +35,7 @@ const updateTab = (name: string | number) => {
       <div>{{ tab.meta.title }}</div>
       <n-icon
         v-if="tabList.length > 1"
-        class="text-[#767C82] hover:text-[#1890FF] ml-2"
+        class="text-[#767c82] hover:text-[#1890ff] ml-2"
         size="12"
         :component="CloseOutlined"
         @click.stop="closeTab(tab)"

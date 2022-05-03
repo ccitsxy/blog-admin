@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch, watchEffect } from "vue";
+import { computed, provide, ref, watch, watchEffect } from "vue";
 import { useRouter, type RouteRecordRaw } from "vue-router";
 
 import { useFullscreen } from "@vueuse/core";
@@ -35,10 +35,15 @@ const osTheme = computed(() =>
 const theme = ref<GlobalTheme | null>(null);
 watch(
   () => osTheme.value,
-  () => {
-    theme.value = osTheme.value;
+  (newVal) => {
+    theme.value = newVal;
   },
   { immediate: true }
+);
+provide("theme", theme);
+const scrollbarColor = computed(() => (theme.value ? "#686868" : "#cdcdcd"));
+const scrollbarHoverColor = computed(() =>
+  theme.value ? "#5b5b5e" : "#a6a6a6"
 );
 
 const collapsed = ref(false);
@@ -142,6 +147,7 @@ watchEffect(() => {
               {{ item.breadcrumbName }}
             </n-breadcrumb-item>
           </n-breadcrumb>
+          {{ theme?.name }}
           <div class="flex-1" />
           <n-button v-if="isFullscreen" text @click="exit">
             <n-icon size="24" :component="FullscreenExitOutlined" />
@@ -169,3 +175,12 @@ watchEffect(() => {
     </n-layout>
   </n-config-provider>
 </template>
+
+<style>
+.n-layout-scroll-container ::-webkit-scrollbar-thumb {
+  background-color: v-bind(scrollbarColor);
+}
+.n-layout-scroll-container ::-webkit-scrollbar-thumb:hover {
+  background-color: v-bind(scrollbarHoverColor);
+}
+</style>

@@ -17,7 +17,9 @@
     height: 4px;
   }
 }
+
 .n-layout-scroll-container ::-webkit-scrollbar-thumb {
   background-color: #cdcdcd;
   background-clip: padding-box;
 }
+
