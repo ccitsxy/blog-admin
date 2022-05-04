@@ -1,4 +1,4 @@
-/* eslint-disable-next-line */
+/* eslint-env node */
 module.exports = {
   plugins: {
     tailwindcss: {},

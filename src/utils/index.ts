@@ -1,8 +1,8 @@
 import type { RouteRecord, RouteRecordRaw } from "vue-router";
 
-export function clearMenuItem(
+const clearMenuItem = (
   menusData: RouteRecord[] | RouteRecordRaw[]
-): RouteRecordRaw[] {
+): RouteRecordRaw[] => {
   return menusData
     .map((item: RouteRecord | RouteRecordRaw) => {
       const finalItem = { ...item };
@@ -28,7 +28,7 @@ export function clearMenuItem(
       return finalItem;
     })
     .filter((item) => item) as RouteRecordRaw[];
-}
+};
 
 const formatRelativePath = (
   routes: RouteRecordRaw[],
@@ -59,7 +59,9 @@ const formatRelativePath = (
 };
 
 export const getMenuData = (routes: RouteRecordRaw[]): RouteRecordRaw[] => {
-  const childrenRoute = routes.find((route) => route.path === "/");
+  const childrenRoute = clearMenuItem(routes).find(
+    (route) => route.path === "/"
+  );
   return formatRelativePath(
     childrenRoute?.children || ([] as RouteRecordRaw[])
   );

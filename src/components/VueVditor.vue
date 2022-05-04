@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import type { GlobalTheme } from "naive-ui";
-import Vditor from "vditor";
-import "vditor/dist/index.css";
 import {
   onMounted,
   ref,
@@ -11,8 +8,10 @@ import {
   unref,
   inject,
   type Ref,
-  computed,
 } from "vue";
+import type { GlobalTheme } from "naive-ui";
+import Vditor from "vditor";
+import "vditor/dist/index.css";
 
 const emit = defineEmits([
   "update:modelValue",

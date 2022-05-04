@@ -15,6 +15,7 @@ import {
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
+  ReloadOutlined,
   FullscreenOutlined,
   FullscreenExitOutlined,
   BulbOutlined,
@@ -22,7 +23,7 @@ import {
 } from "@vicons/antd";
 
 import { useWindowSize } from "@vueuse/core";
-import { clearMenuItem, getMenuData } from "@/utils";
+import { getMenuData } from "@/utils";
 import { renderIcon } from "@/utils/icons";
 
 import MultiTab from "./MultiTab.vue";
@@ -41,16 +42,14 @@ watch(
   { immediate: true }
 );
 provide("theme", theme);
-const scrollbarColor = computed(() => (theme.value ? "#686868" : "#cdcdcd"));
-const scrollbarHoverColor = computed(() =>
-  theme.value ? "#5b5b5e" : "#a6a6a6"
-);
 
 const collapsed = ref(false);
-
 const { width } = useWindowSize();
 
 const router = useRouter();
+const handleReload = () => {
+  void router.push(`/redirect${router.currentRoute.value.path}`);
+};
 
 const breadcrumb = computed(() =>
   router.currentRoute.value.matched
@@ -64,16 +63,16 @@ const breadcrumb = computed(() =>
     })
 );
 
-function mapMenu(item: RouteRecordRaw): MenuOption {
+const mapMenu = (item: RouteRecordRaw): MenuOption => {
   return {
     label: item.meta?.title,
     key: item.path,
     icon: renderIcon(item.meta?.icon),
     children: item.children?.map((item2) => mapMenu(item2)),
   };
-}
+};
 
-const menuData = getMenuData(clearMenuItem(router.getRoutes()));
+const menuData = getMenuData(router.getRoutes());
 const menuOptions: MenuOption[] = menuData.map((item: RouteRecordRaw) =>
   mapMenu(item)
 );
@@ -101,6 +100,7 @@ watchEffect(() => {
         :collapsed-width="width > 768 ? 64 : 0"
         :width="224"
         inverted
+        :native-scrollbar="false"
       >
         <div class="h-12 flex justify-center items-center whitespace-nowrap">
           <img class="h-8 w-8" src="@/assets/logo.svg" alt="logo" />
@@ -138,6 +138,9 @@ watchEffect(() => {
           <n-button v-else text @click="collapsed = true">
             <n-icon size="24" :component="MenuFoldOutlined" />
           </n-button>
+          <n-button text @click="handleReload">
+            <n-icon size="24" :component="ReloadOutlined" />
+          </n-button>
           <n-breadcrumb>
             <n-breadcrumb-item
               v-for="item in breadcrumb"
@@ -147,7 +150,6 @@ watchEffect(() => {
               {{ item.breadcrumbName }}
             </n-breadcrumb-item>
           </n-breadcrumb>
-          {{ theme?.name }}
           <div class="flex-1" />
           <n-button v-if="isFullscreen" text @click="exit">
             <n-icon size="24" :component="FullscreenExitOutlined" />
@@ -162,11 +164,12 @@ watchEffect(() => {
             <n-icon size="24" :component="BulbFilled" />
           </n-button>
         </n-layout-header>
-        <multi-tab class="h-12 pt-2 absolute top-12" />
+        <multi-tab class="absolute top-12 h-12 pt-2" />
         <n-layout-content
           class="top-24"
           style="height: calc(100vh - 96px)"
           content-style="padding: 24px;"
+          :native-scrollbar="false"
         >
           <router-view />
           <n-back-top />
@@ -175,12 +178,3 @@ watchEffect(() => {
     </n-layout>
   </n-config-provider>
 </template>
-
-<style>
-.n-layout-scroll-container ::-webkit-scrollbar-thumb {
-  background-color: v-bind(scrollbarColor);
-}
-.n-layout-scroll-container ::-webkit-scrollbar-thumb:hover {
-  background-color: v-bind(scrollbarHoverColor);
-}
-</style>

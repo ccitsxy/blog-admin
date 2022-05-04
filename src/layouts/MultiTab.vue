@@ -20,9 +20,9 @@ watch(
   }
 );
 
-function closeTab(tab: RouteLocationNormalized) {
+const closeTab = (tab: RouteLocationNormalized) => {
   useMultiTabStore().closeTab(tab);
-}
+};
 const updateTab = (name: string | number) => {
   router.push(`${name}`);
 };
@@ -35,8 +35,8 @@ const updateTab = (name: string | number) => {
       <div>{{ tab.meta.title }}</div>
       <n-icon
         v-if="tabList.length > 1"
-        class="text-[#767c82] hover:text-[#1890ff] ml-2"
-        size="12"
+        class="text-[#767c82] hover:text-[#1890ff] ml-3"
+        size="14"
         :component="CloseOutlined"
         @click.stop="closeTab(tab)"
       />
