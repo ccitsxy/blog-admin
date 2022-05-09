@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from 'vue';
 
-const editor = ref("");
+const editor = ref('');
 const options = {
   height: 480,
 };

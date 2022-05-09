@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, provide, ref, watch, watchEffect } from "vue";
-import { useRouter, type RouteRecordRaw } from "vue-router";
+import { computed, provide, ref, watch, watchEffect } from 'vue';
+import { useRouter, type RouteRecordRaw } from 'vue-router';
 
-import { useFullscreen } from "@vueuse/core";
+import { useFullscreen } from '@vueuse/core';
 
 import {
   useOsTheme,
@@ -10,7 +10,7 @@ import {
   NIcon,
   type GlobalTheme,
   type MenuOption,
-} from "naive-ui";
+} from 'naive-ui';
 
 import {
   MenuUnfoldOutlined,
@@ -20,18 +20,18 @@ import {
   FullscreenExitOutlined,
   BulbOutlined,
   BulbFilled,
-} from "@vicons/antd";
+} from '@vicons/antd';
 
-import { useWindowSize } from "@vueuse/core";
-import { getMenuData } from "@/utils";
-import { renderIcon } from "@/utils/icons";
+import { useWindowSize } from '@vueuse/core';
+import { getMenuData } from '@/utils';
+import { renderIcon } from '@/utils/icons';
 
-import MultiTab from "./MultiTab.vue";
+import MultiTab from './MultiTab.vue';
 
 const { isFullscreen, enter, exit } = useFullscreen();
 
 const osTheme = computed(() =>
-  useOsTheme().value === "dark" ? darkTheme : null
+  useOsTheme().value === 'dark' ? darkTheme : null
 );
 const theme = ref<GlobalTheme | null>(null);
 watch(
@@ -41,15 +41,15 @@ watch(
   },
   { immediate: true }
 );
-provide("theme", theme);
+provide('theme', theme);
 
 const collapsed = ref(false);
 const { width } = useWindowSize();
 
 const router = useRouter();
-const handleReload = () => {
+function handleReload() {
   void router.push(`/redirect${router.currentRoute.value.path}`);
-};
+}
 
 const breadcrumb = computed(() =>
   router.currentRoute.value.matched
@@ -58,7 +58,7 @@ const breadcrumb = computed(() =>
     .map((item) => {
       return {
         path: item.path,
-        breadcrumbName: item.meta.title || "",
+        breadcrumbName: item.meta.title || '',
       };
     })
 );
@@ -76,9 +76,9 @@ const menuData = getMenuData(router.getRoutes());
 const menuOptions: MenuOption[] = menuData.map((item: RouteRecordRaw) =>
   mapMenu(item)
 );
-const updateValue = (key: string) => {
+function updateValue(key: string) {
   void router.push(key);
-};
+}
 const openKeys = ref<string[]>([]);
 watchEffect(() => {
   if (router.currentRoute) {
@@ -121,7 +121,7 @@ watchEffect(() => {
         <teleport to="#app">
           <div
             class="md:hidden fixed top-0 left-0 h-full w-full opacity-100 bg-[#00000073] transition-opacity"
-            :class="{ 'opacity-0 h-0': collapsed }"
+            :class="{ 'opacity-0 h-0': collapsed && width < 768 }"
             @click="collapsed = true"
           ></div>
         </teleport>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { watch } from "vue";
-import { useRouter, type RouteLocationNormalized } from "vue-router";
+import { watch } from 'vue';
+import { useRouter, type RouteLocationNormalized } from 'vue-router';
 
-import { useMultiTabStore } from "@/stores/multiTab";
+import { useMultiTabStore } from '@/stores/multiTab';
 
-import { CloseOutlined } from "@vicons/antd";
+import { CloseOutlined } from '@vicons/antd';
 
 const tabList = useMultiTabStore().tabList;
 

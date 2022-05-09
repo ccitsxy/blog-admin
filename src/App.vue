@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { GlobalThemeOverrides } from "naive-ui";
+import type { GlobalThemeOverrides } from 'naive-ui';
 const themeOverrides: GlobalThemeOverrides = {
   common: {
-    primaryColor: "#2080f0FF",
-    primaryColorHover: "#4098fcFF",
-    primaryColorPressed: "#1060c9FF",
-    primaryColorSuppl: "#4098fcFF",
+    primaryColor: '#2080f0FF',
+    primaryColorHover: '#4098fcFF',
+    primaryColorPressed: '#1060c9FF',
+    primaryColorSuppl: '#4098fcFF',
   },
 };
 </script>

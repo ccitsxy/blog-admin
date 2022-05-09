@@ -8,19 +8,19 @@ import {
   unref,
   inject,
   type Ref,
-} from "vue";
-import type { GlobalTheme } from "naive-ui";
-import Vditor from "vditor";
-import "vditor/dist/index.css";
+} from 'vue';
+import type { GlobalTheme } from 'naive-ui';
+import Vditor from 'vditor';
+import 'vditor/dist/index.css';
 
 const emit = defineEmits([
-  "update:modelValue",
-  "after",
-  "focus",
-  "blur",
-  "esc",
-  "ctrlEnter",
-  "select",
+  'update:modelValue',
+  'after',
+  'focus',
+  'blur',
+  'esc',
+  'ctrlEnter',
+  'select',
 ]);
 
 const props = defineProps({
@@ -32,14 +32,14 @@ const props = defineProps({
   },
   modelValue: {
     type: String,
-    default: "",
+    default: '',
   },
 });
 
 const contentEditor = ref<Vditor | null>(null);
 const editorRef = ref<HTMLElement | null>(null);
 
-const theme = inject<Ref<GlobalTheme | null>>("theme");
+const theme = inject<Ref<GlobalTheme | null>>('theme');
 
 onMounted(() => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -48,46 +48,46 @@ onMounted(() => {
     value: props.modelValue,
     toolbar: [
       // "emoji",
-      "headings",
-      "bold",
-      "italic",
-      "strike",
-      "link",
-      "|",
-      "list",
-      "ordered-list",
-      "check",
-      "outdent",
-      "indent",
-      "|",
-      "quote",
-      "line",
-      "code",
-      "inline-code",
-      "insert-before",
-      "insert-after",
-      "|",
-      "upload",
+      'headings',
+      'bold',
+      'italic',
+      'strike',
+      'link',
+      '|',
+      'list',
+      'ordered-list',
+      'check',
+      'outdent',
+      'indent',
+      '|',
+      'quote',
+      'line',
+      'code',
+      'inline-code',
+      'insert-before',
+      'insert-after',
+      '|',
+      'upload',
       // "record",
-      "table",
-      "|",
-      "undo",
-      "redo",
-      "|",
-      "fullscreen",
-      "edit-mode",
+      'table',
+      '|',
+      'undo',
+      'redo',
+      '|',
+      'fullscreen',
+      'edit-mode',
       {
-        name: "more",
+        name: 'more',
         toolbar: [
-          "both",
-          "code-theme",
-          "content-theme",
-          "export",
-          "outline",
-          "preview",
-          "devtools",
-          "info",
-          "help",
+          'both',
+          'code-theme',
+          'content-theme',
+          'export',
+          'outline',
+          'preview',
+          'devtools',
+          'info',
+          'help',
         ],
       },
     ],
@@ -98,26 +98,26 @@ onMounted(() => {
       index: 3000,
     },
     after() {
-      emit("after", toRaw(contentEditor.value));
-      contentEditor.value?.setTheme(theme?.value ? "dark" : "classic");
+      emit('after', toRaw(contentEditor.value));
+      contentEditor.value?.setTheme(theme?.value ? 'dark' : 'classic');
     },
     input(value: string) {
-      emit("update:modelValue", value);
+      emit('update:modelValue', value);
     },
     focus(value: string) {
-      emit("focus", value);
+      emit('focus', value);
     },
     blur(value: string) {
-      emit("blur", value);
+      emit('blur', value);
     },
     esc(value: string) {
-      emit("esc", value);
+      emit('esc', value);
     },
     ctrlEnter(value: string) {
-      emit("ctrlEnter", value);
+      emit('ctrlEnter', value);
     },
     select(value: string) {
-      emit("select", value);
+      emit('select', value);
     },
   });
 });
@@ -134,7 +134,7 @@ watch(
 watch(
   () => theme?.value,
   (newVal) => {
-    contentEditor?.value?.setTheme(newVal ? "dark" : "classic");
+    contentEditor?.value?.setTheme(newVal ? 'dark' : 'classic');
   }
 );
 
@@ -155,6 +155,6 @@ onUnmounted(() => {
 
 <style>
 .vditor {
-  border-radius: unset;
+  padding: 0.5px;
 }
 </style>

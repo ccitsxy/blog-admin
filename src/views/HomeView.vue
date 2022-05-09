@@ -1,5 +1,7 @@
 <template>
-  <div class="about">
-    <h1 class="h-screen bg-red-50 border-8">This is an home page</h1>
-  </div>
+  <n-card>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo inventore non
+    natus in ratione. Ipsam ea nostrum pariatur velit similique temporibus quas
+    reiciendis eaque quod, iusto, magnam esse saepe id!
+  </n-card>
 </template>

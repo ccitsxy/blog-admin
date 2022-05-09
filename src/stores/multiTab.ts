@@ -1,7 +1,7 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
 
-import type { RouteLocationNormalized } from "vue-router";
-import router from "@/router";
+import type { RouteLocationNormalized } from 'vue-router';
+import router from '@/router';
 
 interface MultiTabState {
   tabList: RouteLocationNormalized[];
@@ -9,7 +9,7 @@ interface MultiTabState {
 }
 
 export const useMultiTabStore = defineStore({
-  id: "multi-tab",
+  id: 'multi-tab',
   state: (): MultiTabState => ({
     tabList: [],
     cachedTabList: new Set(),
@@ -28,7 +28,7 @@ export const useMultiTabStore = defineStore({
         this.tabList.some(
           (p: { path: string }) => p.path === router.currentRoute.value.path
         ) ||
-        router.currentRoute.value.path.startsWith("/redirect")
+        router.currentRoute.value.path.startsWith('/redirect')
       )
         return;
       this.tabList.push(router.currentRoute.value);

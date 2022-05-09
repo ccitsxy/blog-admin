@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { onBeforeMount } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { onBeforeMount } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
 
@@ -8,7 +8,7 @@ onBeforeMount(() => {
   const { params, query } = route;
   const { path } = params;
   void router.replace({
-    path: "/" + (Array.isArray(path) ? path.join("/") : path),
+    path: '/' + (Array.isArray(path) ? path.join('/') : path),
     query,
   });
 });
