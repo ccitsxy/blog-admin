@@ -34,10 +34,13 @@ const osTheme = computed(() =>
   useOsTheme().value === 'dark' ? darkTheme : null
 );
 const theme = ref<GlobalTheme | null>(null);
+const colorScheme = ref('normal');
+
 watch(
   () => osTheme.value,
   (newVal) => {
     theme.value = newVal;
+    colorScheme.value = newVal ? 'dark' : 'classic';
   },
   { immediate: true }
 );
@@ -178,3 +181,9 @@ watchEffect(() => {
     </n-layout>
   </n-config-provider>
 </template>
+
+<style>
+:root {
+  color-scheme: v-bind(colorScheme);
+}
+</style>

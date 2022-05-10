@@ -97,9 +97,18 @@ onMounted(() => {
     fullscreen: {
       index: 3000,
     },
+    preview: {
+      hljs: {
+        lineNumber: true,
+      },
+    },
     after() {
       emit('after', toRaw(contentEditor.value));
-      contentEditor.value?.setTheme(theme?.value ? 'dark' : 'classic');
+      contentEditor.value?.setTheme(
+        theme?.value ? 'dark' : 'classic',
+        theme?.value ? 'dark' : 'light',
+        'native'
+      );
     },
     input(value: string) {
       emit('update:modelValue', value);
@@ -134,7 +143,10 @@ watch(
 watch(
   () => theme?.value,
   (newVal) => {
-    contentEditor?.value?.setTheme(newVal ? 'dark' : 'classic');
+    contentEditor?.value?.setTheme(
+      newVal ? 'dark' : 'classic',
+      newVal ? 'dark' : 'light'
+    );
   }
 );
 
