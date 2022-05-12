@@ -12,6 +12,8 @@ const themeOverrides: GlobalThemeOverrides = {
 
 <template>
   <n-config-provider inline-theme-disabled :theme-overrides="themeOverrides">
-    <router-view />
+    <n-loading-bar-provider>
+      <router-view />
+    </n-loading-bar-provider>
   </n-config-provider>
 </template>

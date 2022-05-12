@@ -5,10 +5,16 @@ const editor = ref('');
 const options = {
   height: 480,
 };
+const show = ref(true);
+function after() {
+  show.value = false;
+}
 </script>
 
 <template>
   <div class="about">
-    <vue-vditor v-model="editor" :options="options" />
+    <n-spin :show="show" class="h-[480px]" description="加载中...">
+      <vue-vditor v-model="editor" :options="options" @after="after()" />
+    </n-spin>
   </div>
 </template>

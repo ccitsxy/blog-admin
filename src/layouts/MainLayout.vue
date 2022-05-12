@@ -8,6 +8,7 @@ import {
   useOsTheme,
   darkTheme,
   NIcon,
+  useLoadingBar,
   type GlobalTheme,
   type MenuOption,
 } from 'naive-ui';
@@ -50,6 +51,15 @@ const collapsed = ref(false);
 const { width } = useWindowSize();
 
 const router = useRouter();
+
+const loadingBar = useLoadingBar();
+router.beforeEach(() => {
+  loadingBar.start();
+});
+router.afterEach(() => {
+  loadingBar.finish();
+});
+
 function handleReload() {
   void router.push(`/redirect${router.currentRoute.value.path}`);
 }
@@ -66,14 +76,14 @@ const breadcrumb = computed(() =>
     })
 );
 
-const mapMenu = (item: RouteRecordRaw): MenuOption => {
+function mapMenu(item: RouteRecordRaw): MenuOption {
   return {
     label: item.meta?.title,
     key: item.path,
     icon: renderIcon(item.meta?.icon),
     children: item.children?.map((item2) => mapMenu(item2)),
   };
-};
+}
 
 const menuData = getMenuData(router.getRoutes());
 const menuOptions: MenuOption[] = menuData.map((item: RouteRecordRaw) =>

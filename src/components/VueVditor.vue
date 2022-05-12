@@ -103,12 +103,12 @@ onMounted(() => {
       },
     },
     after() {
-      emit('after', toRaw(contentEditor.value));
       contentEditor.value?.setTheme(
         theme?.value ? 'dark' : 'classic',
         theme?.value ? 'dark' : 'light',
         'native'
       );
+      emit('after', toRaw(contentEditor.value));
     },
     input(value: string) {
       emit('update:modelValue', value);
