@@ -169,4 +169,8 @@ onUnmounted(() => {
 .vditor {
   padding: 0.5px;
 }
+.vditor--fullscreen {
+  padding: 0;
+  border: 0;
+}
 </style>
