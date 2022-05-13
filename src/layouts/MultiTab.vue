@@ -20,12 +20,12 @@ watch(
   }
 );
 
-const closeTab = (tab: RouteLocationNormalized) => {
+function closeTab(tab: RouteLocationNormalized) {
   useMultiTabStore().closeTab(tab);
-};
-const updateTab = (name: string | number) => {
+}
+function updateTab(name: string | number) {
   router.push(`${name}`);
-};
+}
 </script>
 
 <template>
