@@ -1,5 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { EditOutlined, SettingOutlined } from '@vicons/antd';
+
+import type { App } from 'vue';
+
+import { useTitle } from '@vueuse/core';
+
+import {
+  HomeOutlined,
+  EditOutlined,
+  FundOutlined,
+} from '@ant-design/icons-vue';
+
+// manually import menu icons
+const components = [HomeOutlined, EditOutlined, FundOutlined];
+
+export function icons(app: App) {
+  components.forEach((item) => {
+    app.component(item.name, item);
+  });
+}
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,20 +25,20 @@ const router = createRouter({
     {
       path: '/',
       name: 'index',
-      meta: { title: '主页' },
+      meta: { title: '主页', icon: HomeOutlined.name },
       component: () => import('@/layouts/MainLayout.vue'),
       redirect: '/home',
       children: [
         {
           path: '/home',
           name: 'home',
-          meta: { title: '主页', icon: EditOutlined },
+          meta: { title: '主页', icon: HomeOutlined.name },
           component: () => import('@/views/HomeView.vue'),
         },
         {
           path: '/manager',
           name: 'manager',
-          meta: { title: '管理', icon: SettingOutlined },
+          meta: { title: '管理', icon: FundOutlined.name },
           component: () => import('@/layouts/NestedPage.vue'),
           redirect: '/manager/article',
           children: [
@@ -30,7 +48,8 @@ const router = createRouter({
               meta: {
                 title: '文章管理',
               },
-              component: () => import('@/views/AboutView.vue'),
+              component: () =>
+                import('@/views/manager/ArticlesManager/ArticlesManager.vue'),
             },
             {
               path: '/manager/category',
@@ -38,7 +57,7 @@ const router = createRouter({
               meta: {
                 title: '分类管理',
               },
-              component: () => import('@/views/AboutView.vue'),
+              component: () => import('@/views/manager/CategoriesManager.vue'),
             },
             {
               path: '/manager/tag',
@@ -46,28 +65,15 @@ const router = createRouter({
               meta: {
                 title: '标签管理',
               },
-              component: () => import('@/views/AboutView.vue'),
-            },
-          ],
-        },
-        {
-          path: '/test',
-          name: 'test',
-          meta: { title: '测试', icon: EditOutlined },
-          component: () => import('@/layouts/NestedPage.vue'),
-          redirect: '/test/1',
-          children: [
-            {
-              path: '/test/1',
-              name: 'test1',
-              meta: {
-                title: '测试1',
-              },
-              component: () => import('@/views/AboutView.vue'),
+              component: () => import('@/views/manager/TagsManager.vue'),
             },
           ],
         },
       ],
+    },
+    {
+      path: '/user',
+      component: () => import('@/layouts/UserLayout.vue'),
     },
     {
       path: '/redirect',
@@ -77,7 +83,7 @@ const router = createRouter({
         {
           path: '/redirect/:path(.*)',
           name: 'redirect',
-          component: () => import('@/views/RedirectView.vue'),
+          component: () => import('@/views/redirect/RedirectView.vue'),
         },
       ],
     },
@@ -87,6 +93,10 @@ const router = createRouter({
       component: () => import('@/views/ErrorView.vue'),
     },
   ],
+});
+
+router.afterEach(() => {
+  useTitle(router.currentRoute.value.meta.title);
 });
 
 export default router;

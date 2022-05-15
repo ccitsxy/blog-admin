@@ -15,5 +15,5 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <n-empty />
+  <div></div>
 </template>

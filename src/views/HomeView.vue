@@ -1,7 +1,28 @@
+<script setup lang="ts"></script>
+
 <template>
-  <n-card>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo inventore non
-    natus in ratione. Ipsam ea nostrum pariatur velit similique temporibus quas
-    reiciendis eaque quod, iusto, magnam esse saepe id!
-  </n-card>
+  <div>
+    <a-row :gutter="[16, 16]">
+      <a-col :span="24" :md="6">
+        <a-card title="Card title" :bordered="false">
+          <p>card content</p>
+        </a-card>
+      </a-col>
+      <a-col :span="24" :md="6">
+        <a-card title="Card title" :bordered="false">
+          <p>card content</p>
+        </a-card>
+      </a-col>
+      <a-col :span="24" :md="6">
+        <a-card title="Card title" :bordered="false">
+          <p>card content</p>
+        </a-card>
+      </a-col>
+      <a-col :span="24" :md="6">
+        <a-card title="Card title" :bordered="false">
+          <p>card content</p>
+        </a-card>
+      </a-col>
+    </a-row>
+  </div>
 </template>
