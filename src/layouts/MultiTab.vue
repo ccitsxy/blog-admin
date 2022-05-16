@@ -64,12 +64,12 @@ function closeTab(tab: RouteLocationNormalized) {
     </a-tab-pane>
 
     <template #leftExtra>
-      <span style="margin-left: 16px" />
+      <span class="ml-4" />
     </template>
 
     <template #rightExtra>
       <a-dropdown>
-        <more-outlined style="margin-right: 16px; font-size: 1rem" />
+        <more-outlined class="mr-4 text-base" />
         <template #overlay>
           <a-menu>
             <a-menu-item key="1">关闭当前</a-menu-item>

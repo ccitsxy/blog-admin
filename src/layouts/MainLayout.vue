@@ -8,8 +8,9 @@ import { getMenuData, clearMenuItem } from '@ant-design-vue/pro-layout';
 import { ProLayout } from '@ant-design-vue/pro-layout';
 import '@ant-design-vue/pro-layout/dist/style.css';
 
-import MultiTab from '@/layouts/MultiTab.vue';
-import NestedPage from '@/layouts/NestedPage.vue';
+import MultiTab from './MultiTab.vue';
+import NestedPage from './NestedPage.vue';
+import LayoutFooter from './LayoutFooter.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -127,9 +128,10 @@ function reloadPage() {
     <multi-tab />
 
     <div
-      class="h-[calc(100vh-111px)] flex flex-1 flex-col box-border overflow-y-auto overflow-x-hidden p-4"
+      class="h-[calc(100vh-111px)] flex flex-col box-border overflow-y-auto overflow-x-hidden"
     >
-      <nested-page />
+      <nested-page class="m-4" />
+      <layout-footer />
     </div>
   </pro-layout>
 </template>
