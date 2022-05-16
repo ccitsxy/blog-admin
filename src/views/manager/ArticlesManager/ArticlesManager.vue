@@ -166,10 +166,7 @@ function addDraft() {
                 <a-button type="primary" size="large" @click="addArticle()"
                   >提交文章</a-button
                 >
-                <a-button
-                  size="large"
-                  style="margin-left: 16px"
-                  @click="addDraft()"
+                <a-button size="large" class="ml-4" @click="addDraft()"
                   >存草稿</a-button
                 >
               </a-form-item>

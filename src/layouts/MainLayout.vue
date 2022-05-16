@@ -89,7 +89,7 @@ function reloadPage() {
     </template>
 
     <template #headerContentRender>
-      <div class="h-full flex items-center space-x-4">
+      <div class="h-12 flex items-center space-x-4">
         <reload-outlined class="text-xl cursor-pointer" @click="reloadPage()" />
         <a-breadcrumb>
           <a-breadcrumb-item v-for="item in breadcrumb" :key="item.path">
@@ -100,7 +100,7 @@ function reloadPage() {
     </template>
 
     <template #rightContentRender>
-      <div class="h-full flex items-center space-x-4">
+      <div class="h-12 flex items-center space-x-4">
         <fullscreen-exit-outlined
           v-if="isFullscreen"
           class="text-xl cursor-pointer"
@@ -128,7 +128,7 @@ function reloadPage() {
     <multi-tab />
 
     <div
-      class="h-[calc(100vh-111px)] flex flex-col box-border overflow-y-auto overflow-x-hidden"
+      class="h-[calc(100vh-109px)] flex flex-col box-border overflow-y-auto overflow-x-hidden"
     >
       <nested-page class="m-4" />
       <layout-footer />

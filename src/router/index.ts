@@ -4,6 +4,8 @@ import type { App } from 'vue';
 
 import { useTitle } from '@vueuse/core';
 
+import NProgress from 'nprogress';
+
 import {
   HomeOutlined,
   EditOutlined,
@@ -95,7 +97,17 @@ const router = createRouter({
   ],
 });
 
+NProgress.configure({
+  showSpinner: false,
+});
+
+router.beforeEach((to, from, next) => {
+  NProgress.start();
+  next();
+});
+
 router.afterEach(() => {
+  NProgress.done();
   useTitle(router.currentRoute.value.meta.title);
 });
 
