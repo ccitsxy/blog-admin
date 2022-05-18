@@ -98,8 +98,8 @@ function addDraft() {
       :data-source="articles"
       :pagination="pagination"
       :row-class-name="
-        (_record:any, index:number) => (index % 2 === 1 ? 'table-striped' : undefined)
-      "
+      (_record: any, index: number) => (index % 2 === 1 ? 'table-striped' : undefined)
+    "
     >
     </a-table>
 
@@ -177,7 +177,11 @@ function addDraft() {
 
 <style scoped>
 .articles-manager {
-  /* background-color: white; */
+  background-color: white;
+}
+
+[theme-mode='dark'] .articles-manager {
+  background-color: #151515;
 }
 
 /* table */
@@ -211,7 +215,10 @@ function addDraft() {
 }
 
 .manager-table :deep(.table-striped) td {
-  /* background-color: #fafafa; */
+  background-color: #fafafa;
+}
+[theme-mode='dark'] .manager-table :deep(.table-striped) td {
+  background-color: #262626;
 }
 </style>
 
@@ -222,12 +229,14 @@ function addDraft() {
   padding-bottom: 0;
   margin: 0;
 }
+
 .full-modal .ant-modal-content {
   display: flex;
   flex-direction: column;
   height: 100%;
   min-height: 100vh;
 }
+
 .full-modal .ant-modal-body {
   flex: 1;
 }
