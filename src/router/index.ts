@@ -50,8 +50,7 @@ const router = createRouter({
               meta: {
                 title: '文章管理',
               },
-              component: () =>
-                import('@/views/manager/ArticlesManager/ArticlesManager.vue'),
+              component: () => import('@/views/manager/ArticlesManager.vue'),
             },
             {
               path: '/manager/category',
@@ -108,6 +107,7 @@ router.beforeEach((to, from, next) => {
 
 router.afterEach(() => {
   NProgress.done();
+  document.documentElement.removeAttribute('class');
   useTitle(router.currentRoute.value.meta.title);
 });
 

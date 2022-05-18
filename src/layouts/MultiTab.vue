@@ -30,7 +30,7 @@ function closeTab(tab: RouteLocationNormalized) {
     :active-key="$route.path"
     type="editable-card"
     hide-add
-    class="layout-tabs bg-white !pt-[6px] border-0 border-b border-solid border-[#efeff5]"
+    class="layout-tabs !pt-2"
   >
     <a-tab-pane
       v-for="tab in tabList"
@@ -47,7 +47,7 @@ function closeTab(tab: RouteLocationNormalized) {
             {{ tab.meta.title }}
             <close-outlined
               v-if="tabList.length > 1"
-              class="!text-[#00000073] hover:!text-inherit text-xs ml-2 !mr-0"
+              class="text-xs ml-2 !mr-0"
               @click.stop="closeTab(tab)"
             />
           </span>
@@ -84,9 +84,6 @@ function closeTab(tab: RouteLocationNormalized) {
 </template>
 
 <style scoped>
-.layout-tabs {
-  box-shadow: 0 1px 4px #00152914;
-}
 .layout-tabs :deep(.ant-tabs-tab) {
   padding: 0 !important;
 }

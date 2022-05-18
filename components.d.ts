@@ -23,6 +23,7 @@ declare module 'vue' {
     ATable: typeof import('ant-design-vue/es')['Table']
     ATabPane: typeof import('ant-design-vue/es')['TabPane']
     ATabs: typeof import('ant-design-vue/es')['Tabs']
+    BulbOutlined: typeof import('@ant-design/icons-vue')['BulbOutlined']
     FullscreenExitOutlined: typeof import('@ant-design/icons-vue')['FullscreenExitOutlined']
     FullscreenOutlined: typeof import('@ant-design/icons-vue')['FullscreenOutlined']
     ReloadOutlined: typeof import('@ant-design/icons-vue')['ReloadOutlined']

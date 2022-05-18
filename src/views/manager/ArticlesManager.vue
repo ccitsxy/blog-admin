@@ -180,7 +180,7 @@ function addDraft() {
 
 <style scoped>
 .articles-manager {
-  background-color: white;
+  /* background-color: white; */
 }
 
 /* table */
@@ -214,7 +214,7 @@ function addDraft() {
 }
 
 .manager-table :deep(.table-striped) td {
-  background-color: #fafafa;
+  /* background-color: #fafafa; */
 }
 </style>
 

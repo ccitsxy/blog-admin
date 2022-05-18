@@ -2,15 +2,16 @@
 import { watchEffect, computed, ref, unref } from 'vue';
 import { useRoute, useRouter, RouterLink } from 'vue-router';
 
-import { useWindowSize, useFullscreen } from '@vueuse/core';
+import { useWindowSize, useFullscreen, useDark } from '@vueuse/core';
 
 import { getMenuData, clearMenuItem } from '@ant-design-vue/pro-layout';
 import { ProLayout } from '@ant-design-vue/pro-layout';
-import '@ant-design-vue/pro-layout/dist/style.css';
 
 import MultiTab from './MultiTab.vue';
 import NestedPage from './NestedPage.vue';
 import LayoutFooter from './LayoutFooter.vue';
+
+import '@ant-design-vue/pro-layout/dist/style.css';
 
 const route = useRoute();
 const router = useRouter();
@@ -58,6 +59,26 @@ function reloadPage() {
     path: '/redirect' + unref(route).fullPath,
   });
 }
+
+useDark({
+  selector: 'body',
+  attribute: 'theme-mode',
+  valueDark: 'dark',
+  valueLight: 'light',
+  onChanged(dark: boolean) {
+    dark
+      ? document.body.setAttribute('theme-mode', 'dark')
+      : document.body.removeAttribute('theme-mode');
+  },
+});
+
+function setTheme() {
+  if (document.body.getAttribute('theme-mode') === 'dark') {
+    document.body.removeAttribute('theme-mode');
+  } else {
+    document.body.setAttribute('theme-mode', 'dark');
+  }
+}
 </script>
 
 <template>
@@ -74,7 +95,7 @@ function reloadPage() {
     <template #menuHeaderRender>
       <router-link to="/">
         <img src="@/assets/logo.svg" alt="logo" width="32" height="32" />
-        <h1 v-show="!collapsed">Preview Pro</h1>
+        <h1>Preview Pro</h1>
       </router-link>
     </template>
 
@@ -101,6 +122,7 @@ function reloadPage() {
 
     <template #rightContentRender>
       <div class="h-12 flex items-center space-x-4">
+        <bulb-outlined class="text-xl cursor-pointer" @click="setTheme()" />
         <fullscreen-exit-outlined
           v-if="isFullscreen"
           class="text-xl cursor-pointer"
@@ -128,7 +150,7 @@ function reloadPage() {
     <multi-tab />
 
     <div
-      class="h-[calc(100vh-109px)] flex flex-col box-border overflow-y-auto overflow-x-hidden"
+      class="h-[calc(100vh-111px)] flex flex-col box-border overflow-y-auto overflow-x-hidden"
     >
       <nested-page class="m-4" />
       <layout-footer />
