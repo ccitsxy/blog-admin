@@ -4,9 +4,6 @@ import { ref } from 'vue';
 import { message } from 'ant-design-vue';
 import 'ant-design-vue/es/message/style/css';
 import type { TablePaginationConfig } from 'ant-design-vue';
-import { EditOutlined } from '@ant-design/icons-vue';
-
-import VueVditor from '@/components/VueVditor/VueVditor.vue';
 
 const articles = ref([
   {

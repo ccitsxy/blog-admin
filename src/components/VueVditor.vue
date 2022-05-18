@@ -85,12 +85,12 @@ onMounted(() => {
     fullscreen: {
       index: 3000,
     },
-    upload: {
-      url: 'https://api.ccitsxy.vercel.app/upload',
-      fieldName: 'file',
-      multiple: false,
-    },
-
+    // upload: {
+    //   url: 'https://api.ccitsxy.vercel.app/upload',
+    //   fieldName: 'file',
+    //   multiple: false,
+    // },
+    cdn: '/vditor',
     after() {
       emit('after', toRaw(contentEditor.value));
     },

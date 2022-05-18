@@ -25,7 +25,7 @@
   background-color: #fff;
 }
 
-* {
+.ant-layout-sider {
   scrollbar-width: thin;
 }
 
@@ -104,7 +104,7 @@
   --ant-info-color-deprecated-border: #96d7ff;
 }
 
-[theme-mode='dark'] body {
+[theme-mode='dark'] #app {
   color-scheme: dark;
 }
 

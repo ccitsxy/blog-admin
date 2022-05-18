@@ -24,11 +24,12 @@ declare module 'vue' {
     ATabPane: typeof import('ant-design-vue/es')['TabPane']
     ATabs: typeof import('ant-design-vue/es')['Tabs']
     BulbOutlined: typeof import('@ant-design/icons-vue')['BulbOutlined']
+    EditOutlined: typeof import('@ant-design/icons-vue')['EditOutlined']
     FullscreenExitOutlined: typeof import('@ant-design/icons-vue')['FullscreenExitOutlined']
     FullscreenOutlined: typeof import('@ant-design/icons-vue')['FullscreenOutlined']
     ReloadOutlined: typeof import('@ant-design/icons-vue')['ReloadOutlined']
     UserOutlined: typeof import('@ant-design/icons-vue')['UserOutlined']
-    VueVditor: typeof import('./src/components/VueVditor/VueVditor.vue')['default']
+    VueVditor: typeof import('./src/components/VueVditor.vue')['default']
   }
 }
 
