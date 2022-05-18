@@ -35,7 +35,7 @@ function updateTab(name: string | number) {
       <div>{{ tab.meta.title }}</div>
       <n-icon
         v-if="tabList.length > 1"
-        class="text-[#767c82] hover:text-[#1890ff] ml-3"
+        class="icon-close ml-3"
         size="14"
         :component="CloseOutlined"
         @click.stop="closeTab(tab)"
@@ -44,3 +44,15 @@ function updateTab(name: string | number) {
     <template #suffix> <div /> </template>
   </n-tabs>
 </template>
+
+<style scoped>
+.icon-close {
+  color: var(--n-close-color);
+}
+.icon-close :hover {
+  color: var(--n-close-color-hover);
+}
+.icon-close :active {
+  color: var(--n-close-color-pressed);
+}
+</style>

@@ -12,7 +12,7 @@ function after() {
 </script>
 
 <template>
-  <div class="about">
+  <div class="about mt-4">
     <n-spin :show="show" class="h-[480px]" description="加载中...">
       <vue-vditor v-model="editor" :options="options" @after="after()" />
     </n-spin>

@@ -101,7 +101,15 @@ onMounted(() => {
       hljs: {
         lineNumber: true,
       },
+      theme: {
+        current: 'light',
+        path: '/vditor/dist/css/content-theme',
+      },
     },
+    hint: {
+      emojiPath: '/vditor/dist/images/emoji',
+    },
+    cdn: '/vditor',
     after() {
       contentEditor.value?.setTheme(
         theme?.value ? 'dark' : 'classic',

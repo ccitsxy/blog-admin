@@ -179,8 +179,7 @@ watchEffect(() => {
         </n-layout-header>
         <multi-tab class="absolute top-12 h-12 pt-2" />
         <n-layout-content
-          class="top-24"
-          style="height: calc(100vh - 96px)"
+          class="top-24 h-[calc(100vh - 96px)]"
           content-style="padding: 24px;"
           :native-scrollbar="false"
         >
