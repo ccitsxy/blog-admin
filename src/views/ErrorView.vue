@@ -1,9 +1,9 @@
 <template>
-  <a-result status="404" title="404" sub-title="抱歉，您访问的页面不存在。">
-    <template #extra>
-      <a-button type="primary">
-        <router-link to="/">回到首页</router-link>
-      </a-button>
-    </template>
-  </a-result>
+  <div class="grid justify-center items-center h-screen">
+    <n-result status="error" title="404 资源不存在">
+      <template #footer>
+        <n-button type="primary" @click="$router.push('/')">回到首页</n-button>
+      </template>
+    </n-result>
+  </div>
 </template>

@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import zhCN from 'ant-design-vue/es/locale/zh_CN';
+import type { GlobalThemeOverrides } from 'naive-ui';
+const themeOverrides: GlobalThemeOverrides = {
+  common: {
+    primaryColor: '#2080f0FF',
+    primaryColorHover: '#4098fcFF',
+    primaryColorPressed: '#1060c9FF',
+    primaryColorSuppl: '#4098fcFF',
+  },
+};
 </script>
 
 <template>
-  <a-config-provider :locale="zhCN">
-    <router-view />
-  </a-config-provider>
+  <n-config-provider inline-theme-disabled :theme-overrides="themeOverrides">
+    <n-loading-bar-provider>
+      <router-view />
+    </n-loading-bar-provider>
+  </n-config-provider>
 </template>
-
-<style>
-@import '@/assets/base.css';
-</style>

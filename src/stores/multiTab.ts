@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
-import type { RouteLocationNormalized } from 'vue-router';
 
+import type { RouteLocationNormalized } from 'vue-router';
 import router from '@/router';
 
 interface MultiTabState {

@@ -1,7 +1,17 @@
 <script setup lang="ts">
+import {
+  onMounted,
+  ref,
+  watch,
+  toRaw,
+  onUnmounted,
+  unref,
+  inject,
+  type Ref,
+} from 'vue';
+import type { GlobalTheme } from 'naive-ui';
 import Vditor from 'vditor';
 import 'vditor/dist/index.css';
-import { onMounted, ref, watch, toRaw, onUnmounted, unref } from 'vue';
 
 const emit = defineEmits([
   'update:modelValue',
@@ -28,6 +38,8 @@ const props = defineProps({
 
 const contentEditor = ref<Vditor | null>(null);
 const editorRef = ref<HTMLElement | null>(null);
+
+const theme = inject<Ref<GlobalTheme | null>>('theme');
 
 onMounted(() => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -85,13 +97,17 @@ onMounted(() => {
     fullscreen: {
       index: 3000,
     },
-    // upload: {
-    //   url: 'https://api.ccitsxy.vercel.app/upload',
-    //   fieldName: 'file',
-    //   multiple: false,
-    // },
-    cdn: '/vditor',
+    preview: {
+      hljs: {
+        lineNumber: true,
+      },
+    },
     after() {
+      contentEditor.value?.setTheme(
+        theme?.value ? 'dark' : 'classic',
+        theme?.value ? 'dark' : 'light',
+        'native'
+      );
       emit('after', toRaw(contentEditor.value));
     },
     input(value: string) {
@@ -124,6 +140,16 @@ watch(
   }
 );
 
+watch(
+  () => theme?.value,
+  (newVal) => {
+    contentEditor?.value?.setTheme(
+      newVal ? 'dark' : 'classic',
+      newVal ? 'dark' : 'light'
+    );
+  }
+);
+
 onUnmounted(() => {
   const editorInstance = unref(contentEditor);
   if (!editorInstance) return;
@@ -141,6 +167,10 @@ onUnmounted(() => {
 
 <style>
 .vditor {
-  border-radius: unset;
+  padding: 0.5px;
+}
+.vditor--fullscreen {
+  padding: 0;
+  border: 0;
 }
 </style>
