@@ -30,7 +30,9 @@ function updateTab(name: string | number) {
 
 <template>
   <n-tabs :value="$route.path" type="card" @update-value="updateTab">
-    <template #prefix> <div /> </template>
+    <template #prefix>
+      <div />
+    </template>
     <n-tab v-for="tab in tabList" :key="tab.path" :name="tab.path">
       <div>{{ tab.meta.title }}</div>
       <n-icon
@@ -41,7 +43,9 @@ function updateTab(name: string | number) {
         @click.stop="closeTab(tab)"
       />
     </n-tab>
-    <template #suffix> <div /> </template>
+    <template #suffix>
+      <div />
+    </template>
   </n-tabs>
 </template>
 
@@ -49,9 +53,11 @@ function updateTab(name: string | number) {
 .icon-close {
   color: var(--n-close-color);
 }
+
 .icon-close :hover {
   color: var(--n-close-color-hover);
 }
+
 .icon-close :active {
   color: var(--n-close-color-pressed);
 }
