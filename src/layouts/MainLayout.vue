@@ -35,13 +35,11 @@ const osTheme = computed(() =>
   useOsTheme().value === 'dark' ? darkTheme : null
 );
 const theme = ref<GlobalTheme | null>(null);
-const colorScheme = ref('normal');
 
 watch(
   () => osTheme.value,
   (newVal) => {
     theme.value = newVal;
-    colorScheme.value = newVal ? 'dark' : 'classic';
   },
   { immediate: true }
 );
@@ -140,11 +138,7 @@ watchEffect(() => {
         </teleport>
       </n-layout-sider>
       <n-layout>
-        <n-layout-header
-          class="flex items-center h-12 space-x-4 px-4"
-          bordered
-          position="absolute"
-        >
+        <n-layout-header class="flex items-center h-12 space-x-4 px-4" bordered>
           <n-button v-if="collapsed" text @click="collapsed = false">
             <n-icon size="24" :component="MenuUnfoldOutlined" />
           </n-button>
@@ -177,9 +171,9 @@ watchEffect(() => {
             <n-icon size="24" :component="BulbFilled" />
           </n-button>
         </n-layout-header>
-        <multi-tab class="absolute top-12 h-12 pt-2" />
+        <multi-tab class="h-12 pt-2" />
         <n-layout-content
-          class="top-24 h-[calc(100vh - 96px)]"
+          class="h-[calc(100vh-96px)]"
           content-style="padding: 24px;"
           :native-scrollbar="false"
         >
@@ -190,9 +184,3 @@ watchEffect(() => {
     </n-layout>
   </n-config-provider>
 </template>
-
-<style>
-:root {
-  color-scheme: v-bind(colorScheme);
-}
-</style>

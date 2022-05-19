@@ -11,7 +11,11 @@ const themeOverrides: GlobalThemeOverrides = {
 </script>
 
 <template>
-  <n-config-provider inline-theme-disabled :theme-overrides="themeOverrides">
+  <n-config-provider
+    inline-theme-disabled
+    preflight-style-disabled
+    :theme-overrides="themeOverrides"
+  >
     <n-loading-bar-provider>
       <router-view />
     </n-loading-bar-provider>

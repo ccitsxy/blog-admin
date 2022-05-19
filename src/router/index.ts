@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { EditOutlined, SettingOutlined } from '@vicons/antd';
+import {
+  EditOutlined,
+  SettingOutlined,
+  QuestionCircleOutlined,
+} from '@vicons/antd';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,7 +34,7 @@ const router = createRouter({
               meta: {
                 title: '文章管理',
               },
-              component: () => import('@/views/AboutView.vue'),
+              component: () => import('@/views/manager/ArticleManager.vue'),
             },
             {
               path: '/manager/category',
@@ -38,7 +42,7 @@ const router = createRouter({
               meta: {
                 title: '分类管理',
               },
-              component: () => import('@/views/AboutView.vue'),
+              component: () => import('@/views/manager/CategoryManager.vue'),
             },
             {
               path: '/manager/tag',
@@ -46,26 +50,15 @@ const router = createRouter({
               meta: {
                 title: '标签管理',
               },
-              component: () => import('@/views/AboutView.vue'),
+              component: () => import('@/views/manager/TagManager.vue'),
             },
           ],
         },
         {
-          path: '/test',
-          name: 'test',
-          meta: { title: '测试', icon: EditOutlined },
-          component: () => import('@/layouts/NestedPage.vue'),
-          redirect: '/test/1',
-          children: [
-            {
-              path: '/test/1',
-              name: 'test1',
-              meta: {
-                title: '测试1',
-              },
-              component: () => import('@/views/AboutView.vue'),
-            },
-          ],
+          path: '/about',
+          name: 'about',
+          meta: { title: '关于', icon: QuestionCircleOutlined },
+          component: () => import('@/views/AboutView.vue'),
         },
       ],
     },

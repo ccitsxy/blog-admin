@@ -1,20 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
-const editor = ref('');
-const options = {
-  height: 480,
-};
-const show = ref(true);
-function after() {
-  show.value = false;
-}
+import { GithubOutlined } from '@vicons/antd';
 </script>
-
 <template>
-  <div class="about mt-4">
-    <n-spin :show="show" class="h-[480px]" description="加载中...">
-      <vue-vditor v-model="editor" :options="options" @after="after()" />
-    </n-spin>
-  </div>
+  <div class="h-[2000px]">测试</div>
+  <a
+    class="flex items-center space-x-2"
+    href="https://github.com/ccitsxy/blog-admin"
+    target="_blank"
+  >
+    <n-icon :component="GithubOutlined" size="20" />
+    <span>Github</span>
+  </a>
 </template>

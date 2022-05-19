@@ -181,4 +181,7 @@ onUnmounted(() => {
   padding: 0;
   border: 0;
 }
+.vditor--dark {
+  padding: 0;
+}
 </style>
