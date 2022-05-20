@@ -2,6 +2,7 @@
 import {
   darkTheme,
   useOsTheme,
+  zhCN,
   type GlobalThemeOverrides,
   type GlobalTheme,
 } from 'naive-ui';
@@ -35,6 +36,7 @@ provide('theme', theme);
     preflight-style-disabled
     :theme-overrides="themeOverrides"
     :theme="theme"
+    :locale="zhCN"
   >
     <n-loading-bar-provider>
       <router-view />

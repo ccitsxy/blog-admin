@@ -116,11 +116,13 @@ watchEffect(() => {
         @update-value="updateValue"
       />
       <teleport to="#app">
-        <div
-          class="h-full w-full fixed top-0 left-0 md:hidden opacity-100 bg-[#00000073] transition-opacity"
-          :class="{ 'opacity-0 h-0': collapsed && width < 768 }"
-          @click="collapsed = true"
-        ></div>
+        <transition name="fade">
+          <div
+            v-show="!collapsed && width < 768"
+            class="h-full w-full fixed top-0 left-0 bg-[#00000073]"
+            @click="collapsed = true"
+          ></div
+        ></transition>
       </teleport>
     </n-layout-sider>
     <n-layout>
