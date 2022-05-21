@@ -1,19 +1,23 @@
 <script setup lang="ts">
-import { watch } from 'vue';
+import { computed, watch } from 'vue';
 import { useRouter, type RouteLocationNormalized } from 'vue-router';
 
 import { useMultiTabStore } from '@/stores/multiTab';
 
 import { CloseOutlined } from '@vicons/antd';
 
-const tabList = useMultiTabStore().tabList;
+import Draggable from 'vuedraggable';
 
 const router = useRouter();
+
+const multiTabStore = useMultiTabStore();
+
+const tabList = computed(() => multiTabStore.tabList);
 
 watch(
   () => router.currentRoute.value.path,
   () => {
-    useMultiTabStore().addTab();
+    multiTabStore.addTab(router.currentRoute.value);
   },
   {
     immediate: true,
@@ -21,44 +25,72 @@ watch(
 );
 
 function closeTab(tab: RouteLocationNormalized) {
-  useMultiTabStore().closeTab(tab);
+  multiTabStore.closeTab(tab);
 }
-function updateTab(name: string | number) {
+/* function updateTab(name: string | number) {
   router.push(`${name}`);
-}
+} */
 </script>
 
 <template>
-  <n-tabs :value="$route.path" type="card" @update-value="updateTab">
-    <template #prefix>
-      <div />
-    </template>
-    <n-tab v-for="tab in tabList" :key="tab.path" :name="tab.path">
-      <div>{{ tab.meta.title }}</div>
-      <n-icon
-        v-if="tabList.length > 1"
-        class="icon-close ml-3"
-        size="14"
-        :component="CloseOutlined"
-        @click.stop="closeTab(tab)"
-      />
-    </n-tab>
-    <template #suffix>
-      <div />
-    </template>
-  </n-tabs>
+  <n-el>
+    <draggable
+      :list="tabList"
+      animation="300"
+      item-key="path"
+      class="multi-tabs flex items-center space-x-2 px-4 py-1"
+    >
+      <template #item="{ element }">
+        <div
+          :id="element.path"
+          class="multi-tabs-tab flex content-center items-center space-x-2 pl-3 pr-3 py-2 cursor-pointer"
+          :class="{ 'multi-tabs-tab-active': element.path === $route.path }"
+          @click="$router.push(element.path)"
+        >
+          <span>{{ element.meta.title }}</span>
+          <n-icon
+            v-if="tabList.length > 1"
+            class="icon-close"
+            size="14"
+            :component="CloseOutlined"
+            @click.stop="closeTab(element)"
+          />
+        </div>
+      </template>
+    </draggable>
+  </n-el>
 </template>
 
 <style scoped>
+.multi-tabs {
+  border-bottom: 1px solid var(--divider-color);
+  transition: color 0.3s var(--n-bezier), background-color 0.3s var(--n-bezier),
+    box-shadow 0.3s var(--n-bezier), border-color 0.3s var(--n-bezier);
+}
+.multi-tabs-tab {
+  font-size: var(--font-size);
+  background-color: var(--tab-color);
+  color: var(--n-text-color);
+  transition: color 0.3s var(--n-bezier), background-color 0.3s var(--n-bezier),
+    box-shadow 0.3s var(--n-bezier), border-color 0.3s var(--n-bezier);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+}
+
+.multi-tabs-tab-active {
+  color: var(--primary-color);
+  background-color: var(--base-color);
+}
+
 .icon-close {
-  color: var(--n-close-color);
+  color: var(--close-color);
 }
 
 .icon-close :hover {
-  color: var(--n-close-color-hover);
+  color: var(--close-color-hover);
 }
 
 .icon-close :active {
-  color: var(--n-close-color-pressed);
+  color: var(--close-color-pressed);
 }
 </style>
