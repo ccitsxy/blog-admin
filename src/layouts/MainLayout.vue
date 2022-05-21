@@ -121,8 +121,8 @@ watchEffect(() => {
             v-show="!collapsed && width < 768"
             class="h-full w-full fixed top-0 left-0 bg-[#00000073]"
             @click="collapsed = true"
-          />
-        </transition>
+          ></div
+        ></transition>
       </teleport>
     </n-layout-sider>
     <n-layout>
@@ -159,10 +159,10 @@ watchEffect(() => {
           <n-icon size="24" :component="BulbFilled" />
         </n-button>
       </n-layout-header>
-      <multi-tab class="h-12" />
+      <multi-tab class="h-12 pt-2" />
       <n-layout-content
         class="h-[calc(100vh-96px)]"
-        content-style="padding: 16px;"
+        content-style="padding: 24px;"
         :native-scrollbar="false"
       >
         <router-view />

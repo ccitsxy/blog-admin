@@ -23,14 +23,16 @@ export const useMultiTabStore = defineStore({
     },
   },
   actions: {
-    addTab(tab: RouteLocationNormalized) {
+    addTab() {
       if (
-        !this.tabList.some((p: { path: string }) => p.path == tab.path) ||
-        tab.path.startsWith('/redirect')
-      ) {
-        this.tabList.push(tab);
-        this.cachedTabList.add(tab.name as string);
-      }
+        this.tabList.some(
+          (p: { path: string }) => p.path === router.currentRoute.value.path
+        ) ||
+        router.currentRoute.value.path.startsWith('/redirect')
+      )
+        return;
+      this.tabList.push(router.currentRoute.value);
+      this.cachedTabList.add(router.currentRoute.value.name as string);
     },
     closeTab(tab: RouteLocationNormalized) {
       const tabIndex = this.tabList.indexOf(tab);
