@@ -11,14 +11,13 @@ const router = createRouter({
     {
       path: '/',
       name: 'index',
-      meta: { title: '主页' },
       component: () => import('@/layouts/MainLayout.vue'),
       redirect: '/home',
       children: [
         {
           path: '/home',
           name: 'home',
-          meta: { title: '主页', icon: EditOutlined },
+          meta: { title: '主页', icon: EditOutlined, affix: true },
           component: () => import('@/views/HomeView.vue'),
         },
         {

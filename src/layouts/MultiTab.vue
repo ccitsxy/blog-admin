@@ -1,19 +1,29 @@
 <script setup lang="ts">
-import { watch } from 'vue';
+import { computed, watch } from 'vue';
 import { useRouter, type RouteLocationNormalized } from 'vue-router';
 
 import { useMultiTabStore } from '@/stores/multiTab';
 
-import { CloseOutlined } from '@vicons/antd';
+import {
+  CloseOutlined,
+  ColumnWidthOutlined,
+  EllipsisOutlined,
+  MinusOutlined,
+  DoubleLeftOutlined,
+  DoubleRightOutlined,
+} from '@vicons/antd';
+import { renderIcon } from '@/utils/icons';
 
-const tabList = useMultiTabStore().tabList;
+const multiTabStore = useMultiTabStore();
+
+const tabList = computed(() => multiTabStore.tabList);
 
 const router = useRouter();
 
 watch(
   () => router.currentRoute.value.path,
   () => {
-    useMultiTabStore().addTab();
+    multiTabStore.addTab();
   },
   {
     immediate: true,
@@ -21,17 +31,73 @@ watch(
 );
 
 function closeTab(tab: RouteLocationNormalized) {
-  useMultiTabStore().closeTab(tab);
+  multiTabStore.closeTab(tab);
 }
 function updateTab(name: string | number) {
   router.push(`${name}`);
+}
+
+const tabsMenuOptions = computed(() => {
+  const isDisabled = tabList.value.length <= 1;
+  return [
+    {
+      label: `关闭当前`,
+      key: '1',
+      disabled: isDisabled,
+      icon: renderIcon(CloseOutlined),
+    },
+    {
+      label: '关闭其他',
+      key: '2',
+      disabled: isDisabled,
+      icon: renderIcon(ColumnWidthOutlined),
+    },
+    {
+      label: '关闭左侧',
+      key: '3',
+      disabled: isDisabled,
+      icon: renderIcon(DoubleLeftOutlined),
+    },
+    {
+      label: '关闭右侧',
+      key: '4',
+      disabled: isDisabled,
+      icon: renderIcon(DoubleRightOutlined),
+    },
+    {
+      label: '关闭全部',
+      key: '5',
+      disabled: isDisabled,
+      icon: renderIcon(MinusOutlined),
+    },
+  ];
+});
+
+function selectTabsMenu(key: string | number) {
+  switch (key) {
+    case '1':
+      multiTabStore.closeCurrentTab();
+      break;
+    case '2':
+      multiTabStore.closeOtherTabs();
+      break;
+    case '3':
+      multiTabStore.closeLeftTabs();
+      break;
+    case '4':
+      multiTabStore.closeRightTabs();
+      break;
+    case '5':
+      multiTabStore.closeAllTabs();
+      break;
+  }
 }
 </script>
 
 <template>
   <n-tabs :value="$route.path" type="card" @update-value="updateTab">
     <template #prefix>
-      <div />
+      <div></div>
     </template>
     <n-tab v-for="tab in tabList" :key="tab.path" :name="tab.path">
       <div>{{ tab.meta.title }}</div>
@@ -44,7 +110,9 @@ function updateTab(name: string | number) {
       />
     </n-tab>
     <template #suffix>
-      <div />
+      <n-dropdown :options="tabsMenuOptions" @select="selectTabsMenu">
+        <n-icon class="mr-4" size="24" :component="EllipsisOutlined" />
+      </n-dropdown>
     </template>
   </n-tabs>
 </template>

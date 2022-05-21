@@ -26,7 +26,7 @@ export const useMultiTabStore = defineStore({
     addTab() {
       if (
         this.tabList.some(
-          (p: { path: string }) => p.path === router.currentRoute.value.path
+          (item) => item.path === router.currentRoute.value.path
         ) ||
         router.currentRoute.value.path.startsWith('/redirect')
       )
@@ -44,6 +44,40 @@ export const useMultiTabStore = defineStore({
         void router.push(this.tabList[tabIndex - 1].path);
       } else {
         void router.push(this.tabList[tabIndex].path);
+      }
+    },
+    closeCurrentTab() {
+      const index = this.tabList.findIndex(
+        (item) => item.path == router.currentRoute.value.path
+      );
+      this.tabList.splice(index, 1);
+    },
+    closeOtherTabs() {
+      // 关闭其他
+      this.tabList = this.tabList.filter(
+        (item) => item.path === router.currentRoute.value.path
+      );
+    },
+    closeLeftTabs() {
+      // 关闭左侧
+      const index = this.tabList.findIndex(
+        (item) => item.path == router.currentRoute.value.path
+      );
+      this.tabList.splice(0, index);
+    },
+    closeRightTabs() {
+      // 关闭右侧
+      const index = this.tabList.findIndex(
+        (item) => item.path === router.currentRoute.value.path
+      );
+      this.tabList.splice(index + 1);
+    },
+    closeAllTabs() {
+      this.tabList = this.tabList.filter((item) => item?.meta?.affix ?? false);
+      if (this.tabList.length === 0) {
+        router.push('/');
+      } else {
+        router.push(this.tabList[this.tabList.length - 1].path);
       }
     },
   },

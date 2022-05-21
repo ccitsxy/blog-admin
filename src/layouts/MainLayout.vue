@@ -162,7 +162,7 @@ watchEffect(() => {
       <multi-tab class="h-12 pt-2" />
       <n-layout-content
         class="h-[calc(100vh-96px)]"
-        content-style="padding: 24px;"
+        content-style="padding: 16px;"
         :native-scrollbar="false"
       >
         <router-view />
