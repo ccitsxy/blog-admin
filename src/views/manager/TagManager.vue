@@ -1,4 +1,7 @@
-<script setup lang="ts"></script>
 <template>
-  <div></div>
+  <div>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo inventore non
+    natus in ratione. Ipsam ea nostrum pariatur velit similique temporibus quas
+    reiciendis eaque quod, iusto, magnam esse saepe id!
+  </div>
 </template>

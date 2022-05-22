@@ -39,7 +39,9 @@ provide('theme', theme);
     :locale="zhCN"
   >
     <n-loading-bar-provider>
-      <router-view />
+      <n-message-provider>
+        <router-view />
+      </n-message-provider>
     </n-loading-bar-provider>
   </n-config-provider>
 </template>

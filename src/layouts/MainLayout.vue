@@ -161,25 +161,24 @@ watchEffect(() => {
       </n-layout-header>
       <multi-tab class="h-12 pt-2" />
       <n-layout-content
-        class="h-[calc(100vh-96px)]"
-        content-style="padding: 16px;"
+        class="h-[calc(100vh-6rem)]"
+        content-style="padding: 1rem;"
         :native-scrollbar="false"
       >
-        <router-view />
+        <router-view v-slot="{ Component, route }">
+          <transition name="slide-left" mode="out-in" appear>
+            <keep-alive>
+              <suspense>
+                <template #default>
+                  <component :is="Component" :key="route?.meta?.path" />
+                </template>
+                <template #fallback> Loading... </template>
+              </suspense>
+            </keep-alive>
+          </transition>
+        </router-view>
         <n-back-top />
       </n-layout-content>
     </n-layout>
   </n-layout>
 </template>
-
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

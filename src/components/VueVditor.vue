@@ -172,16 +172,3 @@ onUnmounted(() => {
 <template>
   <div ref="editorRef"></div>
 </template>
-
-<style>
-.vditor {
-  padding: 0.5px;
-}
-.vditor--fullscreen {
-  padding: 0;
-  border: 0;
-}
-.vditor--dark {
-  padding: 0;
-}
-</style>
