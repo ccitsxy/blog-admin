@@ -38,36 +38,41 @@ function updateTab(name: string | number) {
 }
 
 const tabsMenuOptions = computed(() => {
-  const isDisabled = tabList.value.length <= 1;
+  const isSingle = tabList.value.length <= 1;
+  const currentIndex = tabList.value.findIndex(
+    (item) => item.path === router.currentRoute.value.path
+  );
+  const isFirst = currentIndex === 0;
+  const isLast = currentIndex === tabList.value.length - 1;
   return [
     {
       label: `关闭当前`,
       key: '1',
-      disabled: isDisabled,
+      disabled: isSingle,
       icon: renderIcon(CloseOutlined),
     },
     {
       label: '关闭其他',
       key: '2',
-      disabled: isDisabled,
+      disabled: isSingle,
       icon: renderIcon(ColumnWidthOutlined),
     },
     {
       label: '关闭左侧',
       key: '3',
-      disabled: isDisabled,
+      disabled: isSingle || isFirst,
       icon: renderIcon(DoubleLeftOutlined),
     },
     {
       label: '关闭右侧',
       key: '4',
-      disabled: isDisabled,
+      disabled: isSingle || isLast,
       icon: renderIcon(DoubleRightOutlined),
     },
     {
       label: '关闭全部',
       key: '5',
-      disabled: isDisabled,
+      disabled: isSingle,
       icon: renderIcon(MinusOutlined),
     },
   ];
