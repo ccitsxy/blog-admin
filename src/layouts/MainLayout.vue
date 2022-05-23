@@ -27,6 +27,7 @@ import { getMenuData } from '@/utils';
 import { renderIcon } from '@/utils/icons';
 
 import MultiTab from './MultiTab.vue';
+import { useMultiTabStore } from '@/stores/multiTab';
 
 const theme = inject<Ref<GlobalTheme | null>>('theme');
 
@@ -86,6 +87,9 @@ watchEffect(() => {
       .map((r) => r.path);
   }
 });
+
+const multiTabStore = useMultiTabStore();
+const cachedTabList = computed(() => multiTabStore.getCachedTabList);
 </script>
 
 <template>
@@ -167,13 +171,8 @@ watchEffect(() => {
       >
         <router-view v-slot="{ Component, route }">
           <transition name="slide-left" mode="out-in" appear>
-            <keep-alive>
-              <suspense>
-                <template #default>
-                  <component :is="Component" :key="route?.meta?.path" />
-                </template>
-                <template #fallback> Loading... </template>
-              </suspense>
+            <keep-alive :include="cachedTabList">
+              <component :is="Component" :key="route?.meta?.path" />
             </keep-alive>
           </transition>
         </router-view>
