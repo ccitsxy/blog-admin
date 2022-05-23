@@ -125,8 +125,8 @@ const cachedTabList = computed(() => multiTabStore.getCachedTabList);
             v-show="!collapsed && width < 768"
             class="h-full w-full fixed top-0 left-0 bg-[#00000073]"
             @click="collapsed = true"
-          ></div
-        ></transition>
+          />
+        </transition>
       </teleport>
     </n-layout-sider>
     <n-layout>

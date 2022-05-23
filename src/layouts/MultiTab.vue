@@ -7,7 +7,7 @@ import { useMultiTabStore } from '@/stores/multiTab';
 import {
   CloseOutlined,
   ColumnWidthOutlined,
-  EllipsisOutlined,
+  MoreOutlined,
   MinusOutlined,
   DoubleLeftOutlined,
   DoubleRightOutlined,
@@ -102,7 +102,7 @@ function selectTabsMenu(key: string | number) {
 <template>
   <n-tabs :value="$route.path" type="card" @update-value="updateTab">
     <template #prefix>
-      <div></div>
+      <div />
     </template>
     <n-tab v-for="tab in tabList" :key="tab.path" :name="tab.path">
       <div>{{ tab.meta.title }}</div>
@@ -116,7 +116,7 @@ function selectTabsMenu(key: string | number) {
     </n-tab>
     <template #suffix>
       <n-dropdown :options="tabsMenuOptions" @select="selectTabsMenu">
-        <n-icon class="mr-4" size="24" :component="EllipsisOutlined" />
+        <n-icon class="mr-4" size="24" :component="MoreOutlined" />
       </n-dropdown>
     </template>
   </n-tabs>
