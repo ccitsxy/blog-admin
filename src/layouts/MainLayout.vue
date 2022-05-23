@@ -43,6 +43,9 @@ router.beforeEach(() => {
   loadingBar.start();
 });
 router.afterEach(() => {
+  if (width.value < 768) {
+    collapsed.value = true;
+  }
   loadingBar.finish();
 });
 
@@ -163,7 +166,7 @@ watchEffect(() => {
       <multi-tab class="h-12 pt-2" />
       <n-layout-content
         class="h-[calc(100vh-6rem)]"
-        content-style="padding: 1rem;"
+        content-style="padding: 1.5rem;"
         :native-scrollbar="false"
       >
         <nested-page />

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* fix mobile menu touch */
+/* prevent mobile menu touch highlight */
 body {
   -webkit-tap-highlight-color: transparent;
 }
