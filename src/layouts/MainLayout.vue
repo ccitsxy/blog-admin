@@ -27,7 +27,7 @@ import { getMenuData } from '@/utils';
 import { renderIcon } from '@/utils/icons';
 
 import MultiTab from './MultiTab.vue';
-import { useMultiTabStore } from '@/stores/multiTab';
+import NestedPage from './NestedPage.vue';
 
 const theme = inject<Ref<GlobalTheme | null>>('theme');
 
@@ -87,9 +87,6 @@ watchEffect(() => {
       .map((r) => r.path);
   }
 });
-
-const multiTabStore = useMultiTabStore();
-const cachedTabList = computed(() => multiTabStore.getCachedTabList);
 </script>
 
 <template>
@@ -169,13 +166,7 @@ const cachedTabList = computed(() => multiTabStore.getCachedTabList);
         content-style="padding: 1rem;"
         :native-scrollbar="false"
       >
-        <router-view v-slot="{ Component, route }">
-          <transition name="slide-left" mode="out-in" appear>
-            <keep-alive :include="cachedTabList">
-              <component :is="Component" :key="route?.meta?.path" />
-            </keep-alive>
-          </transition>
-        </router-view>
+        <nested-page />
         <n-back-top />
       </n-layout-content>
     </n-layout>

@@ -16,7 +16,7 @@ import { renderIcon } from '@/utils/icons';
 
 const multiTabStore = useMultiTabStore();
 
-const tabList = computed(() => multiTabStore.tabList);
+const tabList = computed(() => multiTabStore.getTabList);
 
 const router = useRouter();
 
