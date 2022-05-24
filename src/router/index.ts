@@ -12,23 +12,23 @@ const router = createRouter({
       path: '/',
       name: 'index',
       component: () => import('@/layouts/MainLayout.vue'),
-      redirect: '/home',
+      redirect: { name: 'home' },
       children: [
         {
-          path: '/home',
+          path: 'home',
           name: 'home',
           meta: { title: '主页', icon: EditOutlined, affix: true },
           component: () => import('@/views/HomeView.vue'),
         },
         {
-          path: '/manager',
+          path: 'manager',
           name: 'manager',
           meta: { title: '管理', icon: SettingOutlined },
           component: () => import('@/layouts/NestedPage.vue'),
-          redirect: '/manager/article',
+          redirect: { name: 'article' },
           children: [
             {
-              path: '/manager/article',
+              path: 'article',
               name: 'article',
               meta: {
                 title: '文章管理',
@@ -36,7 +36,7 @@ const router = createRouter({
               component: () => import('@/views/manager/ArticleManager.vue'),
             },
             {
-              path: '/manager/category',
+              path: 'category',
               name: 'category',
               meta: {
                 title: '分类管理',
@@ -44,7 +44,7 @@ const router = createRouter({
               component: () => import('@/views/manager/CategoryManager.vue'),
             },
             {
-              path: '/manager/tag',
+              path: 'tag',
               name: 'tag',
               meta: {
                 title: '标签管理',
@@ -54,7 +54,7 @@ const router = createRouter({
           ],
         },
         {
-          path: '/about',
+          path: 'about',
           name: 'about',
           meta: { title: '关于', icon: QuestionCircleOutlined },
           component: () => import('@/views/AboutView.vue'),
@@ -67,8 +67,8 @@ const router = createRouter({
       component: () => import('@/layouts/MainLayout.vue'),
       children: [
         {
-          path: '/redirect/:path(.*)',
-          name: 'redirect',
+          path: ':path(.*)',
+          name: 'redirectPath',
           component: () => import('@/views/RedirectView.vue'),
         },
       ],
