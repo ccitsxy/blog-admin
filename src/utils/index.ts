@@ -1,3 +1,4 @@
+// https://github.com/vueComponent/pro-components/tree/next/packages/pro-layout/src/utils
 import type { RouteRecord, RouteRecordRaw } from 'vue-router';
 
 function clearMenuItem(
