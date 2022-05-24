@@ -42,12 +42,11 @@ const editorRef = ref<HTMLElement | null>(null);
 const theme = inject<Ref<GlobalTheme | null>>('theme');
 
 onMounted(() => {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  contentEditor.value = new Vditor(editorRef.value!, {
+  contentEditor.value = new Vditor(editorRef.value as HTMLElement, {
     ...props.options,
     value: props.modelValue,
     toolbar: [
-      // "emoji",
+      'emoji',
       'headings',
       'bold',
       'italic',
@@ -67,7 +66,7 @@ onMounted(() => {
       'insert-before',
       'insert-after',
       '|',
-      'upload',
+      // 'upload',
       // "record",
       'table',
       '|',
