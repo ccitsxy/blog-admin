@@ -39,6 +39,7 @@ function updateTab(name: string | number) {
 
 const tabsMenuOptions = computed(() => {
   const isSingle = tabList.value.length <= 1;
+  const isAffix = router.currentRoute.value.meta.affix;
   const currentIndex = tabList.value.findIndex(
     (item) => item.path === router.currentRoute.value.path
   );
@@ -48,7 +49,7 @@ const tabsMenuOptions = computed(() => {
     {
       label: `关闭当前`,
       key: '1',
-      disabled: isSingle,
+      disabled: isSingle || isAffix,
       icon: renderIcon(CloseOutlined),
     },
     {
@@ -107,7 +108,7 @@ function selectTabsMenu(key: string | number) {
     <n-tab v-for="tab in tabList" :key="tab.path" :name="tab.path">
       <div>{{ tab.meta.title }}</div>
       <n-icon
-        v-if="tabList.length > 1"
+        v-if="tabList.length > 1 && !tab.meta.affix"
         class="icon-close ml-3"
         size="14"
         :component="CloseOutlined"

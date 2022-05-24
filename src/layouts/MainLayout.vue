@@ -43,9 +43,6 @@ router.beforeEach(() => {
   loadingBar.start();
 });
 router.afterEach(() => {
-  if (width.value < 768) {
-    collapsed.value = true;
-  }
   loadingBar.finish();
 });
 
@@ -79,6 +76,9 @@ const menuOptions: MenuOption[] = menuData.map((item: RouteRecordRaw) =>
   mapMenu(item)
 );
 function updateValue(key: string) {
+  if (width.value < 768) {
+    collapsed.value = true;
+  }
   void router.push(key);
 }
 const openKeys = ref<string[]>([]);
