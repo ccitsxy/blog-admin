@@ -4,10 +4,14 @@ import { useRouter, type RouteRecordRaw } from 'vue-router';
 
 import { useFullscreen } from '@vueuse/core';
 
+import { useWindowSize } from '@vueuse/core';
+import { getMenuData } from '@/utils';
+import { renderIcon } from '@/utils/icons';
+
 import {
   darkTheme,
-  NIcon,
   useLoadingBar,
+  NIcon,
   type GlobalTheme,
   type MenuOption,
 } from 'naive-ui';
@@ -18,13 +22,10 @@ import {
   ReloadOutlined,
   FullscreenOutlined,
   FullscreenExitOutlined,
-  BulbOutlined,
-  BulbFilled,
 } from '@vicons/antd';
 
-import { useWindowSize } from '@vueuse/core';
-import { getMenuData } from '@/utils';
-import { renderIcon } from '@/utils/icons';
+import LightModeOutlined from '@/components/LightModeOutlined.vue';
+import DarkModeOutlined from '@/components/DarkModeOutlined.vue';
 
 import MultiTab from './MultiTab.vue';
 import NestedPage from './NestedPage.vue';
@@ -157,10 +158,10 @@ watchEffect(() => {
           <n-icon size="24" :component="FullscreenOutlined" />
         </n-button>
         <n-button v-if="theme" text @click="theme = null">
-          <n-icon size="24" :component="BulbOutlined" />
+          <n-icon size="24" :component="DarkModeOutlined" />
         </n-button>
         <n-button v-else text @click="theme = darkTheme">
-          <n-icon size="24" :component="BulbFilled" />
+          <n-icon size="24" :component="LightModeOutlined" />
         </n-button>
       </n-layout-header>
       <multi-tab class="h-12 pt-2" />
