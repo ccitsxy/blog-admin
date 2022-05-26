@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import { useRouter, useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 
 import { useLoadingBar } from 'naive-ui';
 import { useTitle } from '@vueuse/core';
 
-import NestedPage from './NestedPage.vue';
-
 const router = useRouter();
-const route = useRoute();
 
 const loadingBar = useLoadingBar();
 router.beforeEach(() => {
@@ -15,9 +12,9 @@ router.beforeEach(() => {
 });
 router.afterEach(() => {
   loadingBar.finish();
-  useTitle(route.meta.title);
+  useTitle(router.currentRoute.value.meta.title);
 });
 </script>
 <template>
-  <nested-page />
+  <router-view />
 </template>
