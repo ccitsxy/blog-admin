@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import {
-  darkTheme,
   useOsTheme,
+  darkTheme,
   zhCN,
   type GlobalThemeOverrides,
   type GlobalTheme,
 } from 'naive-ui';
 import { computed, ref, watch, provide } from 'vue';
+import AppRouter from './layouts/AppRouter.vue';
+
 const themeOverrides: GlobalThemeOverrides = {
   common: {
     primaryColor: '#2080f0FF',
@@ -40,7 +42,7 @@ provide('theme', theme);
   >
     <n-loading-bar-provider>
       <n-message-provider>
-        <router-view />
+        <app-router />
       </n-message-provider>
     </n-loading-bar-provider>
   </n-config-provider>

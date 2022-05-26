@@ -39,11 +39,11 @@ export const useMultiTabStore = defineStore({
       this.tabList.splice(tabIndex, 1);
       this.cachedTabList.delete(tab.name as string);
       if (tabIndex === 0) {
-        void router.push(this.tabList[0].path);
+        router.push(this.tabList[0].path);
       } else if (tabIndex === this.tabList.length) {
-        void router.push(this.tabList[tabIndex - 1].path);
+        router.push(this.tabList[tabIndex - 1].path);
       } else {
-        void router.push(this.tabList[tabIndex].path);
+        router.push(this.tabList[tabIndex].path);
       }
     },
     closeCurrentTab() {

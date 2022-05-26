@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, inject, ref, watchEffect, type Ref } from 'vue';
-import { useRouter, type RouteRecordRaw } from 'vue-router';
+import { useRouter, useRoute, type RouteRecordRaw } from 'vue-router';
 
 import { useFullscreen } from '@vueuse/core';
 
@@ -8,13 +8,7 @@ import { useWindowSize } from '@vueuse/core';
 import { getMenuData } from '@/utils';
 import { renderIcon } from '@/utils/icons';
 
-import {
-  darkTheme,
-  useLoadingBar,
-  NIcon,
-  type GlobalTheme,
-  type MenuOption,
-} from 'naive-ui';
+import { darkTheme, NIcon, type GlobalTheme, type MenuOption } from 'naive-ui';
 
 import {
   MenuUnfoldOutlined,
@@ -38,21 +32,14 @@ const collapsed = ref(false);
 const { width } = useWindowSize();
 
 const router = useRouter();
-
-const loadingBar = useLoadingBar();
-router.beforeEach(() => {
-  loadingBar.start();
-});
-router.afterEach(() => {
-  loadingBar.finish();
-});
+const route = useRoute();
 
 function handleReload() {
-  void router.push(`/redirect${router.currentRoute.value.path}`);
+  router.push(`/redirect${route.path}`);
 }
 
 const breadcrumb = computed(() =>
-  router.currentRoute.value.matched
+  route.matched
     .slice(1)
     .concat()
     .map((item) => {
@@ -63,6 +50,7 @@ const breadcrumb = computed(() =>
     })
 );
 
+const menuData = getMenuData(router.getRoutes());
 function mapMenu(item: RouteRecordRaw): MenuOption {
   return {
     label: item.meta?.title,
@@ -71,23 +59,21 @@ function mapMenu(item: RouteRecordRaw): MenuOption {
     children: item.children?.map((item2) => mapMenu(item2)),
   };
 }
-
-const menuData = getMenuData(router.getRoutes());
 const menuOptions: MenuOption[] = menuData.map((item: RouteRecordRaw) =>
   mapMenu(item)
 );
 function updateValue(key: string) {
-  if (width.value < 768) {
+  if (width.value < 768 && key !== route.path) {
     collapsed.value = true;
   }
-  void router.push(key);
+  router.push(key);
 }
 const openKeys = ref<string[]>([]);
 watchEffect(() => {
-  if (router.currentRoute) {
-    const matched = router.currentRoute.value.matched.concat();
+  if (route) {
+    const matched = route.matched.concat();
     openKeys.value = matched
-      .filter((r) => r.path !== router.currentRoute.value.path)
+      .filter((r) => r.path !== route.path)
       .map((r) => r.path);
   }
 });

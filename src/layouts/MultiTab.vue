@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, watch } from 'vue';
-import { useRouter, type RouteLocationNormalized } from 'vue-router';
+import { useRoute, useRouter, type RouteLocationNormalized } from 'vue-router';
 
 import { useMultiTabStore } from '@/stores/multiTab';
 
@@ -19,9 +19,10 @@ const multiTabStore = useMultiTabStore();
 const tabList = computed(() => multiTabStore.getTabList);
 
 const router = useRouter();
+const route = useRoute();
 
 watch(
-  () => router.currentRoute.value.path,
+  () => route.path,
   () => {
     multiTabStore.addTab();
   },
@@ -39,9 +40,9 @@ function updateTab(name: string | number) {
 
 const tabsMenuOptions = computed(() => {
   const isSingle = tabList.value.length <= 1;
-  const isAffix = router.currentRoute.value.meta.affix;
+  const isAffix = route.meta.affix;
   const currentIndex = tabList.value.findIndex(
-    (item) => item.path === router.currentRoute.value.path
+    (item) => item.path === route.path
   );
   const isFirst = currentIndex === 0;
   const isLast = currentIndex === tabList.value.length - 1;

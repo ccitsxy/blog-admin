@@ -9,7 +9,7 @@ const cachedTabList = computed(() => multiTabStore.getCachedTabList);
   <router-view v-slot="{ Component, route }">
     <transition name="slide-left" mode="out-in" appear>
       <keep-alive :include="cachedTabList">
-        <component :is="Component" :key="route?.meta?.path" />
+        <component :is="Component" :key="route.path" />
       </keep-alive>
     </transition>
   </router-view>

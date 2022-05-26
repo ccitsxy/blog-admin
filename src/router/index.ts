@@ -67,8 +67,8 @@ const router = createRouter({
       component: () => import('@/layouts/MainLayout.vue'),
       children: [
         {
-          path: ':path(.*)',
-          name: 'redirectPath',
+          path: '/redirect/:path(.*)',
+          name: 'redirect',
           component: () => import('@/views/RedirectView.vue'),
         },
       ],
