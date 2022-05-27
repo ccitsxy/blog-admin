@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject, ref, watchEffect, type Ref } from 'vue';
+import { computed, inject, ref, watch, type Ref } from 'vue';
 import { useRouter, useRoute, type RouteRecordRaw } from 'vue-router';
 
 import { useFullscreen } from '@vueuse/core';
@@ -24,15 +24,15 @@ import DarkModeOutlined from '@/components/DarkModeOutlined.vue';
 import MultiTab from './MultiTab.vue';
 import NestedPage from './NestedPage.vue';
 
+const router = useRouter();
+const route = useRoute();
+
 const theme = inject<Ref<GlobalTheme | null>>('theme');
 
 const { isFullscreen, enter, exit } = useFullscreen();
 
 const collapsed = ref(false);
 const { width } = useWindowSize();
-
-const router = useRouter();
-const route = useRoute();
 
 function handleReload() {
   router.push(`/redirect${route.path}`);
@@ -69,14 +69,17 @@ function updateValue(key: string) {
   router.push(key);
 }
 const openKeys = ref<string[]>([]);
-watchEffect(() => {
-  if (route) {
-    const matched = route.matched.concat();
-    openKeys.value = matched
-      .filter((r) => r.path !== route.path)
+const layoutContentRef = ref();
+watch(
+  () => route.path,
+  (newVal) => {
+    openKeys.value = route.matched
+      .concat()
+      .filter((r) => r.path !== newVal)
       .map((r) => r.path);
+    layoutContentRef.value.scrollTo(0, 0, 'smooth');
   }
-});
+);
 </script>
 
 <template>
@@ -152,6 +155,7 @@ watchEffect(() => {
       </n-layout-header>
       <multi-tab class="h-12 pt-2" />
       <n-layout-content
+        ref="layoutContentRef"
         class="h-[calc(100vh-6rem)]"
         content-style="padding: 1.5rem;"
         :native-scrollbar="false"
