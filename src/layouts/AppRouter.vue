@@ -9,12 +9,6 @@ const router = useRouter();
 const loadingBar = useLoadingBar();
 router.beforeEach(() => {
   loadingBar.start();
-  // chrome
-  document.body.scrollTop = 0;
-  // firefox
-  document.documentElement.scrollTop = 0;
-  // safari
-  window.pageYOffset = 0;
 });
 router.afterEach(() => {
   loadingBar.finish();

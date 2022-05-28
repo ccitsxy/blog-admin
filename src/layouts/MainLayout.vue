@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject, ref, watch, type Ref } from 'vue';
+import { computed, inject, ref, type Ref } from 'vue';
 import { useRouter, useRoute, type RouteRecordRaw } from 'vue-router';
 
 import { useFullscreen } from '@vueuse/core';
@@ -68,18 +68,21 @@ function updateValue(key: string) {
   }
   router.push(key);
 }
-const openKeys = ref<string[]>([]);
-const layoutContentRef = ref();
-watch(
-  () => route.path,
-  (newVal) => {
-    openKeys.value = route.matched
-      .concat()
-      .filter((r) => r.path !== newVal)
-      .map((r) => r.path);
-    layoutContentRef.value.scrollTo(0, 0, 'smooth');
-  }
+const openKeys = computed(() =>
+  route.matched
+    .concat()
+    .filter((r) => r.path !== route.path)
+    .map((r) => r.path)
 );
+
+const layoutContentRef = ref();
+router.afterEach(() => {
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(layoutContentRef.value.scrollTo(0, 0, 'smooth'));
+    }, 300);
+  });
+});
 </script>
 
 <template>
