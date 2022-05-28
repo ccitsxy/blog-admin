@@ -79,7 +79,7 @@ const layoutContentRef = ref();
 router.afterEach(() => {
   new Promise((resolve) => {
     setTimeout(() => {
-      resolve(layoutContentRef.value.scrollTo(0, 0, 'smooth'));
+      resolve(layoutContentRef.value.scrollTo(0, 0));
     }, 300);
   });
 });
