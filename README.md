@@ -1,6 +1,13 @@
 # blog-admin
 
-This template should help get you started developing with Vue 3 in Vite.
+A Vue.js Admin Template.
+
+## Features
+
+- [Vue3](https://vuejs.org/)
+- [Vite](https://vitejs.dev/)
+- [Pinia](https://pinia.vuejs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
 ## Getting Started
 
@@ -10,14 +17,14 @@ This template should help get you started developing with Vue 3 in Vite.
 
 ### Plugins
 
-1. [Vue Language Features (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
-2. [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)
-3. [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-4. [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-5. [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
-6. [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)
+- [Vue Language Features (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+- [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+- [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)
 
-### Settings.json
+### settings.json
 
 ```json
 {
