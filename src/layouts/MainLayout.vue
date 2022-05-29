@@ -161,7 +161,7 @@ router.afterEach(() => {
         ref="layoutContentRef"
         class="h-[calc(100vh-6rem)]"
         content-style="padding: 1.5rem;"
-        :native-scrollbar="false"
+        :native-scrollbar="width < 768"
       >
         <nested-page />
         <n-back-top />
