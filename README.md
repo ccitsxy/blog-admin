@@ -1,14 +1,5 @@
 # blog-admin
 
-A Vue.js Admin Template.
-
-## Features
-
-- [Vue3](https://vuejs.org/)
-- [Vite](https://vitejs.dev/)
-- [Pinia](https://pinia.vuejs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-
 ## Getting Started
 
 ### IDE
