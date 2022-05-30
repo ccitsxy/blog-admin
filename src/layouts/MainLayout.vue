@@ -123,7 +123,7 @@ router.afterEach(() => {
       </teleport>
     </n-layout-sider>
     <n-layout>
-      <n-layout-header class="h-12 flex items-center space-x-4 px-4" bordered>
+      <n-layout-header class="h-12 flex items-center space-x-4 px-4">
         <n-button v-if="collapsed" text @click="collapsed = false">
           <n-icon size="24" :component="MenuUnfoldOutlined" />
         </n-button>
@@ -156,10 +156,10 @@ router.afterEach(() => {
           <n-icon size="24" :component="LightModeOutlined" />
         </n-button>
       </n-layout-header>
-      <multi-tab class="h-12 py-1" />
+      <multi-tab class="h-16 pt-2 pb-4" />
       <n-layout-content
         ref="layoutContentRef"
-        class="h-[calc(100vh-6rem)]"
+        class="h-[calc(100vh-8rem)]"
         content-style="padding: 1.5rem;"
         :native-scrollbar="false"
         embedded
