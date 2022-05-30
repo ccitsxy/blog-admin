@@ -31,8 +31,9 @@ const theme = inject<Ref<GlobalTheme | null>>('theme');
 
 const { isFullscreen, enter, exit } = useFullscreen();
 
-const collapsed = ref(false);
 const { width } = useWindowSize();
+
+const collapsed = ref(width.value < 640);
 
 function handleReload() {
   router.push(`/redirect${route.path}`);

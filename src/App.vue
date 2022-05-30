@@ -37,6 +37,7 @@ provide('theme', theme);
     :theme-overrides="themeOverrides"
     :theme="theme"
     :locale="zhCN"
+    preflight-style-disabled
   >
     <n-loading-bar-provider>
       <n-message-provider>
