@@ -34,8 +34,6 @@ provide('theme', theme);
 
 <template>
   <n-config-provider
-    inline-theme-disabled
-    preflight-style-disabled
     :theme-overrides="themeOverrides"
     :theme="theme"
     :locale="zhCN"

@@ -63,7 +63,7 @@ const menuOptions: MenuOption[] = menuData.map((item: RouteRecordRaw) =>
   mapMenu(item)
 );
 function updateValue(key: string) {
-  if (width.value < 768 && key !== route.path) {
+  if (width.value < 640 && key !== route.path) {
     collapsed.value = true;
   }
   router.push(key);
@@ -86,12 +86,12 @@ router.afterEach(() => {
 </script>
 
 <template>
-  <n-layout class="h-screen" has-sider>
+  <n-layout has-sider>
     <n-layout-sider
       class="h-screen !fixed top-0 left-0 md:!static"
       :collapsed="collapsed"
       collapse-mode="width"
-      :collapsed-width="width > 768 ? 64 : 0"
+      :collapsed-width="width > 640 ? 64 : 0"
       :width="224"
       inverted
       :native-scrollbar="false"
@@ -115,7 +115,7 @@ router.afterEach(() => {
       <teleport to="#app">
         <transition name="fade">
           <div
-            v-show="!collapsed && width < 768"
+            v-show="!collapsed && width < 640"
             class="h-full w-full fixed top-0 left-0 bg-[#00000073]"
             @click="collapsed = true"
           />
@@ -156,12 +156,13 @@ router.afterEach(() => {
           <n-icon size="24" :component="LightModeOutlined" />
         </n-button>
       </n-layout-header>
-      <multi-tab class="h-12 pt-2" />
+      <multi-tab class="h-12 py-1" />
       <n-layout-content
         ref="layoutContentRef"
         class="h-[calc(100vh-6rem)]"
         content-style="padding: 1.5rem;"
         :native-scrollbar="false"
+        embedded
       >
         <nested-page />
         <n-back-top />
