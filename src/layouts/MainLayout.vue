@@ -88,12 +88,13 @@ router.afterEach(() => {
 <template>
   <n-layout has-sider>
     <n-layout-sider
-      class="h-screen !fixed top-0 left-0 md:!static"
+      class="h-screen top-0 left-0"
       :collapsed="collapsed"
       collapse-mode="width"
       :collapsed-width="width > 640 ? 64 : 0"
       :width="224"
       inverted
+      :position="width > 640 ? 'static' : 'absolute'"
       :native-scrollbar="false"
     >
       <div class="h-12 flex justify-center items-center whitespace-nowrap">
@@ -159,9 +160,9 @@ router.afterEach(() => {
       <multi-tab class="h-16 pt-2 pb-4" />
       <n-layout-content
         ref="layoutContentRef"
-        class="h-[calc(100vh-8rem)]"
+        class="h-[calc(100vh-7rem)]"
         content-style="padding: 1.5rem;"
-        :native-scrollbar="false"
+        :native-scrollbar="width < 640"
         embedded
       >
         <nested-page />
