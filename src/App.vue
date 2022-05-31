@@ -38,6 +38,7 @@ provide('theme', theme);
     :theme="theme"
     :locale="zhCN"
     preflight-style-disabled
+    inline-theme-disabled
   >
     <n-loading-bar-provider>
       <n-message-provider>

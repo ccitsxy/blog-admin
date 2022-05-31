@@ -158,13 +158,12 @@ router.afterEach(() => {
           <n-icon size="24" :component="LightModeOutlined" />
         </n-button>
       </n-layout-header>
-      <multi-tab class="h-16 pt-2 pb-4" />
+      <multi-tab class="h-12 pt-2" />
       <n-layout-content
         ref="layoutContentRef"
-        class="h-[calc(100vh-7rem)]"
+        class="h-[calc(100vh-6rem)]"
         content-style="padding: 1.5rem;"
         :native-scrollbar="width < 640"
-        embedded
       >
         <nested-page />
         <n-back-top />
