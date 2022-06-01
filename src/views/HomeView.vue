@@ -1,8 +1,10 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const title = ref('');
+</script>
 <template>
   <div>
-    <n-card embedded>
-      只要是 看到天边云一朵<br />
-      逐天拢有好心情
-    </n-card>
+    <n-input v-model="title"></n-input>
   </div>
 </template>

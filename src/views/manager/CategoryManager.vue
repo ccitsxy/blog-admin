@@ -1,5 +1,10 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const title = ref('');
+</script>
 <template>
   <div>
-    <div class="h-[2000px]">{{ $route.path }}</div>
+    <n-input v-model="title"></n-input>
   </div>
 </template>

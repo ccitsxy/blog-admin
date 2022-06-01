@@ -12,11 +12,11 @@ const router = createRouter({
       path: '/',
       name: 'index',
       component: () => import('@/layouts/MainLayout.vue'),
-      redirect: { name: 'home' },
+      redirect: { name: 'HomeView' },
       children: [
         {
           path: 'home',
-          name: 'home',
+          name: 'HomeView',
           meta: { title: '主页', icon: EditOutlined, affix: true },
           component: () => import('@/views/HomeView.vue'),
         },
@@ -25,11 +25,11 @@ const router = createRouter({
           name: 'manager',
           meta: { title: '管理', icon: SettingOutlined },
           component: () => import('@/layouts/NestedPage.vue'),
-          redirect: { name: 'article' },
+          redirect: { name: 'ArticleManager' },
           children: [
             {
               path: 'article',
-              name: 'article',
+              name: 'ArticleManager',
               meta: {
                 title: '文章管理',
               },
@@ -37,7 +37,7 @@ const router = createRouter({
             },
             {
               path: 'category',
-              name: 'category',
+              name: 'CategoryManager',
               meta: {
                 title: '分类管理',
               },
@@ -45,7 +45,7 @@ const router = createRouter({
             },
             {
               path: 'tag',
-              name: 'tag',
+              name: 'TagManager',
               meta: {
                 title: '标签管理',
               },
@@ -55,7 +55,7 @@ const router = createRouter({
         },
         {
           path: 'about',
-          name: 'about',
+          name: 'AboutView',
           meta: { title: '关于', icon: QuestionCircleOutlined },
           component: () => import('@/views/AboutView.vue'),
         },

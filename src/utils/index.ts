@@ -7,9 +7,9 @@ function clearMenuItem(
   return menusData
     .map((item: RouteRecord | RouteRecordRaw) => {
       const finalItem = { ...item };
-      if (!finalItem.name || finalItem.meta?.hideInMenu) {
-        return null;
-      }
+      // if (!finalItem.name || finalItem.meta?.hideInMenu) {
+      //   return null;
+      // }
 
       if (finalItem && finalItem?.children) {
         if (
