@@ -39,6 +39,7 @@ provide('theme', theme);
     :locale="zhCN"
     preflight-style-disabled
     inline-theme-disabled
+    abstract
   >
     <n-loading-bar-provider>
       <n-message-provider>
