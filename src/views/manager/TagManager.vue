@@ -5,6 +5,6 @@ const title = ref('');
 </script>
 <template>
   <div>
-    <n-input v-model="title"></n-input>
+    <n-input v-model:value="title"></n-input>
   </div>
 </template>
