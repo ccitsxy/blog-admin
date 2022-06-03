@@ -24,9 +24,9 @@ const router = createRouter({
           component: () => import('@/views/HomeView.vue'),
         },
         {
-          path: '/manager',
+          path: 'manager',
           meta: { title: '管理', icon: SettingOutlined },
-          component: () => import('@/layouts/NestedPage.vue'),
+          component: () => import('@/layouts/BlankPage.vue'),
           redirect: { name: 'ArticleManager' },
           children: [
             {
@@ -52,6 +52,23 @@ const router = createRouter({
                 title: '标签管理',
               },
               component: () => import('@/views/manager/TagManager.vue'),
+            },
+            {
+              path: 'test',
+              meta: { title: 'test', icon: SettingOutlined },
+              component: () => import('@/layouts/BlankPage.vue'),
+              redirect: { name: 'ArticleManager' },
+              children: [
+                {
+                  path: 'test',
+                  name: 'TestManager',
+                  meta: {
+                    title: '测试管理',
+                  },
+                  component: () =>
+                    import('@/views/manager/test/ArticleManagerTest.vue'),
+                },
+              ],
             },
           ],
         },

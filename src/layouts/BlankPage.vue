@@ -1,9 +1,9 @@
 <template>
-  <router-view v-slot="{ Component, route }">
-    <transition name="slide-left" mode="out-in" appear>
+  <div>
+    <router-view v-slot="{ Component, route }">
       <keep-alive :exclude="['RedirectView']">
         <component :is="Component" :key="route.path" />
       </keep-alive>
-    </transition>
-  </router-view>
+    </router-view>
+  </div>
 </template>
