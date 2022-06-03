@@ -24,6 +24,38 @@ const router = createRouter({
           component: () => import('@/views/HomeView.vue'),
         },
         {
+          path: '/manager',
+          meta: { title: '管理', icon: SettingOutlined },
+          component: () => import('@/layouts/NestedPage.vue'),
+          redirect: { name: 'ArticleManager' },
+          children: [
+            {
+              path: 'article',
+              name: 'ArticleManager',
+              meta: {
+                title: '文章管理',
+              },
+              component: () => import('@/views/manager/ArticleManager.vue'),
+            },
+            {
+              path: 'category',
+              name: 'CategoryManager',
+              meta: {
+                title: '分类管理',
+              },
+              component: () => import('@/views/manager/CategoryManager.vue'),
+            },
+            {
+              path: 'tag',
+              name: 'TagManager',
+              meta: {
+                title: '标签管理',
+              },
+              component: () => import('@/views/manager/TagManager.vue'),
+            },
+          ],
+        },
+        {
           path: 'about',
           name: 'AboutView',
           meta: {
@@ -31,38 +63,6 @@ const router = createRouter({
             icon: QuestionCircleOutlined,
           },
           component: () => import('@/views/AboutView.vue'),
-        },
-      ],
-    },
-    {
-      path: '/manager',
-      meta: { title: '管理', icon: SettingOutlined },
-      component: () => import('@/layouts/MainLayout.vue'),
-      redirect: { name: 'ArticleManager' },
-      children: [
-        {
-          path: 'article',
-          name: 'ArticleManager',
-          meta: {
-            title: '文章管理',
-          },
-          component: () => import('@/views/manager/ArticleManager.vue'),
-        },
-        {
-          path: 'category',
-          name: 'CategoryManager',
-          meta: {
-            title: '分类管理',
-          },
-          component: () => import('@/views/manager/CategoryManager.vue'),
-        },
-        {
-          path: 'tag',
-          name: 'TagManager',
-          meta: {
-            title: '标签管理',
-          },
-          component: () => import('@/views/manager/TagManager.vue'),
         },
       ],
     },
