@@ -10,74 +10,64 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'index',
       component: () => import('@/layouts/MainLayout.vue'),
-      redirect: { name: 'HomeView' },
+      redirect: '/home',
       children: [
         {
           path: 'home',
-          name: 'HomeView',
+          name: 'home',
           meta: {
             title: '主页',
             icon: EditOutlined,
             affix: true,
+            keepAlive: true,
           },
           component: () => import('@/views/HomeView.vue'),
         },
         {
           path: 'manager',
+          name: 'manager',
           meta: { title: '管理', icon: SettingOutlined },
-          component: () => import('@/layouts/BlankPage.vue'),
-          redirect: { name: 'ArticleManager' },
+          component: () => import('@/layouts/NestedPage.vue'),
+          redirect: '/manager/article',
           children: [
             {
               path: 'article',
-              name: 'ArticleManager',
+              name: 'article',
               meta: {
                 title: '文章管理',
+                keepAlive: true,
               },
               component: () => import('@/views/manager/ArticleManager.vue'),
             },
             {
               path: 'category',
-              name: 'CategoryManager',
+              name: 'Category',
               meta: {
                 title: '分类管理',
+                keepAlive: true,
               },
               component: () => import('@/views/manager/CategoryManager.vue'),
             },
             {
               path: 'tag',
-              name: 'TagManager',
+              name: 'tag',
               meta: {
                 title: '标签管理',
+                keepAlive: true,
               },
               component: () => import('@/views/manager/TagManager.vue'),
-            },
-            {
-              path: 'test',
-              meta: { title: 'test', icon: SettingOutlined },
-              component: () => import('@/layouts/BlankPage.vue'),
-              redirect: { name: 'ArticleManager' },
-              children: [
-                {
-                  path: 'test',
-                  name: 'TestManager',
-                  meta: {
-                    title: '测试管理',
-                  },
-                  component: () =>
-                    import('@/views/manager/test/ArticleManagerTest.vue'),
-                },
-              ],
             },
           ],
         },
         {
           path: 'about',
-          name: 'AboutView',
+          name: 'about',
           meta: {
             title: '关于',
             icon: QuestionCircleOutlined,
+            keepAlive: true,
           },
           component: () => import('@/views/AboutView.vue'),
         },
