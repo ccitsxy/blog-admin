@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, watch } from 'vue';
-import { useRoute, useRouter, type RouteLocationNormalized } from 'vue-router';
+import { useRouter, type RouteLocationNormalized } from 'vue-router';
 
 import { useMultiTabStore } from '@/stores/multiTab';
 
@@ -19,12 +19,11 @@ const multiTabStore = useMultiTabStore();
 const tabList = computed(() => multiTabStore.getTabList);
 
 const router = useRouter();
-const route = useRoute();
 
 watch(
-  () => route.path,
+  () => router.currentRoute.value.path,
   () => {
-    multiTabStore.addTab(route);
+    multiTabStore.addTab(router.currentRoute.value);
   },
   {
     immediate: true,
@@ -40,9 +39,9 @@ function updateTab(name: string | number) {
 
 const tabsMenuOptions = computed(() => {
   const isSingle = tabList.value.length <= 1;
-  const isAffix = route.meta.affix;
+  const isAffix = router.currentRoute.value.meta.affix;
   const currentIndex = tabList.value.findIndex(
-    (item) => item.path === route.path
+    (item) => item.path === router.currentRoute.value.path
   );
   const isFirst = currentIndex === 0;
   const isLast = currentIndex === tabList.value.length - 1;
@@ -83,16 +82,16 @@ const tabsMenuOptions = computed(() => {
 function selectTabsMenu(key: string | number) {
   switch (key) {
     case '1':
-      multiTabStore.closeTab(route);
+      multiTabStore.closeTab(router.currentRoute.value);
       break;
     case '2':
-      multiTabStore.closeOtherTabs(route);
+      multiTabStore.closeOtherTabs(router.currentRoute.value);
       break;
     case '3':
-      multiTabStore.closeLeftTabs(route);
+      multiTabStore.closeLeftTabs(router.currentRoute.value);
       break;
     case '4':
-      multiTabStore.closeRightTabs(route);
+      multiTabStore.closeRightTabs(router.currentRoute.value);
       break;
     case '5':
       multiTabStore.closeAllTabs();

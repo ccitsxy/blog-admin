@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, inject, ref, type Ref } from 'vue';
-import { useRouter, useRoute, type RouteRecordRaw } from 'vue-router';
+import { useRouter, type RouteRecordRaw } from 'vue-router';
 
 import { useFullscreen } from '@vueuse/core';
 
@@ -25,7 +25,6 @@ import MultiTab from './MultiTab.vue';
 import NestedPage from './NestedPage.vue';
 
 const router = useRouter();
-const route = useRoute();
 
 const theme = inject<Ref<GlobalTheme | null>>('theme');
 
@@ -36,11 +35,11 @@ const { width } = useWindowSize();
 const collapsed = ref(width.value < 640);
 
 function handleReload() {
-  router.push(`/redirect${route.path}`);
+  router.push(`/redirect${router.currentRoute.value.path}`);
 }
 
 const breadcrumb = computed(() =>
-  route.matched
+  router.currentRoute.value.matched
     .slice(1)
     .concat()
     .map((item) => {
@@ -64,15 +63,15 @@ const menuOptions: MenuOption[] = menuData.map((item: RouteRecordRaw) =>
   mapMenu(item)
 );
 function updateValue(key: string) {
-  if (width.value < 640 && key !== route.path) {
+  if (width.value < 640 && key !== router.currentRoute.value.path) {
     collapsed.value = true;
   }
   router.push(key);
 }
 const openKeys = computed(() =>
-  route.matched
+  router.currentRoute.value.matched
     .concat()
-    .filter((r) => r.path !== route.path)
+    .filter((r) => r.path !== router.currentRoute.value.path)
     .map((r) => r.path)
 );
 

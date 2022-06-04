@@ -16,7 +16,7 @@ const router = createRouter({
       children: [
         {
           path: 'home',
-          name: 'home',
+          name: 'HomeView',
           meta: {
             title: '主页',
             icon: EditOutlined,
@@ -34,7 +34,7 @@ const router = createRouter({
           children: [
             {
               path: 'article',
-              name: 'article',
+              name: 'ArticleManager',
               meta: {
                 title: '文章管理',
                 keepAlive: true,
@@ -43,7 +43,7 @@ const router = createRouter({
             },
             {
               path: 'category',
-              name: 'Category',
+              name: 'CategoryManager',
               meta: {
                 title: '分类管理',
                 keepAlive: true,
@@ -52,7 +52,7 @@ const router = createRouter({
             },
             {
               path: 'tag',
-              name: 'tag',
+              name: 'TagManager',
               meta: {
                 title: '标签管理',
                 keepAlive: true,
@@ -63,7 +63,7 @@ const router = createRouter({
         },
         {
           path: 'about',
-          name: 'about',
+          name: 'AboutView',
           meta: {
             title: '关于',
             icon: QuestionCircleOutlined,
