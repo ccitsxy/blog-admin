@@ -1,11 +1,6 @@
 <script setup lang="ts">
-import {
-  useOsTheme,
-  darkTheme,
-  zhCN,
-  type GlobalThemeOverrides,
-  type GlobalTheme,
-} from 'naive-ui';
+import { useOsTheme, darkTheme, zhCN } from 'naive-ui';
+import type { GlobalThemeOverrides, GlobalTheme } from 'naive-ui';
 import { computed, ref, watch, provide } from 'vue';
 import AppRouter from './layouts/AppRouter.vue';
 

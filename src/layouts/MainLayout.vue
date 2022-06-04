@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { computed, inject, ref, type Ref } from 'vue';
-import { useRouter, type RouteRecordRaw } from 'vue-router';
+import { computed, inject, ref } from 'vue';
+import type { Ref } from 'vue';
+import { useRouter } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
 
 import { useFullscreen } from '@vueuse/core';
 
@@ -8,7 +10,8 @@ import { useWindowSize } from '@vueuse/core';
 import { getMenuData } from '@/utils';
 import { renderIcon } from '@/utils/icons';
 
-import { darkTheme, NIcon, type GlobalTheme, type MenuOption } from 'naive-ui';
+import { darkTheme, NIcon } from 'naive-ui';
+import type { GlobalTheme, MenuOption } from 'naive-ui';
 
 import {
   MenuUnfoldOutlined,

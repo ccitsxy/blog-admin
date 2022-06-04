@@ -13,7 +13,7 @@ specifiers:
   autoprefixer: ^10.4.4
   eslint: ^8.5.0
   eslint-plugin-vue: ^8.2.0
-  naive-ui: ^2.28.2
+  naive-ui: ^2.29.1
   pinia: ^2.0.13
   prettier: ^2.5.1
   rollup-plugin-visualizer: ^5.6.0
@@ -28,7 +28,7 @@ specifiers:
 
 dependencies:
   '@vueuse/core': 8.5.0_vue@3.2.36
-  naive-ui: 2.29.0_vue@3.2.36
+  naive-ui: 2.29.1_vue@3.2.36
   pinia: 2.0.14_7gwbvmtszsbbeay4sidijbp26i
   vditor: 3.8.15
   vue: 3.2.36
@@ -2006,8 +2006,8 @@ packages:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: true
 
-  /naive-ui/2.29.0_vue@3.2.36:
-    resolution: {integrity: sha512-zZ4ka0Y5QakNyqJIPiAoZ5YJG4mCiSw+HzYtreEmOvBmbP14/iUXarRhI9a3XET8g6ix682TcitamlCyqZ/y2Q==}
+  /naive-ui/2.29.1_vue@3.2.36:
+    resolution: {integrity: sha512-99GbjOYAf2QvKxfBvx3msanFRCTR2+5Y7BxiitkfNN52RtyyhRBLlNiLJefsn1BskqdnfPsyJ7/nu6ZhIpTTmQ==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:

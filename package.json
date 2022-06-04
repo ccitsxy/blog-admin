@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^8.3.1",
-    "naive-ui": "^2.28.2",
+    "naive-ui": "^2.29.1",
     "pinia": "^2.0.13",
     "vditor": "^3.8.15",
     "vue": "^3.2.35",

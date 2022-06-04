@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, watch } from 'vue';
-import { useRouter, type RouteLocationNormalized } from 'vue-router';
+import { useRouter } from 'vue-router';
+import type { RouteLocationNormalized } from 'vue-router';
 
 import { useMultiTabStore } from '@/stores/multiTab';
 

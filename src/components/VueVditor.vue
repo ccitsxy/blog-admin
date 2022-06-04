@@ -1,14 +1,6 @@
 <script setup lang="ts">
-import {
-  onMounted,
-  ref,
-  watch,
-  toRaw,
-  onUnmounted,
-  unref,
-  inject,
-  type Ref,
-} from 'vue';
+import { onMounted, ref, watch, toRaw, onUnmounted, unref, inject } from 'vue';
+import type { Ref } from 'vue';
 import type { GlobalTheme } from 'naive-ui';
 import Vditor from 'vditor';
 import 'vditor/dist/index.css';

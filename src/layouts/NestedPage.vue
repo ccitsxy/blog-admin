@@ -11,9 +11,9 @@ const excludedTabList = computed(() => useMultiTabStore().getExcludedTabList);
     <router-view v-slot="{ Component, route }">
       <transition name="slide-left" mode="out-in" appear>
         <keep-alive v-if="route.meta.keepAlive" :exclude="excludedTabList">
-          <component :is="Component" :key="route.path" />
+          <component :is="Component" />
         </keep-alive>
-        <component :is="Component" v-else :key="route.path" />
+        <component :is="Component" v-else />
       </transition>
     </router-view>
   </div>
