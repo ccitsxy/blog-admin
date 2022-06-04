@@ -24,7 +24,7 @@ const route = useRoute();
 watch(
   () => route.path,
   () => {
-    multiTabStore.addTab();
+    multiTabStore.addTab(route);
   },
   {
     immediate: true,
@@ -83,16 +83,16 @@ const tabsMenuOptions = computed(() => {
 function selectTabsMenu(key: string | number) {
   switch (key) {
     case '1':
-      multiTabStore.closeCurrentTab();
+      multiTabStore.closeTab(route);
       break;
     case '2':
-      multiTabStore.closeOtherTabs();
+      multiTabStore.closeOtherTabs(route);
       break;
     case '3':
-      multiTabStore.closeLeftTabs();
+      multiTabStore.closeLeftTabs(route);
       break;
     case '4':
-      multiTabStore.closeRightTabs();
+      multiTabStore.closeRightTabs(route);
       break;
     case '5':
       multiTabStore.closeAllTabs();

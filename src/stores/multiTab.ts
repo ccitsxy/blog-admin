@@ -5,39 +5,30 @@ import router from '@/router';
 
 interface MultiTabState {
   tabList: RouteLocationNormalized[];
-  cachedTabList: Set<string>;
 }
 
 export const useMultiTabStore = defineStore({
   id: 'multi-tab',
   state: (): MultiTabState => ({
     tabList: [],
-    cachedTabList: new Set(),
   }),
   getters: {
     getTabList(): RouteLocationNormalized[] {
       return this.tabList;
     },
-    getCachedTabList(): string[] {
-      return Array.from(this.cachedTabList);
-    },
   },
   actions: {
-    addTab() {
+    addTab(tab: RouteLocationNormalized) {
       if (
-        this.tabList.some(
-          (item) => item.path === router.currentRoute.value.path
-        ) ||
-        router.currentRoute.value.path.startsWith('/redirect')
+        this.tabList.some((item) => item.path === tab.path) ||
+        tab.path.startsWith('/redirect')
       )
         return;
-      this.tabList.push(router.currentRoute.value);
-      this.cachedTabList.add(router.currentRoute.value.name as string);
+      this.tabList.push(tab);
     },
     closeTab(tab: RouteLocationNormalized) {
       const tabIndex = this.tabList.indexOf(tab);
       this.tabList.splice(tabIndex, 1);
-      this.cachedTabList.delete(tab.name as string);
       if (tabIndex === 0) {
         router.push(this.tabList[0].path);
       } else if (tabIndex === this.tabList.length) {
@@ -46,30 +37,15 @@ export const useMultiTabStore = defineStore({
         router.push(this.tabList[tabIndex].path);
       }
     },
-    closeCurrentTab() {
-      const index = this.tabList.findIndex(
-        (item) => item.path == router.currentRoute.value.path
-      );
-      this.tabList.splice(index, 1);
+    closeOtherTabs(tab: RouteLocationNormalized) {
+      this.tabList = this.tabList.filter((item) => item.path === tab.path);
     },
-    closeOtherTabs() {
-      // 关闭其他
-      this.tabList = this.tabList.filter(
-        (item) => item.path === router.currentRoute.value.path
-      );
-    },
-    closeLeftTabs() {
-      // 关闭左侧
-      const index = this.tabList.findIndex(
-        (item) => item.path == router.currentRoute.value.path
-      );
+    closeLeftTabs(tab: RouteLocationNormalized) {
+      const index = this.tabList.findIndex((item) => item.path == tab.path);
       this.tabList.splice(0, index);
     },
-    closeRightTabs() {
-      // 关闭右侧
-      const index = this.tabList.findIndex(
-        (item) => item.path === router.currentRoute.value.path
-      );
+    closeRightTabs(tab: RouteLocationNormalized) {
+      const index = this.tabList.findIndex((item) => item.path === tab.path);
       this.tabList.splice(index + 1);
     },
     closeAllTabs() {
