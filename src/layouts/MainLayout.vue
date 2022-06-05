@@ -35,9 +35,7 @@ const { isFullscreen, enter, exit } = useFullscreen();
 
 const { width } = useWindowSize();
 
-const isMobile = width.value < 640;
-
-const collapsed = ref(isMobile);
+const collapsed = ref(width.value < 640);
 
 function handleReload() {
   router.push(`/redirect${router.currentRoute.value.path}`);
@@ -68,7 +66,7 @@ const menuOptions: MenuOption[] = menuData.map((item: RouteRecordRaw) =>
   mapMenu(item)
 );
 function updateValue(key: string) {
-  if (isMobile && key !== router.currentRoute.value.path) {
+  if (width.value < 640 && key !== router.currentRoute.value.path) {
     collapsed.value = true;
   }
   router.push(key);
@@ -96,10 +94,10 @@ router.afterEach(() => {
       class="h-screen top-0 left-0"
       :collapsed="collapsed"
       collapse-mode="width"
-      :collapsed-width="isMobile ? 0 : 64"
+      :collapsed-width="width < 640 ? 0 : 64"
       :width="224"
       inverted
-      :position="isMobile ? 'absolute' : 'static'"
+      :position="width < 640 ? 'absolute' : 'static'"
       :native-scrollbar="false"
     >
       <div class="h-12 flex justify-center items-center whitespace-nowrap">
@@ -121,7 +119,7 @@ router.afterEach(() => {
       <teleport to="#app">
         <transition name="fade">
           <div
-            v-show="!collapsed && isMobile"
+            v-show="!collapsed && width < 640"
             class="h-full w-full fixed top-0 left-0 bg-[#00000073]"
             @click="collapsed = true"
           />
@@ -165,9 +163,9 @@ router.afterEach(() => {
       <multi-tab class="h-12 pt-2" />
       <n-layout-content
         ref="layoutContentRef"
-        class="h-[calc(100vh-96px)]"
-        content-style="padding: 24px;"
-        :native-scrollbar="isMobile"
+        class="h-[calc(100vh-6rem)]"
+        content-style="padding: 1.5rem;"
+        :native-scrollbar="width < 640"
       >
         <nested-page />
         <n-back-top />
