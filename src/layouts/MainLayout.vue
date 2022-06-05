@@ -163,8 +163,8 @@ router.afterEach(() => {
       <multi-tab class="h-12 pt-2" />
       <n-layout-content
         ref="layoutContentRef"
-        class="h-[calc(100vh-6rem)]"
-        content-style="padding: 1.5rem;"
+        class="h-[calc(100vh-96px)]"
+        content-style="padding: 24px;"
         :native-scrollbar="width < 640"
       >
         <nested-page />
