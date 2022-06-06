@@ -31,11 +31,12 @@ watch(
   }
 );
 
-function closeTab(tab: RouteLocationNormalized) {
-  multiTabStore.closeTab(tab);
-}
 function updateTab(name: string | number) {
   router.push(`${name}`);
+}
+function closeTab(name: string | number) {
+  const tab = tabList.value.find((element) => element.name === name);
+  multiTabStore.closeTab(tab as RouteLocationNormalized);
 }
 
 const tabsMenuOptions = computed(() => {
@@ -102,19 +103,18 @@ function selectTabsMenu(key: string | number) {
 </script>
 
 <template>
-  <n-tabs :value="$route.path" type="card" @update-value="updateTab">
+  <n-tabs
+    :value="$route.path"
+    type="card"
+    closable
+    @update-value="updateTab"
+    @close="closeTab"
+  >
     <template #prefix>
       <div />
     </template>
     <n-tab v-for="tab in tabList" :key="tab.path" :name="tab.path">
       <div>{{ tab.meta.title }}</div>
-      <n-icon
-        v-if="tabList.length > 1 && !tab.meta.affix"
-        class="icon-close ml-3"
-        size="14"
-        :component="CloseOutlined"
-        @click.stop="closeTab(tab)"
-      />
     </n-tab>
     <template #suffix>
       <n-dropdown :options="tabsMenuOptions" @select="selectTabsMenu">
@@ -123,17 +123,3 @@ function selectTabsMenu(key: string | number) {
     </template>
   </n-tabs>
 </template>
-
-<style scoped>
-.icon-close {
-  color: var(--n-close-color);
-}
-
-.icon-close :hover {
-  color: var(--n-close-color-hover);
-}
-
-.icon-close :active {
-  color: var(--n-close-color-pressed);
-}
-</style>
