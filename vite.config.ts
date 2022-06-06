@@ -15,6 +15,12 @@ export default defineConfig({
     vueJsx(),
     Components({
       dts: true,
+      types: [
+        {
+          from: 'vue-router',
+          names: ['RouterLink', 'RouterView'],
+        },
+      ],
       resolvers: [NaiveUiResolver()],
     }),
     visualizer({
