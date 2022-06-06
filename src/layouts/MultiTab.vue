@@ -106,14 +106,18 @@ function selectTabsMenu(key: string | number) {
   <n-tabs
     :value="$route.path"
     type="card"
-    closable
     @update-value="updateTab"
     @close="closeTab"
   >
     <template #prefix>
       <div />
     </template>
-    <n-tab v-for="tab in tabList" :key="tab.path" :name="tab.path">
+    <n-tab
+      v-for="tab in tabList"
+      :key="tab.path"
+      :name="tab.path"
+      :closable="tabList.length > 1 && !tab.meta.affix"
+    >
       <div>{{ tab.meta.title }}</div>
     </n-tab>
     <template #suffix>
