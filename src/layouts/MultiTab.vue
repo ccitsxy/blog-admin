@@ -35,7 +35,7 @@ function updateTab(name: string | number) {
   router.push(`${name}`);
 }
 function closeTab(name: string | number) {
-  const tab = tabList.value.find((element) => element.name === name);
+  const tab = tabList.value.find((element) => element.path === name);
   multiTabStore.closeTab(tab as RouteLocationNormalized);
 }
 
