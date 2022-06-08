@@ -100,7 +100,7 @@ router.afterEach(() => {
       :position="width < 640 ? 'absolute' : 'static'"
       :native-scrollbar="false"
     >
-      <div class="h-12 flex justify-center items-center whitespace-nowrap">
+      <div class="h-14 flex justify-center items-center whitespace-nowrap">
         <img class="h-8 w-8" src="@/assets/logo.svg" alt="logo" />
         <div v-show="!collapsed" class="ml-2 text-lg">博客管理</div>
       </div>
@@ -127,7 +127,7 @@ router.afterEach(() => {
       </teleport>
     </n-layout-sider>
     <n-layout>
-      <n-layout-header class="h-12 flex items-center space-x-4 px-4">
+      <n-layout-header class="h-14 flex items-center space-x-4 px-4">
         <n-button v-if="collapsed" text @click="collapsed = false">
           <n-icon size="24" :component="MenuUnfoldOutlined" />
         </n-button>
@@ -163,7 +163,7 @@ router.afterEach(() => {
       <multi-tab class="h-12 pt-2" />
       <n-layout-content
         ref="layoutContentRef"
-        class="h-[calc(100vh-96px)]"
+        class="h-[calc(100vh-112px)]"
         content-style="padding: 24px;"
         :native-scrollbar="width < 640"
       >
