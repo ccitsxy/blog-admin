@@ -7,6 +7,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import Components from 'unplugin-vue-components/vite';
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 import { visualizer } from 'rollup-plugin-visualizer';
+import WindiCSS from 'vite-plugin-windicss';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -28,6 +29,7 @@ export default defineConfig({
       gzipSize: true,
       brotliSize: true,
     }),
+    WindiCSS(),
   ],
   resolve: {
     alias: {
