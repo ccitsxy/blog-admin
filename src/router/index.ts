@@ -81,6 +81,9 @@ const router = createRouter({
         {
           path: ':path(.*)',
           name: 'redirect',
+          meta: {
+            title: '刷新中...',
+          },
           component: () => import('@/views/RedirectView.vue'),
         },
       ],
