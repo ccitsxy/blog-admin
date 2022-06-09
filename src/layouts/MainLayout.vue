@@ -127,7 +127,7 @@ router.afterEach(() => {
       </teleport>
     </n-layout-sider>
     <n-layout>
-      <n-layout-header class="h-12 pt-2 flex items-center space-x-4 px-4">
+      <n-layout-header class="h-12 flex items-center space-x-4 px-4">
         <n-button v-if="collapsed" text @click="collapsed = false">
           <n-icon size="24" :component="MenuUnfoldOutlined" />
         </n-button>
