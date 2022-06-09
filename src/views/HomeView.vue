@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const title = ref('');
+const toogle = ref(false);
+const text = ref('');
 </script>
 <template>
   <div>
-    <n-input v-model:value="title"></n-input>
+    <n-switch v-model:value="toogle" class="mb-2" />
+    <transition name="fade">
+      <vue-vditor v-if="toogle" v-model="text" />
+    </transition>
   </div>
 </template>
