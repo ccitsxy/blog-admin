@@ -1,5 +1,5 @@
 import { defineConfig } from 'windicss/helpers';
 
 export default defineConfig({
-  /* configurations... */
+  preflight: false,
 });

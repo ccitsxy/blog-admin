@@ -34,7 +34,6 @@ provide('theme', theme);
     :theme-overrides="themeOverrides"
     :theme="theme"
     :locale="zhCN"
-    preflight-style-disabled
     inline-theme-disabled
     abstract
   >
