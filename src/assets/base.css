@@ -1,8 +1,3 @@
-/* prevent mobile menu touch highlight */
-body {
-  -webkit-tap-highlight-color: transparent;
-}
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s ease;

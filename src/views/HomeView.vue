@@ -52,7 +52,6 @@ const articlesColumns: DataTableColumns<Article> = [
 const articlesData = ref<Article[]>();
 getArticles().then((response) => {
   articlesData.value = response.data;
-  console.log(articlesData.value);
 });
 </script>
 <template>
@@ -61,7 +60,12 @@ getArticles().then((response) => {
     <transition name="fade">
       <vue-vditor v-if="toggle" v-model="text" />
     </transition>
-    <n-card>{{ articlesData }}</n-card>
-    <n-data-table :columns="articlesColumns" :data="articlesData" />
+    <n-data-table
+      :loading="!articlesData"
+      :columns="articlesColumns"
+      :data="articlesData"
+      :scroll-x="640"
+      striped
+    />
   </div>
 </template>
