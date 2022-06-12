@@ -33,3 +33,6 @@ stats.html
 
 # pnpm
 pnpm-lock.yaml
+
+# unplugin-vue-components
+components.d.ts
