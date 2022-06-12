@@ -23,7 +23,8 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
 - [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-- [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+- [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+- [WindiCSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=voorjaar.windicss-intellisense)
 - [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)
 
 ### settings.json
@@ -37,8 +38,6 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "tailwindCSS.emmetCompletions": true,
-  "typescript.suggest.paths": false,
-  "javascript.suggest.paths": false,
   "path-intellisense.mappings": {
     "@": "${workspaceFolder}/src"
   }
@@ -48,23 +47,23 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
 ### Project Setup
 
 ```sh
-pnpm install
+npm install
 ```
 
 ### Compile and Hot-Reload for Development
 
 ```sh
-pnpm run dev
+npm run dev
 ```
 
 ### Type-Check, Compile and Minify for Production
 
 ```sh
-pnpm run build
+npm run build
 ```
 
 ### Lint with [ESLint](https://eslint.org/)
 
 ```sh
-pnpm run lint
+npm run lint
 ```

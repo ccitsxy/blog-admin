@@ -10,8 +10,6 @@ const themeOverrides: GlobalThemeOverrides = {
     primaryColorHover: '#4098fcFF',
     primaryColorPressed: '#1060c9FF',
     primaryColorSuppl: '#4098fcFF',
-    fontFamily:
-      '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji"',
   },
 };
 const osTheme = computed(() =>

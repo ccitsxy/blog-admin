@@ -1,33 +1,65 @@
 <script setup lang="ts">
-import { ref, h } from 'vue';
+import { h, ref } from 'vue';
 
-import { NTime, type DataTableColumns } from 'naive-ui';
+import type { DataTableColumns } from 'naive-ui';
+import { NTag, NTime } from 'naive-ui';
 
-import { getArticles, type Article } from '@/api/articles';
+import type { Article } from '@/api/articles';
+import { getArticles } from '@/api/articles';
 
 const toggle = ref(false);
 const text = ref('');
 const articlesColumns: DataTableColumns<Article> = [
-  {
-    title: '_id',
-    key: '_id',
-  },
+  // {
+  //   title: '_id',
+  //   key: '_id',
+  // },
   {
     title: 'title',
     key: 'title',
-  },
-  {
-    title: 'description',
-    key: 'description',
     ellipsis: {
       tooltip: true,
     },
   },
+  // {
+  //   title: 'description',
+  //   key: 'description',
+  //   ellipsis: {
+  //     tooltip: true,
+  //   },
+  // },
+  // {
+  //   title: 'markdown',
+  //   key: 'markdown',
+  //   ellipsis: {
+  //     tooltip: true,
+  //   },
+  // },
   {
-    title: 'markdown',
-    key: 'markdown',
-    ellipsis: {
-      tooltip: true,
+    title: 'category',
+    key: 'category',
+    render(row) {
+      return h('div', { class: 'bar', innerHTML: row.category.name });
+    },
+  },
+  {
+    title: 'tags',
+    key: 'tags',
+    render(row) {
+      return row.tags.map((tagKey) => {
+        return h(
+          NTag,
+          {
+            style: {
+              marginRight: '6px',
+            },
+            type: 'primary',
+          },
+          {
+            default: () => tagKey.name,
+          }
+        );
+      });
     },
   },
   {

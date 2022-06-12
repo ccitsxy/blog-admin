@@ -15,6 +15,7 @@
     "naive-ui": "^2.30.2",
     "pinia": "^2.0.13",
     "vditor": "^3.8.15",
+    "vfonts": "^0.0.3",
     "vue": "^3.2.35",
     "vue-router": "^4.0.14"
   },
@@ -38,5 +39,12 @@
     "vite-plugin-windicss": "^1.8.4",
     "vue-tsc": "^0.36.1",
     "windicss": "^3.5.4"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "rollup"
+      ]
+    }
   }
 }
