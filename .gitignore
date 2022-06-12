@@ -30,3 +30,6 @@ coverage
 
 # rollup-plugin-visualizer
 stats.html
+
+# pnpm
+pnpm-lock.yaml
