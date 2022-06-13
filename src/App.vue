@@ -11,12 +11,15 @@ const themeOverrides: GlobalThemeOverrides = {
     primaryColorPressed: '#1060c9FF',
     primaryColorSuppl: '#4098fcFF',
   },
+  DataTable: {
+    thFontWeight: 'bold',
+  },
 };
+
 const osTheme = computed(() =>
   useOsTheme().value === 'dark' ? darkTheme : null
 );
 const theme = ref<GlobalTheme | null>(null);
-
 watch(
   () => osTheme.value,
   (newVal) => {
@@ -35,7 +38,6 @@ provide('theme', theme);
     inline-theme-disabled
     abstract
   >
-    <n-global-style />
     <n-loading-bar-provider>
       <n-message-provider>
         <app-router />

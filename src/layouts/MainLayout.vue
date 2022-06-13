@@ -89,9 +89,9 @@ router.afterEach(() => {
 </script>
 
 <template>
-  <n-layout has-sider>
+  <n-layout class="h-screen" has-sider>
     <n-layout-sider
-      class="h-screen top-0 left-0"
+      class="top-0 left-0"
       :collapsed="collapsed"
       collapse-mode="width"
       :collapsed-width="width < 640 ? 0 : 64"
