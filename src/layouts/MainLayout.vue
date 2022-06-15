@@ -21,9 +21,6 @@ import {
   FullscreenExitOutlined,
 } from '@vicons/antd';
 
-import LightModeOutlined from '@/components/LightModeOutlined.vue';
-import DarkModeOutlined from '@/components/DarkModeOutlined.vue';
-
 import MultiTab from './MultiTab.vue';
 import NestedPage from './NestedPage.vue';
 
@@ -154,17 +151,21 @@ router.afterEach(() => {
           <n-icon size="24" :component="FullscreenOutlined" />
         </n-button>
         <n-button v-if="theme" text @click="theme = null">
-          <n-icon size="24" :component="DarkModeOutlined" />
+          <n-icon size="24">
+            <dark-mode-outlined />
+          </n-icon>
         </n-button>
         <n-button v-else text @click="theme = darkTheme">
-          <n-icon size="24" :component="LightModeOutlined" />
+          <n-icon size="24">
+            <light-mode-outlined />
+          </n-icon>
         </n-button>
       </n-layout-header>
       <multi-tab class="h-12 pt-2" />
       <n-layout-content
         ref="layoutContentRef"
-        class="h-[calc(100vh-112px)]"
-        content-style="padding: 24px;"
+        class="h-[calc(100vh-96px)]"
+        content-style="padding: 24px;min-height: calc(100vh - 96px)"
         :native-scrollbar="width < 640"
       >
         <nested-page />
