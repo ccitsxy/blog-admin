@@ -1,18 +1,36 @@
 <script setup lang="ts">
-import { h, ref } from 'vue';
+import { h, reactive, ref } from 'vue';
 
 import type { DataTableColumns } from 'naive-ui';
 import { NTag, NTime, NButton } from 'naive-ui';
 import { PlusOutlined } from '@vicons/antd';
 
-import type { Article } from '@/api/articles';
+import { createArticle, type Article } from '@/api/articles';
 import { getArticles } from '@/api/articles';
+import type { Category } from '@/api/categories';
 
 const show = ref(false);
+
 const title = ref('');
 const markdown = ref('');
+const description = ref('');
+const category = ref<Category>();
+const article = reactive({
+  title,
+  markdown,
+  description,
+  category,
+});
+function publishArticle() {
+  createArticle(article);
+}
+
 const spin = ref(true);
 const articlesColumns: DataTableColumns<Article> = [
+  {
+    type: 'selection',
+    fixed: 'left',
+  },
   {
     title: '标题',
     key: 'title',
@@ -55,7 +73,7 @@ const articlesColumns: DataTableColumns<Article> = [
     key: 'createdAt',
     render(row) {
       return h(NTime, {
-        time: new Date(row.createdAt),
+        time: new Date(row.createdAt as string),
       });
     },
   },
@@ -64,7 +82,7 @@ const articlesColumns: DataTableColumns<Article> = [
     key: 'updatedAt',
     render(row) {
       return h(NTime, {
-        time: new Date(row.updatedAt),
+        time: new Date(row.updatedAt as string),
       });
     },
   },
@@ -127,8 +145,10 @@ function showModel() {
       <template #header>
         <div class="flex space-x-2 py-2">
           <n-input v-model:value="title" placeholder="标题" type="text" />
-          <n-button round type="primary" ghost>保存草稿</n-button>
-          <n-button round type="primary">发布文章</n-button>
+          <!-- <n-button round type="primary" ghost>保存草稿</n-button> -->
+          <n-button round type="primary" @click="publishArticle"
+            >发布文章</n-button
+          >
         </div>
       </template>
       <n-spin :show="spin">
@@ -144,7 +164,6 @@ function showModel() {
       :loading="!articlesData"
       :columns="articlesColumns"
       :data="articlesData"
-      :scroll-x="1200"
       striped
     />
   </div>
