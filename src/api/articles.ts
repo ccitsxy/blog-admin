@@ -3,9 +3,10 @@ import type { Category } from './categories';
 import type { Tag } from './tags';
 
 export interface Article {
-  _id: string;
+  _id?: string;
   title: string;
   markdown: string;
+  description: string;
   category: Category;
   tags: Tag[];
   createdAt?: string;
